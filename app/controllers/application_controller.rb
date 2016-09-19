@@ -11,44 +11,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  # This routs the signup page to the template
-  get "/signup" do
-    erb :signup
-  end
-
-  post "/signup" do
-    # create user
-    user = User.new({
-      username: params[:username],
-      email:    params[:email],
-    })
-    user.password = params[:password]
-    if user.save
-      session[:user_id] = user.id
-      case request_type?
-      when :ajax
-        body ({
-          success: true,
-          message: "success", 
-          redirect: "/" 
-        }.to_json)
-      else 
-        redirect "/"
-      end
-    else
-      case request_type?
-      when :ajax
-        status 500
-        body({
-          success: false, 
-          message: error_messages_for(user).to_str
-        }.to_json)
-      else 
-        redirect "/"
-      end
-    end
-  end
-
   # This routs the login page to the template
   get "/login" do
     erb :login
@@ -117,7 +79,7 @@ class ApplicationController < Sinatra::Base
   # requested view
   before do
     # Force the user to login before using the app
-    force_login_page = true
+    force_login_page = false
     exceptions = ["/login","/signup"]
     # Check the session and database for current user
     if (!session[:user_id] || !User.exists?(session[:user_id])) && !exceptions.include?(request.path)

@@ -1,9 +1,14 @@
 @import 'variables';
 
+@font-face {
+    font-family: thunder-things;
+    src: url(/fonts/thunder-things.ttf);
+}
+
 body, html{
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  padding: 0;  
+  background-color: #fffcf9;
 }
 
 body{
@@ -12,3 +17,32 @@ body{
 		padding-top: 50px;
 	}
 }
+
+.menu.row,
+.header.row{
+	margin-left: -1px;
+	margin-right: -1px;
+
+	& > a,
+	& > a:hover{
+		text-decoration: none;
+	}
+
+	& > div{
+		padding: 1px;
+	}
+}
+
+.logo{
+	font-family: thunder-things;
+	font-size: 60px;
+	padding: 0;
+}
+
+hr{
+	border-color: rgba(235, 104, 100, 0.48);
+	border-width: 3px;
+	margin: 30px -50px;
+}
+
+@import 'text';

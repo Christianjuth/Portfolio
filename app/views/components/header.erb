@@ -1,26 +1,7 @@
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false">
-		    <span class="sr-only">Toggle navigation</span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		  </button>
-		  <a class="navbar-brand" href="/">Sinatra</a>
-		</div>
+<h1 class="text-center text-primary logo"><b>Christian<br class="hidden-lg"> Juth<b></h1>
 
-		<% if @user %>
-			<div class="collapse navbar-collapse" id="collapse-1">
-		    <ul class="nav navbar-nav navbar-right">
-		    	<li class="navbar-text">Welcome, <%= @user.username %></li>
-		    	<li>
-		    		<form method="POST" action="/logout">
-		    			<button type="submit" class="btn btn-danger navbar-btn">Log out</button>
-		    		</form>
-		    	</li>
-		    </ul>
-		  </div>
-		<% end %>
-	</div>
-</nav>
+<div class="row menu">
+	<a href="#" class="col-xs-4 text-center"><h4>Home</h4></a>
+	<a href="#" class="col-xs-4 text-center"><h4>Music</h4></a>
+	<a href="#" class="col-xs-4 text-center"><h4>About</h4></a>
+</div>

@@ -7,6 +7,7 @@ gem "sinatra-activerecord"
 gem "rake"
 gem "bcrypt"
 gem "json"
+gem "sinch_sms"
 
 group :development, :test do
   gem "shotgun"

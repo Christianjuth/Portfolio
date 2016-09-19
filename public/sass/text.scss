@@ -1,0 +1,18 @@
+h1,h2,h3,h4,h5,h6{
+	font-family: Signika;
+	font-weight: bold;
+	padding: 15px;
+}
+
+p{
+	font-family: 'PT Sans';
+	font-weight: 200;
+	color: #222;
+	line-height: 200%;
+	letter-spacing: 0.5px;
+	padding-bottom: 25px;
+
+	&.indent{
+		text-indent: 50px;
+	}
+}
