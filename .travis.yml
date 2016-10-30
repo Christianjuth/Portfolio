@@ -9,6 +9,7 @@ before_install:
 install:
 - npm install -g grunt-cli
 - npm install -g bower
+- npm run production
 - npm install
 deploy:
   provider: heroku
