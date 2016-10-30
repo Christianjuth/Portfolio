@@ -11,6 +11,14 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get "/portfolio" do
+    erb :portfolio
+  end
+
+  get "/music" do
+    erb :music
+  end
+
   # This routs the login page to the template
   get "/login" do
     erb :login
