@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "bundle install --without production && bundle exec rake db:setup && bower install && grunt once",
-    "production": "bundle install --standalone production",
+    "production": "bundle install",
     "migrate": "bundle exec rake db:migrate",
     "test": "",
     "stop": "kill -9 $(lsof -i tcp:3000 | tail -n 1 | perl -lne 'print $& if /(?<=ruby)\\s+[0-9]+/i')",
