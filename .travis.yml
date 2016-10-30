@@ -10,14 +10,12 @@ install:
   - npm install -g grunt-cli
   - npm install -g bower
   - npm install
-script:
-  - npm test
 deploy:
   provider: heroku
   api_key:
     secure: cxuMUkvv1GwnLKWGeE6LT3iGWYphYDaTxEAo4+6rPaJBVbECeRw1cKmri0WfYnCdmtjM5ikBnVXJsD0nmcVEfVhaiAwtYcFlNSRZEU89eVKJ4dBL/cNc5pS5xfhqhaMjvQ7yfoY7paOwup9ZtHqz2TnJJUSwDWixvfiKilmChVY7iK7TczvwAIGMfZao4n/1cGyLbsSo3pv8jbshICFNpBdza+34RunrFvpkLlIu2+3w5HDAj4G7hMjGam9P3G82K76rjolUuJGZy3QCSijKnUpvbK2tdiQHHTYjKifLRDmmIm5zeIwOdLpjX9w9EAcnuuWFQ7KZRXXo1rfZ52DBiRK7K93SDrQ/dM/QfZTkuhbUYgZ87di1m0HoFQLyJ3vPDQ0l91ZOn8ZS9o0WNbzheCNlO3eScs/+ZP/4/aVNMFVDqwDceyvuMap13h1+LkNEIekgbf9ps8EOsvNspguLG/hm5gyqtHn38Xq2Bkwk6ISx49U1726EZxd3I4rrZXdVUy1BputFdud1N+FZT29e+Oonp1IXCeV/9Hju5lpPKXNsHZcZxqKYjs0sXgjgCsL4laNaqoT1GQK4aEQo6aHPNm3+Utu1f0PQF812Jw0bOUTfyh71KLdAA7sDSZEEbi1nLDfxbwWL+Ze9NRxo8y9ZCzp3kYt0OKyKIyXHfkdpOsM=
-  app: sinatra-startpoint
+  app: christianjuth
   skip_cleanup: true
   run: rake db:migrate
   on:
-    repo: Christianjuth/sinatra-startpoint
+    repo: Christianjuth/Portfolio
