@@ -1,0 +1,58 @@
+@font-face {
+  font-family: thunder-things;
+  src: url(/fonts/thunder-things.ttf); }
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #fffcf9; }
+
+body {
+  padding-top: 15px; }
+  @media (min-width: 1170px) {
+    body {
+      padding-top: 50px; } }
+
+.menu.row,
+.header.row {
+  margin-left: -1px;
+  margin-right: -1px; }
+  .menu.row > a, .menu.row > a:hover,
+  .header.row > a,
+  .header.row > a:hover {
+    text-decoration: none; }
+  .menu.row > div,
+  .header.row > div {
+    padding: 1px; }
+
+.logo {
+  font-family: thunder-things;
+  font-size: 60px;
+  padding: 0; }
+
+hr {
+  border-color: rgba(235, 104, 100, 0.6);
+  border-width: 3px;
+  margin: 30px -50px; }
+
+form,
+h1, h2, h3, h4, h5, h6 {
+  font-family: Signika;
+  font-weight: bold;
+  padding: 15px;
+  color: #000; }
+
+p {
+  font-family: 'PT Sans';
+  font-weight: 200;
+  font-size: 18px;
+  color: #222;
+  line-height: 180%;
+  letter-spacing: 0.5px;
+  padding-bottom: 25px; }
+  p.indent {
+    text-indent: 50px; }
+
+.social > i {
+  padding: 0 15px; }
+
+/*# sourceMappingURL=style.css.map */
