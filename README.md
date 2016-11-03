@@ -1,4 +1,4 @@
-# Sinatra Startpoint [![Build Status](https://travis-ci.org/Christianjuth/sinatra-startpoint.svg?branch=master)](https://travis-ci.org/Christianjuth/sinatra-startpoint) [![Stories in Ready](https://badge.waffle.io/Christianjuth/sinatra-startpoint.svg?label=ready&title=Issues)](http://waffle.io/Christianjuth/sinatra-startpoint)
+# The Portfolio of Christian Juth [![Build Status](https://travis-ci.org/Christianjuth/sinatra-startpoint.svg?branch=master)](https://travis-ci.org/Christianjuth/portfolio) [![Stories in Ready](https://badge.waffle.io/Christianjuth/portfolio.svg?label=ready&title=Issues)](http://waffle.io/Christianjuth/sinatra-startpoint)
 
 ### Setup environment
 Requirements
@@ -12,7 +12,7 @@ Requirements
   # install node modules and gems
   npm install
 ```
-_This command runs `bundle install` so you do not have to run that yourslef._
+_This command runs `bundle install` so you do not have to run that yourself._
 
 ### Running Sinatra
 ```shell
@@ -34,7 +34,7 @@ _This command runs `bundle install` so you do not have to run that yourslef._
   # compile once
   grunt once
 
-  # continious compiling
+  # continuous compiling
   grunt
 ```
 
