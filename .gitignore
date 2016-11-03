@@ -2,5 +2,8 @@ node_modules
 npm-debug.log
 .bundle
 
+public/css
+public/js
+
 db/*.db
 screenshots/
