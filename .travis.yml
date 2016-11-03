@@ -11,6 +11,8 @@ install:
 - npm install -g bower
 - npm run production
 - npm install
+before_deploy:
+- rm -rf .bundle/
 deploy:
   provider: heroku
   api_key:
