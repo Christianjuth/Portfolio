@@ -69,7 +69,10 @@ class ApplicationController < Sinatra::Base
       redirect "/login"
     end
   end
-
+  
+  error Sinatra::NotFound do
+    erb :"404"
+  end
 
   # ----- Config ------
   configure do
@@ -88,12 +91,12 @@ class ApplicationController < Sinatra::Base
   before do
     # Force the user to login before using the app
     force_login_page = false
-    exceptions = ["/login","/signup"]
+    exceptions = ["/login"]
     # Check the session and database for current user
     if (!session[:user_id] || !User.exists?(session[:user_id])) && !exceptions.include?(request.path)
       session.destroy
       redirect "/login" if force_login_page
-    elsif !["/login","/signup"].include?(request.path)
+    elsif !["/login"].include?(request.path)
       @user = User.find(session[:user_id])
     end
   end

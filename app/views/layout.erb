@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Signika|PT+Sans">
-  <link rel="stylesheet" href="//bootswatch.com/journal/bootstrap.min.css">
   <link rel="stylesheet" href="/bower/bootstrap-sweetalert/lib/sweet-alert.css">
+  <link rel="stylesheet" href="//bootswatch.com/journal/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
 
   <!-- Scripts -->
@@ -20,6 +20,10 @@
 </head>
 <body>
   <div class="container-fluid">
+    <%= if @user
+          ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) 
+        end %>
+    
     <div class="row">
       <div class="col-xs-12 col-lg-8 col-lg-offset-2">
         <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>

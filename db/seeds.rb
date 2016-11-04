@@ -1,6 +1,6 @@
 user = User.new({
-  username: "johnsmith",
-  email: "johnsmith@example.com",
+  username: "admin",
+  email: "",
 })
 user.password = "password"
 user.save
