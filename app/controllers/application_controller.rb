@@ -3,6 +3,7 @@ require "./config/environment"
 
 # Require models
 require "./app/models/user"
+require "./app/models/api_verification"
 
 # Set routs
 class ApplicationController < Sinatra::Base
@@ -17,6 +18,11 @@ class ApplicationController < Sinatra::Base
 
   get "/music" do
     erb :music
+  end
+  
+  get "/settings" do
+    @api_verification = ApiVerification.all
+    erb :settings
   end
 
   # This routs the login page to the template
@@ -63,10 +69,10 @@ class ApplicationController < Sinatra::Base
       body({
         success: true, 
         message: "success",
-        redirect: "/login"
+        redirect: "/"
       }.to_json)
     else 
-      redirect "/login"
+      redirect "/"
     end
   end
   

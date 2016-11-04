@@ -7,6 +7,7 @@
     "postinstall": "bundle install --without production && bundle exec rake db:setup && bower install && grunt once",
     "production": "bundle install",
     "migrate": "bundle exec rake db:migrate",
+    "seed": "rake db:seed",
     "test": "",
     "stop": "kill -9 $(lsof -i tcp:3000 | tail -n 1 | perl -lne 'print $& if /(?<=ruby)\\s+[0-9]+/i')",
     "start": "grunt once && shotgun -o 0.0.0.0 -p 3000"

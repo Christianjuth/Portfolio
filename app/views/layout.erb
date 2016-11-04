@@ -27,7 +27,7 @@
     <div class="row">
       <div class="col-xs-12 col-lg-8 col-lg-offset-2">
         <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
-
+        
         <div class="row">
           <div class="col-xs-12">
             <%= yield %>
