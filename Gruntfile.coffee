@@ -10,22 +10,24 @@ module.exports = (grunt)->
     pkg: grunt.file.readJSON('package.json')
     watch:
       default:
-        files: ["public/sass/**/*.scss", "public/coffee/**/*.coffee"]
-        tasks: ["sass", "coffee"]
+        files: ['public/sass/**/*.scss', 'public/coffee/**/*.coffee']
+        tasks: ['sass', 'coffee']
         options:
-          event: ["added", "changed"]
+          event: ['added', 'changed']
     sass:
       default:
         files:
-          "public/css/style.css": "public/sass/style.scss"
+          'public/css/style.css': 'public/sass/style.scss'
     coffee:
+      options:
+        sourceMap: true
       default:
         files: [{
           expand: true,
-          cwd: "public/coffee",
-          src: ["**/*.coffee"],
-          dest: "public/js",
-          ext: ".js"
+          cwd: 'public/coffee',
+          src: ['**/*.coffee'],
+          dest: 'public/js',
+          ext: '.js'
         }]
     uglify:
       files:
@@ -33,9 +35,17 @@ module.exports = (grunt)->
         cwd: 'public/js',
         src: '**/*.js',
         dest: 'public/js'
-  });
+    cssmin:
+      files:
+        expand: true,
+        cwd: 'public/css',
+        src: ['*.css', '!*.min.css'],
+        dest: 'public/css',
+        ext: '.css'
+    clean: ['public/css/**/*.map', 'public/js/**/*.map']
+  })
 
   # Default task(s).
-  grunt.registerTask("default", ["sass", "coffee", "watch"])
-  grunt.registerTask("once", ["sass", "coffee"])
-  grunt.registerTask("production", ["sass", "coffee", "uglify"])
+  grunt.registerTask('default', ['sass', 'coffee', 'watch'])
+  grunt.registerTask('once', ['sass', 'coffee'])
+  grunt.registerTask('production', ['sass', 'coffee', 'uglify', 'cssmin', 'clean'])
