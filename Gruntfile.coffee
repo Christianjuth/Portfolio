@@ -1,9 +1,9 @@
 module.exports = (grunt)->
   # Time Grunt tasks
-  require('time-grunt')(grunt);
+  require('time-grunt')(grunt)
 
   # Load all Grunt tasks
-  require('load-grunt-tasks')(grunt);
+  require('load-grunt-tasks')(grunt)
 
   # Project configuration.
   grunt.initConfig({
@@ -27,8 +27,15 @@ module.exports = (grunt)->
           dest: "public/js",
           ext: ".js"
         }]
+    uglify:
+      files:
+        expand: true,
+        cwd: 'public/js',
+        src: '**/*.js',
+        dest: 'public/js'
   });
 
   # Default task(s).
   grunt.registerTask("default", ["sass", "coffee", "watch"])
   grunt.registerTask("once", ["sass", "coffee"])
+  grunt.registerTask("production", ["sass", "coffee", "uglify"])

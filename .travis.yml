@@ -12,6 +12,7 @@ install:
 - npm run production
 - npm install
 before_deploy:
+- grunt production
 - rm -rf .bundle/
 deploy:
   provider: heroku
