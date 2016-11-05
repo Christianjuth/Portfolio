@@ -1,7 +1,6 @@
 ENV["RACK_ENV"] = "test"
+
 require_relative "../../app/controllers/application_controller"
-DatabaseCleaner.strategy = :truncation
-DatabaseCleaner.clean
 
 Capybara::Webkit.configure do |config|
   config.allow_unknown_urls
