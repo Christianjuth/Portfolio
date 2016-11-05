@@ -8,7 +8,7 @@ end
 Capybara::Screenshot.autosave_on_failure = false
 Capybara::Screenshot.prune_strategy = :keep_last_run
 Capybara::Screenshot.webkit_options = { width: 1024, height: 768 }
-Capybara.save_and_open_page_path = "../screenshots/"
+Capybara.save_path = "../screenshots/"
 
 class MinitestWorld
   extend Minitest::Assertions
