@@ -4,7 +4,7 @@
   "description": "Sinatra startpoint",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bundle install --without production && bundle exec rake db:migrate && bundle exec rake db:seed && bower install && grunt once && ls db/",
+    "postinstall": "bundle install --without production && npm run migrate && npm run seed && bower install && grunt once && ls db/",
     "production": "bundle install",
     "migrate": "bundle exec rake db:migrate_test_database && bundle exec rake db:migrate",
     "seed": "bundle exec rake db:seed",
