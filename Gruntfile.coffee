@@ -22,30 +22,40 @@ module.exports = (grunt)->
       options:
         sourceMap: true
       default:
-        files: [{
-          expand: true,
-          cwd: 'public/coffee',
-          src: ['**/*.coffee'],
-          dest: 'public/js',
+        files: [
+          expand: true
+          cwd: 'public/coffee'
+          src: ['**/*.coffee']
+          dest: 'public/js'
           ext: '.js'
-        }]
+        ]
     uglify:
       files:
-        expand: true,
-        cwd: 'public/js',
-        src: '**/*.js',
+        expand: true
+        cwd: 'public/js'
+        src: '**/*.js'
         dest: 'public/js'
     cssmin:
       files:
-        expand: true,
-        cwd: 'public/css',
-        src: ['*.css', '!*.min.css'],
-        dest: 'public/css',
+        expand: true
+        cwd: 'public/css'
+        src: ['*.css', '!*.min.css']
+        dest: 'public/css'
         ext: '.css'
+    imagemin:
+      options:
+        optimizationLevel: 7
+      dynamic:
+        files: [
+          expand: true
+          cwd: 'src/'
+          src: ['public/images/**/*.{png,jpg,gif}']
+          dest: 'public/images/'
+        ]
     clean: ['public/css/**/*.map', 'public/js/**/*.map']
   })
 
   # Default task(s).
   grunt.registerTask('default', ['sass', 'coffee', 'watch'])
   grunt.registerTask('once', ['sass', 'coffee'])
-  grunt.registerTask('production', ['sass', 'coffee', 'uglify', 'cssmin', 'clean'])
+  grunt.registerTask('production', ['sass', 'coffee', 'uglify', 'cssmin', 'imagemin', 'clean'])
