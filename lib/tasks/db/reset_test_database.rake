@@ -1,5 +1,3 @@
-require "database_cleaner"
-
 namespace :db do
   task :reset_test_database do
     ENV['RACK_ENV'] = 'test'
