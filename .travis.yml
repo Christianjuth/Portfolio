@@ -1,11 +1,15 @@
 language: node_js
 sudo: required
+dist: trusty
 os:
 - osx
+- linux
 node_js:
 - 5.0.0
 before_install:
 - brew install qt
+- sudo apt-get update
+- sudo apt-get install qt4-qmake libqt4-dev
 - rvm install 2.2.1
 install:
 - npm install -g grunt-cli
