@@ -6,4 +6,4 @@ public/css
 public/js
 
 db/*.db
-screenshots/
+features/screenshots/

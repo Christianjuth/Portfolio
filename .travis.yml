@@ -18,6 +18,7 @@ before_deploy:
 - rm -rf .bundle/
 deploy:
   provider: heroku
+  condition: "$(uname)" == "Darwin"
   api_key:
     secure: TPqGFzCdHLEQGg8nON9cLbqICQy2wKP0BfWDv5Awxu1bYbYvkZHnUbCH9yURckSi0b6o/h9/upsJYGs9XYzAIoN3/mxbGtRXS6NX+hsZSa7Xz92FFxQGd0jgpPLn1XAqkE0hQ/HMnlBywZsXKDzhb3iG1Ed5AvjfSwubSzaupzDGklV8YU5nwV/XCMkEu1yE0918a5wcLxwKacLswqP2FBv8Q2jUolMRMwKe5nUelO3bSlRisPmZq60LZjS+qOo/E9Edyp6Ef67TuqyiF5xjhHffRm8BH8LobcijA+s/ep92gbWw5Kcrjw9sVrxtyQh/51j8rxJgw5riGFeh5PMPETwLc4JUrINmdDXfIt8Te+/H+sm4WLU+v87kgrS8Cm4+Flz8U3aUpELRGWI/M7UYhOaEzySAz5HlCx2B/2M4j2w22Kqn77V6IQ5Sf0BE48TwC9CyBRXFLCNzwha6EKtt2QODg1cTX5/dhRk+K5VK5+9c5Q7T+Ah2+ve/hUW4l6rKrftZeqWDzKpiE5+DoNHH0ZMroxq1ecO6/h14Emf15/Nqxn00GNLgRGoTDD+97R65QVbQZ1iCLrWJMv26PcxgxegIuXMfM5Edz1D4VyfFSgviUaVnuut2fdpyFaocMyVrdvRFVQ1ZsLGqzZRps6QyX10FeFlCtwIQ2wMJkZZjcNQ=
   app: christianjuth
