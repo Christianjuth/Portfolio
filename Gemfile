@@ -8,6 +8,7 @@ gem "rake"
 gem "bcrypt"
 gem "json"
 gem "sinch_sms"
+gem "database_cleaner"
 
 group :development, :test do
   gem "shotgun"
@@ -23,7 +24,6 @@ group :test do
   gem "capybara-screenshot", require: "capybara-screenshot/cucumber"
   gem "capybara-webkit"
   gem "minitest", require: "minitest/spec"
-  gem "database_cleaner"
 end
 
 group :production do
