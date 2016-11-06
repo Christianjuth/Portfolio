@@ -9,7 +9,7 @@ namespace :db do
     ENV['RACK_ENV'] = 'test'
     ActiveRecord::Base.establish_connection(:test)
     begin
-      Rake::Task['db:migrate'].invoke
+      ActiveRecord::Migrator.migrate("db/migrate")
       sleep 5
     rescue
     end
@@ -20,7 +20,7 @@ namespace :db do
     ENV['RACK_ENV'] = 'development'
     ActiveRecord::Base.establish_connection(:development)
     begin
-      Rake::Task['db:migrate'].invoke
+      ActiveRecord::Migrator.migrate("db/migrate")
       sleep 5
     rescue
     end
