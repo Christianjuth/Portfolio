@@ -1,10 +1,10 @@
 development:
   adapter: sqlite3
-  database: db/website.db
+  database: db/development/website.db
   pool: 5
   timeout: 5000
 test:
   adapter: sqlite3
-  database: db/cucumber-tests.db
+  database: db/test/cucumber-tests.db
   pool: 5
   timeout: 5000
