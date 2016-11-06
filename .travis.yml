@@ -3,7 +3,7 @@ sudo: required
 node_js:
 - 5.0.0
 before_install:
-- apt-get install qt5-default qttools5-dev-tools
+- sudo apt-get install qt5-default qttools5-dev-tools
 - rvm install 2.2.1
 - sudo apt-get update
 - sudo apt-get install libqt4-dev qt4-qmake
