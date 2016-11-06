@@ -15,7 +15,6 @@ group :development, :test do
   gem "tux"
   gem "sqlite3"
   gem "sass"
-  gem "database_cleaner"
 end
 
 group :test do
