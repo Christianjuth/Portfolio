@@ -2,7 +2,7 @@ language: node_js
 sudo: required
 dist: trusty
 os:
-- linux
+- osx
 node_js:
 - 5.0.0
 before_install:

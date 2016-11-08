@@ -24,7 +24,22 @@ p{
   }
 }
 
+
+
+.logo{
+  font-family: thunder-things;
+  font-size: 60px;
+  padding: 0;
+}
+
 .social > a{
   padding: 0 15px;
   color: #000;
+}
+
+// --------------- Mobile -------------------
+@media screen and #{$break-phone} {
+  .logo{
+    font-size: 11vw;
+  }
 }
