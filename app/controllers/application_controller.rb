@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   get "/music" do
     erb :music
   end
-  
+
   get "/settings" do
     @api_verification = ApiVerification.all
     erb :settings
@@ -44,7 +44,7 @@ class ApplicationController < Sinatra::Base
           success: true, 
           message: "success",
           redirect: "/"
-        }.to_json)
+          }.to_json)
       else 
         redirect "/"
       end
@@ -55,9 +55,44 @@ class ApplicationController < Sinatra::Base
         body({
           success: false, 
           message: "Incorrect username or password"
-        }.to_json)
+          }.to_json)
       else 
         redirect "/login"
+      end
+    end
+  end
+
+  post "/change_password" do
+    # check password and set session
+    if @user
+      # try and update password
+      @user.password = params[:new_password]
+      
+      if params[:new_password] == params[:confirm_password] && @user.valid?
+        # save password to database
+        @user.save
+        # notify page
+        case request_type?
+        when :ajax
+          body({
+            success: true, 
+            message: "success",
+            redirect: request.referer
+            }.to_json)
+        else 
+          redirect request.referer
+        end
+      else
+        case request_type?
+        when :ajax
+          status 500
+          body({
+            success: false, 
+            message: "Passwords do not match"
+            }.to_json)
+        else 
+          redirect request.referer
+        end
       end
     end
   end
@@ -70,12 +105,12 @@ class ApplicationController < Sinatra::Base
         success: true, 
         message: "success",
         redirect: "/"
-      }.to_json)
+        }.to_json)
     else 
       redirect "/"
     end
   end
-  
+
   error Sinatra::NotFound do
     erb :"404"
   end

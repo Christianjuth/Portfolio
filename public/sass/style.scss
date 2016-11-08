@@ -46,7 +46,13 @@ body{
 hr{
   border-color: rgba(235, 104, 100, .8);
   border-width: 3px;
-  margin: 30px 0px;
+  margin: 30px 0;
+}
+
+hr.secondary{
+  border-color: rgba(224, 224, 224, 0.8);
+  border-width: 2px;
+  margin: 30px -15px;
 }
 
 @import 'text';
