@@ -18,6 +18,7 @@ module.exports = (grunt)->
       default:
         files:
           'public/css/style.css': 'public/sass/style.scss'
+          'public/css/portfolio.css': 'public/sass/portfolio.scss'
     coffee:
       options:
         sourceMap: true

@@ -9,6 +9,7 @@ require "./app/models/api_verification"
 class ApplicationController < Sinatra::Base
   # This routs the home page to the template
   get "/" do
+    @comments = true
     erb :index
   end
 
@@ -140,6 +141,7 @@ class ApplicationController < Sinatra::Base
     elsif !["/login"].include?(request.path)
       @user = User.find(session[:user_id])
     end
+    @comments = false
   end
 
 

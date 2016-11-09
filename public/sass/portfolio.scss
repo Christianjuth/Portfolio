@@ -1,0 +1,39 @@
+@import 'variables';
+
+.portfolio-entry{
+  border-radius: 0;
+  border: none;
+  margin-bottom: 0;
+  padding: 50px 0;
+  
+  *{
+    color: #fff;
+  }
+  
+  .lobster{
+    font-family: 'Lobster', cursive;
+  }
+  
+  .pacifico{
+    font-family: 'Pacifico', cursive;
+  }
+  
+  .pepermine-marker{
+    font-family: 'Permanent Marker', cursive;
+  }
+  
+  .kenwave{
+    font-family: 'Knewave', cursive;
+  }
+  
+  .open-sans{
+    font-family: 'Heebo', sans-serif;
+  }
+}
+
+// --------------- Mobile -------------------
+@media screen and #{$break-phone} {
+  .portfolio-entry *{
+    font-size: 5vw;
+  }
+}

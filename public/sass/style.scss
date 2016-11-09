@@ -22,8 +22,10 @@ body{
   overflow-x: hidden;
 }
 
+
 .menu.row,
-.header.row{
+.header.row,
+.row.no-margin{
   margin-left: -1px;
   margin-right: -1px;
 
@@ -32,6 +34,7 @@ body{
     text-decoration: none;
   }
 
+  & > a,
   & > div{
     padding: 1px;
   }
@@ -53,6 +56,14 @@ hr.secondary{
   border-color: rgba(224, 224, 224, 0.8);
   border-width: 2px;
   margin: 30px -15px;
+}
+
+#disqus_thread {
+  overflow: hidden;
+
+  iframe {
+    margin-bottom: -65px;
+  }
 }
 
 @import 'text';
