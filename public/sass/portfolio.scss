@@ -33,7 +33,7 @@
   }
 
   .pacifico{
-    font-family: 'Pacifico', cursive;
+    font-family:8'Pacifico', cursive;
   }
 
   .pepermine-marker{
@@ -80,6 +80,6 @@
 // --------------- Mobile -------------------
 @media screen and #{$break-phone} {
   .portfolio-entry *{
-    font-size: 5vw;
+    font-size: 9vw;
   }
 }
