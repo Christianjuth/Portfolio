@@ -31,6 +31,7 @@ body, html{
 
 #disqus_thread {
   overflow: hidden;
+  margin: 50px 0 -20px 0;
 
   iframe {
     margin-bottom: -65px;
@@ -55,7 +56,7 @@ hr.secondary{
 
 .page{
   overflow-x: hidden;
-  padding: 30px 0 100px 0;
+  padding: 30px 0 60px 0;
 }
 
 @media screen and #{$break-phone} {
@@ -65,7 +66,7 @@ hr.secondary{
   
   .page{
     overflow-x: hidden;
-    padding: 15px 0;
+    padding: 15px 0 35px 0;
   }
 }
 

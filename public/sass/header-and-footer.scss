@@ -4,6 +4,14 @@
   border-bottom: 2px solid #d05c58;
 }
 
+.header.portfolio-entry{
+  padding: 50px 0;
+  
+  & > *{
+    font-size: 8vw;
+  }
+}
+
 .heading-background{
   background-color: #eb6864;
   display: inline-block;

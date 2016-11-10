@@ -1,5 +1,13 @@
-<div class="row header">
-  <div class="col-xs-4"><img src="/images/header/IMG_0185.jpg" class="img-responsive"></div>
-  <div class="col-xs-4"><img src="/images/header/IMG_0532.jpg" class="img-responsive"></div>
-  <div class="col-xs-4"><img src="/images/header/IMG_0392.jpg" class="img-responsive"></div>	
-</div>
+<% if @entry %>
+  <div class="header portfolio-entry" style="background-color: <%= @entry.color %>">
+    <h1 class="text-center <%= @entry.font %>"><%= @entry.title %></h1>
+  </div>
+  <br>
+  <br>
+<% else %>
+  <div class="row header">
+    <div class="col-xs-4"><img src="/images/header/IMG_0185.jpg" class="img-responsive"></div>
+    <div class="col-xs-4"><img src="/images/header/IMG_0532.jpg" class="img-responsive"></div>
+    <div class="col-xs-4"><img src="/images/header/IMG_0392.jpg" class="img-responsive"></div>	
+  </div>
+<% end %>
