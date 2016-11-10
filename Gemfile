@@ -9,6 +9,7 @@ gem "bcrypt"
 gem "json"
 gem "sinch_sms"
 gem "database_cleaner"
+gem "rack-google-analytics"
 
 group :development, :test do
   gem "shotgun"

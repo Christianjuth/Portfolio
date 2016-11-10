@@ -1,6 +1,19 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    actionpack (4.2.6)
+      actionview (= 4.2.6)
+      activesupport (= 4.2.6)
+      rack (~> 1.6)
+      rack-test (~> 0.6.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionview (4.2.6)
+      activesupport (= 4.2.6)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
     activemodel (4.2.6)
       activesupport (= 4.2.6)
       builder (~> 3.1)
@@ -46,11 +59,14 @@ GEM
     cucumber-wire (0.0.1)
     database_cleaner (1.5.3)
     diff-lcs (1.2.5)
+    erubis (2.7.0)
     gherkin (3.2.0)
     i18n (0.7.0)
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
+    loofah (2.0.3)
+      nokogiri (>= 1.5.9)
     method_source (0.8.2)
     mime-types (3.0)
       mime-types-data (~> 3.2015)
@@ -67,10 +83,21 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
+    rack-google-analytics (1.2.0)
+      actionpack
+      activesupport
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails-deprecated_sanitizer (1.0.3)
+      activesupport (>= 4.2.0.alpha)
+    rails-dom-testing (1.0.7)
+      activesupport (>= 4.2.0.beta, < 5.0)
+      nokogiri (~> 1.6.0)
+      rails-deprecated_sanitizer (>= 1.0.1)
+    rails-html-sanitizer (1.0.3)
+      loofah (~> 2.0)
     rake (11.1.2)
     ripl (0.7.1)
       bond (~> 0.5.1)
@@ -120,6 +147,7 @@ DEPENDENCIES
   minitest
   pg
   pry
+  rack-google-analytics
   rake
   sass
   shotgun
