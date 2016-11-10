@@ -4,6 +4,7 @@ require "./config/environment"
 # Require models
 require "./app/models/user"
 require "./app/models/api_verification"
+require "./app/models/portfolio_entries"
 
 # Set routs
 class ApplicationController < Sinatra::Base
@@ -14,7 +15,90 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/portfolio" do
+    @portfolio_entries = PortfolioEntry.all.reverse
     erb :portfolio
+  end
+  
+  get "/portfolio/:id" do
+    @comments = true
+    @entry = PortfolioEntry.find(params[:id])
+    erb :"portfolio/entry"
+  end
+  
+  get "/portfolio/edit/:id" do
+    if @user
+      @entry = PortfolioEntry.find(params[:id])
+      erb :"portfolio/edit"
+    end
+  end
+  
+  post "/portfolio/update/:id" do
+    if @user
+      @entry = PortfolioEntry.find(params[:id])
+      @entry.title = params[:title]
+      @entry.color = params[:color]
+      @entry.blurb = params[:blurb]
+      @entry.font = params[:font]
+      @entry.description = params[:description]
+      if @entry.valid?
+        @entry.save
+        case request_type?
+        when :ajax
+          body({
+            success: true, 
+            message: "success",
+            redirect: request.referer
+            }.to_json)
+        else 
+          redirect request.referer
+        end
+      else
+        case request_type?
+        when :ajax
+          status 500
+          body({
+            success: false, 
+            message: "Contains invalid information"
+            }.to_json)
+        else 
+          redirect request.referer
+        end
+      end
+    end
+  end
+  
+  post "/portfolio/new_entry" do
+    if @user
+      entry = PortfolioEntry.new()
+      entry.save()
+      case request_type?
+      when :ajax
+        body({
+          success: true, 
+          message: "success",
+          redirect: "/portfolio/edit/#{entry.id}"
+          }.to_json)
+      else 
+        redirect "/portfolio/edit/#{entry.id}"
+      end
+    end
+  end
+  
+  post "/portfolio/delete/:id" do
+    if @user
+      @entry = PortfolioEntry.find(params[:id])
+      @entry.delete
+      case request_type?
+      when :ajax
+        body({
+          success: true, 
+          message: "success",
+          redirect: "/portfolio"
+          }.to_json)
+      else 
+        redirect "/portfolio"
+      end
+    end
   end
 
   get "/music" do

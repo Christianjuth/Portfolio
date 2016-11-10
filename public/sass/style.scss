@@ -22,7 +22,6 @@ body{
   overflow-x: hidden;
 }
 
-
 .menu.row,
 .header.row,
 .row.no-margin{
@@ -64,6 +63,10 @@ hr.secondary{
   iframe {
     margin-bottom: -65px;
   }
+}
+
+textarea { 
+  resize: vertical;
 }
 
 @import 'text';

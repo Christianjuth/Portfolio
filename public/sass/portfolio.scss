@@ -1,34 +1,80 @@
 @import 'variables';
 
+.row.no-margin{
+  & > a,
+  & > div{
+    padding: 0.1px;
+  }
+}
+
 .portfolio-entry{
+  background-color: #000;
+  cursor: pointer;
+  position: relative;
   border-radius: 0;
   border: none;
   margin-bottom: 0;
-  padding: 50px 0;
-  
+  padding: 15px 0;
+
   *{
     color: #fff;
   }
   
+  input{
+    font-size: 35px;
+    background: transparent;
+    border: none;
+    text-align: center;
+    width: 100%;
+  }
+
   .lobster{
     font-family: 'Lobster', cursive;
   }
-  
+
   .pacifico{
     font-family: 'Pacifico', cursive;
   }
-  
+
   .pepermine-marker{
     font-family: 'Permanent Marker', cursive;
   }
-  
+
   .kenwave{
     font-family: 'Knewave', cursive;
   }
-  
-  .open-sans{
+
+  .heebo{
     font-family: 'Heebo', sans-serif;
   }
+
+  .blurb{
+    color: #000;
+    opacity: 0;
+    position: absolute;
+    font-family: 'PT Sans';
+    font-size: 20px;
+    text-align: center;
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 10px);
+    width: calc(100% - 10px);
+    padding: 20px;
+    background-color: #fffcf9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    -webkit-transition: opacity 0.2s;
+    
+    &:hover{
+      opacity: 1;
+    }
+  }
+}
+
+.add-portfolio-entry{
+  padding: 1px;
 }
 
 // --------------- Mobile -------------------

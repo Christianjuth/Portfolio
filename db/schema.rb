@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104123431) do
+ActiveRecord::Schema.define(version: 20161109200204) do
 
   create_table "api_verifications", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20161104123431) do
     t.string   "secret"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "portfolio_entries", force: :cascade do |t|
+    t.string   "title"
+    t.string   "blurb"
+    t.string   "description"
+    t.string   "color"
+    t.string   "github"
+    t.string   "website"
+    t.datetime "date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
