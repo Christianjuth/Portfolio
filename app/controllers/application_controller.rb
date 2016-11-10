@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
 
   get "/portfolio" do
     @portfolio_entries = PortfolioEntry.all.reverse
-    erb :portfolio
+    erb :"portfolio/portfolio"
   end
   
   get "/portfolio/:id" do
@@ -39,6 +39,8 @@ class ApplicationController < Sinatra::Base
       @entry.color = params[:color]
       @entry.blurb = params[:blurb]
       @entry.font = params[:font]
+      @entry.github = params[:github]
+      @entry.website = params[:website]
       @entry.description = params[:description]
       if @entry.valid?
         @entry.save
