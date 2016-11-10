@@ -24,14 +24,14 @@
     <div class="loader-section"></div>
   </div>
   
-  <div class="container-fluid">
-    <%= if @user
+  <%= if @user
           ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) 
         end %>
-    
+    <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
+  
+  <div class="container-fluid">
     <div class="row page">
-      <div class="col-xs-12 col-md-8 col-md-offset-2">
-        <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
         
         <%= ERB.new(File.read("./app/views/components/header-photos.erb")).result(binding) %>
         <div class="row">
@@ -43,12 +43,10 @@
                 end %>
           </div>
         </div>
-        
-        
-        <%= ERB.new(File.read("./app/views/components/footer.erb")).result(binding) %>
-
       </div>
     </div>
   </div>
+  
+  <%= ERB.new(File.read("./app/views/components/footer.erb")).result(binding) %>
 </body>
 </html>
