@@ -19,6 +19,11 @@
   <script type="text/javascript" src="/js/main.js"></script>
 </head>
 <body>
+  <div class="loader-wrapper">
+    <div class="loader"></div>
+    <div class="loader-section"></div>
+  </div>
+  
   <div class="container-fluid">
     <%= if @user
           ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) 
