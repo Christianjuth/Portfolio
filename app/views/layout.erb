@@ -19,10 +19,13 @@
   <script type="text/javascript" src="/js/main.js"></script>
 </head>
 <body>
-  <div class="loader-wrapper">
+  <div class="loader-wrapper hidden">
     <div class="loader"></div>
     <div class="loader-section"></div>
   </div>
+  <script type="text/javascript">
+    document.getElementsByClassName("loader-wrapper")[0].classList.remove("hidden");
+  </script>
   
   <%= if @user
           ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) 
@@ -32,12 +35,10 @@
   <div class="container-fluid">
     <div class="row page">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-        
-        <%= ERB.new(File.read("./app/views/components/header-photos.erb")).result(binding) %>
+        <%= ERB.new(File.read("./app/views/components/page-header.erb")).result(binding) %>
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1">
             <%= yield %>
-            
             <%= if @comments == true
                   ERB.new(File.read("./app/views/components/disqus.erb")).result(binding) 
                 end %>
