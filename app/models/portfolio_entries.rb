@@ -2,13 +2,11 @@ class PortfolioEntry < ActiveRecord::Base
   
   # -- Validators --
   validates :title, 
-    presence: true, 
-    format: { with: /\A([a-z]|[1-9])+\Z/i,
-    message: "titles must use letters and numbers only" }
+    presence: true
   
   validates :font, 
     presence: true, 
-    format: { with: /\A([a-z]|[1-9])+\Z/i,
+    format: { with: /\A([A-Za-z0-9]|-)+\Z/i,
     message: "invalid font" }
   
   validates :color, 
@@ -21,13 +19,13 @@ class PortfolioEntry < ActiveRecord::Base
   
   validates :website, 
     presence: true, 
-    format: { with: /\Ahttps?:\/\/(www\.|)([A-Za-z1-9]+)(\.[A-Za-z]+)\Z/i,
+    format: { with: /\Ahttps?:\/\/(www\.|)([A-Za-z1-9]+)(\.[\S]+)\Z/i,
     message: "invalid url" },
     allow_blank: true
 
   validates :github, 
     presence: true, 
-    format: { with: /\Ahttps?:\/\/(www\.|)(github)(\.[A-Za-z]+)\Z/i,
+    format: { with: /\Ahttps?:\/\/(www\.|)(github)(\.[\S]+)\Z/i,
     message: "invalid github url" },
     allow_blank: true
   
