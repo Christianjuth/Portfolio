@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   # Validate email is present and follow the
   # format person@example.com
-	validates_uniqueness_of :email, :on => :create
+  validates_uniqueness_of :email, :on => :create
   validates :email, 
     presence: true, 
     format: { with: /\S+@\S+\.\S+/i,

@@ -4,21 +4,21 @@
 <div class="row no-margin">
   <% if @user %>
   <div class="col-xs-12">
-    <form method="POST" action="/portfolio/new_entry">
-      <div class="portfolio-entry add-portfolio-entry fake-submit" style="background-color: #336699">
+    <a type="fake_submit" action="/portfolio/new_entry">
+      <div class="portfolio-entry add-portfolio-entry" method="POST" action="/portfolio/new_entry" style="background-color: #336699">
         <h6 class="text-center"><i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i></h6>
       </div>
-    </form>
+    </a>
   </div>
   <% end %>
-  
+
   <% @portfolio_entries.each do |entry| %>
-    <a class="col-xs-12" href="/portfolio/<%= entry.id %>">
-      <div class="portfolio-entry" style="background-color: <%= entry.color %>">
-        <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
-        <div class="blurb" style="color: <%= entry.color %>"><%= entry.blurb %></div>
-      </div>
-    </a>
+  <a class="col-xs-12" href="/portfolio/<%= entry.id %>">
+    <div class="portfolio-entry" style="background-color: <%= entry.color %>">
+      <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
+      <div class="blurb" style="color: <%= entry.color %>"><%= entry.blurb %></div>
+    </div>
+  </a>
   <% end %>
 </div>
 

@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/portfolio" do
-    @portfolio_entries = PortfolioEntry.all.reverse
+    @portfolio_entries = PortfolioEntry.order(:date).reverse
     erb :"portfolio/portfolio"
   end
   
@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
   
   get "/portfolio/edit/:id" do
     if @user
-      @entry = PortfolioEntry.find(params[:id])
+      @edit_entry = PortfolioEntry.find(params[:id])
       erb :"portfolio/edit"
     end
   end
@@ -37,6 +37,7 @@ class ApplicationController < Sinatra::Base
       @entry = PortfolioEntry.find(params[:id])
       @entry.title = params[:title]
       @entry.color = params[:color]
+      @entry.date = Date.parse(params[:date])
       @entry.blurb = params[:blurb]
       @entry.font = params[:font]
       @entry.github = params[:github]
@@ -60,7 +61,7 @@ class ApplicationController < Sinatra::Base
           status 500
           body({
             success: false, 
-            message: "Contains invalid information"
+            message: @entry.errors.first[1]
             }.to_json)
         else 
           redirect request.referer

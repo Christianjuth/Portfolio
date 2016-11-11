@@ -1,3 +1,6 @@
+# ---------------------------------------
+#       Run once the dom is loaded
+# ---------------------------------------
 $(document).ready ->
   url = window.location
 
@@ -21,10 +24,6 @@ $(document).ready ->
     .fail (data)->
       data = jQuery.parseJSON(data.responseText)
       sweetAlert("Error", data.message, "error")
-
-  # Portfolio Page
-  $(".fake-submit").click ->
-    $(this).parent("form").submit()
   
   $("select[default]").each ->
     $(this).val($(this).attr("default"))
@@ -39,6 +38,20 @@ $(document).ready ->
     .fail (data)->
       data = jQuery.parseJSON(data.responseText)
       sweetAlert("Error", data.message, "error")
-      
+
+  $(".input-hex").formatter({
+    'pattern': '#{{******}}',
+    'persistent': true
+  })
+
+  $(".input-date").formatter({
+    'pattern': '{{9999}}/{{99}}/{{99}}',
+    'persistent': true
+  })
+  
+  
+# ---------------------------------------
+# Hide loader once page content is loaded
+# ---------------------------------------
 $(window).load ->
   $('body').addClass('loaded')

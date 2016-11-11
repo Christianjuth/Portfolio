@@ -5,6 +5,7 @@ npm-debug.log
 
 public/css
 public/js
+public/bower
 
 db/*.db
 features/screenshots/

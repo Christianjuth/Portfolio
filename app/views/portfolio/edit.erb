@@ -1,24 +1,21 @@
-<form action="/portfolio/update/<%= @entry.id %>" method="POST">
+<form action="/portfolio/update/<%= @edit_entry.id %>" method="POST">
 
   <br>
-  <a href="/portfolio/<%= @entry.id %>" class="btn btn-link btn-block">Back</a>
+  <a href="/portfolio/<%= @edit_entry.id %>" class="btn btn-link btn-block">Back</a>
   <br>
-  <div class="portfolio-entry" style="background-color: <%= @entry.color %>">
+  <div class="portfolio-entry" style="background-color: <%= @edit_entry.color %>">
     <h1>
-      <input class="<%= @entry.font %>" type="text" name="title" class="form-control" value="<%= @entry.title %>">
+      <input class="<%= @edit_entry.font %>" type="text" name="title" class="form-control" value="<%= @edit_entry.title %>">
     </h1>
   </div>
   <br>
 
   <div class="row">
     <div class="form-group col-xs-4">
-      <input type="text" name="color" class="form-control" placeholder="Hex Color" value="<%= @entry.color %>" required>
+      <input type="text" name="color" class="form-control input-hex" placeholder="Hex Color" value="<%= @edit_entry.color %>" required>
     </div>
     <div class="form-group col-xs-4">
-      <input type="text" name="blurb" class="form-control" placeholder="Blurb" value="<%= @entry.blurb %>" required>
-    </div>
-    <div class="form-group col-xs-4">
-      <select name="font" class="form-control" default="<%= @entry.font %>" required>
+      <select name="font" class="form-control" default="<%= @edit_entry.font %>" required>
         <option value="knewave">Knewave</option>
         <option value="heebo">Heebo</option>
         <option value="lobster">Lobster</option>
@@ -26,17 +23,23 @@
         <option value="pepermine-marker">Pepermine Marker</option>
       </select>
     </div>
-    <div class="form-group col-xs-12">
-      <textarea name="description" class="form-control" rows="15"><%= @entry.description %></textarea>
+    <div class='form-group col-xs-4'>
+      <input name="date" type='text' class="form-control input-date" value="<%= @edit_entry.date.strftime("%Y/%m/%d") %>">
     </div>
     <div class="form-group col-xs-12">
-      <input type="text" name="github" class="form-control" placeholder="Github" value="<%= @entry.github %>" required>
+      <input type="text" name="blurb" class="form-control" placeholder="Blurb" value="<%= @edit_entry.blurb %>" required>
     </div>
     <div class="form-group col-xs-12">
-      <input type="text" name="website" class="form-control" placeholder="Url" value="<%= @entry.website %>" required>
+      <textarea name="description" class="form-control" rows="15"><%= @edit_entry.description %></textarea>
+    </div>
+    <div class="form-group col-xs-12">
+      <input type="text" name="github" class="form-control input-github" placeholder="Github" value="<%= @edit_entry.github %>" required>
+    </div>
+    <div class="form-group col-xs-12">
+      <input type="text" name="website" class="form-control" placeholder="Url" value="<%= @edit_entry.website %>" required>
     </div>
     <div class="form-group col-xs-6">
-      <a type="fake_submit" action="/portfolio/delete/<%= @entry.id %>" class="btn btn-primary btn-block">Delete</a>
+      <a type="fake_submit" action="/portfolio/delete/<%= @edit_entry.id %>" class="btn btn-primary btn-block">Delete</a>
     </div>
     <div class="form-group col-xs-6">
       <button type="submit" class="btn btn-primary btn-block">Update</button>
