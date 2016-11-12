@@ -13,13 +13,18 @@
   position: relative;
   border-radius: 0;
   border: none;
-  margin-bottom: 0;
+  margin: 0;
   padding: 15px 0;
+
+  &.header{
+    margin-bottom: 20px;
+    cursor: auto;
+  }
 
   *{
     color: #fff;
   }
-  
+
   input{
     font-size: 35px;
     background: transparent;
@@ -60,13 +65,13 @@
     height: calc(100% - 10px);
     width: calc(100% - 10px);
     padding: 20px;
-    background-color: #fffcf9;
+    background-color: $white;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     -webkit-transition: opacity 0.2s;
-    
+
     &:hover{
       opacity: 1;
     }
@@ -79,7 +84,17 @@
 
 // --------------- Mobile -------------------
 @media screen and #{$break-phone} {
-  .portfolio-entry *{
-    font-size: 9vw;
+  .portfolio-entry{
+    &.header{
+      margin-bottom: 15px;
+    }
+
+    *{
+      font-size: 9vw;
+    }
+
+    .blurb{
+      display: none;
+    }
   }
 }

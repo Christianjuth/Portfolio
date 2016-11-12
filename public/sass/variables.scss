@@ -1,9 +1,17 @@
-//sizes
+// sizes
 $computer:                     1170px;
 $tablet:                       768px;
 $phone:                        0px;
 
-//media rule
+// colors
+$white:                        #fffcf9;
+$black:                        rgba(0,0,0,0.86);
+
+$primary:                      #d05c58;
+
+  
+
+// media rule
 $break-computer:               #{' (min-width: ' $computer ')'};
 $break-tablet:                 #{' (min-width: ' $tablet ') and (max-width: ' $computer - 1 ')'};
 $break-phone:                  #{' (min-width: ' $phone ') and (max-width: ' $tablet - 1 ')'};

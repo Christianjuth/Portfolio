@@ -1,7 +1,7 @@
 .navbar{
   position: relative;
   margin-bottom: 0;
-  border-bottom: 2px solid #d05c58;
+  border-bottom: 2px solid $primary;
 }
 
 .header.portfolio-entry{
@@ -25,11 +25,11 @@
     margin: 0;
     padding: 10px;
     margin-bottom: 0;
-    color: #fffcf9;
+    color: $white;
   }
 
   a > *{
-    color: #fffcf9;
+    color: $white;
     padding: 0;
   }
 }
@@ -50,10 +50,10 @@
 
   .social > a{
     padding: 0 15px;
-    color: #fffcf9;
+    color: $white;
   }
 
   *{
-    color: #fffcf9;
+    color: $white;
   }
 }

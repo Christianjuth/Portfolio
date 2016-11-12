@@ -86,7 +86,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: #fffcf9;
+  background: $white;
   z-index: 1000;
   -webkit-transform: translateX(0);  /* Chrome, Opera 15+, Safari 3.1+ */
   -ms-transform: translateX(0);  /* IE 9 */
@@ -110,12 +110,4 @@
 
   -webkit-transition: all 0.08s 1s ease-out;  
   transition: all 0.08s 1s ease-out;
-}
-
-/* JavaScript Turned Off */
-.no-js .loader-wrapper {
-  display: none;
-}
-.no-js h1 {
-  color: #222222;
 }
