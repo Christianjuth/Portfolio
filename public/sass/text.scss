@@ -5,12 +5,14 @@
 
 body{
   font-family: 'PT Sans';
+  font-weight: 500;
 }
 
 .navbar,
 .btn,
 h1,h2,h3,h4,h5,h6{
   font-family: Asap;
+  font-weight: 700;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -24,6 +26,7 @@ h1,h2,h3,h4,h5,h6{
 
 p{
   font-family: 'PT Sans';
+  font-weight: 500;
   font-size: 20px;
   color: $black;
   line-height: 180%;
