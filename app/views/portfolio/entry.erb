@@ -3,7 +3,9 @@
   <a href="/portfolio/edit/<%= @entry.id %>" class="btn btn-link btn-block">Edit</a>
 <% end %>
 
-<p><%= @entry.description %></p>
+<div class="portfolio-body">
+  <%= RDiscount.new(@entry.description).to_html %>
+</div>
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Knewave|Heebo:900|Lobster|Pacifico|Permanent+Marker">
 <link rel="stylesheet" href="/css/portfolio.css">

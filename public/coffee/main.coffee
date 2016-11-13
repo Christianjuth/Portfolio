@@ -38,6 +38,8 @@ $(document).ready ->
     .fail (data)->
       data = jQuery.parseJSON(data.responseText)
       sweetAlert("Error", data.message, "error")
+      
+  hljs.initHighlightingOnLoad()
 
   $(".input-hex").formatter({
     'pattern': '#{{******}}',
@@ -54,4 +56,7 @@ $(document).ready ->
 # Hide loader once page content is loaded
 # ---------------------------------------
 $(window).load ->
-  $('body').addClass('loaded')
+  $('.loader').addClass('loaded')
+  
+  $("a").click ->
+    $('.loader').removeClass('loaded')

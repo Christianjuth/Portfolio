@@ -13,8 +13,10 @@
   position: relative;
   border-radius: 0;
   border: none;
-  margin: 0;
   padding: 15px 0;
+  margin: 0;
+  // Fixes a bug in chrome THIS IS A HACK
+  margin-top: -1px;
 
   &.header{
     margin-bottom: 20px;
@@ -31,6 +33,30 @@
     border: none;
     text-align: center;
     width: 100%;
+  }
+
+  .blurb{
+    color: #000;
+    opacity: 0;
+    position: absolute;
+    font-family: 'PT Sans';
+    font-size: 20px;
+    text-align: center;
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 11px);
+    width: calc(100% - 10px);
+    padding: 20px;
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    -webkit-transition: opacity 0.2s;
+
+    &:hover{
+      opacity: 1;
+    }
   }
 
   .lobster{
@@ -52,29 +78,12 @@
   .heebo{
     font-family: 'Heebo', sans-serif;
   }
+}
 
-  .blurb{
-    color: #000;
-    opacity: 0;
-    position: absolute;
-    font-family: 'PT Sans';
-    font-size: 20px;
-    text-align: center;
-    top: 5px;
-    left: 5px;
-    height: calc(100% - 10px);
-    width: calc(100% - 10px);
-    padding: 20px;
-    background-color: $white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    -webkit-transition: opacity 0.2s;
-
-    &:hover{
-      opacity: 1;
-    }
+.portfolio-body{
+  iframe[src*="embed.spotify.com/"]{
+    width: 100%;
+    height: auto;
   }
 }
 

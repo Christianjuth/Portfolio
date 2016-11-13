@@ -1,10 +1,5 @@
 @import 'variables';
 
-@font-face {
-  font-family: thunder-things;
-  src: url(/fonts/thunder-things.ttf);
-}
-
 body, html{
   margin: 0;
   padding: 0;  
@@ -29,8 +24,15 @@ body, html{
   }
 }
 
-.menu-wrap{
-  padding: 0 20px;
+.page{
+  overflow-x: hidden;
+  padding: 30px 0 60px 0;
+}
+
+@media screen and #{$break-phone} {
+  .page{
+    padding: 20px 2vw 50px 2vw;
+  }
 }
 
 #disqus_thread {
@@ -42,38 +44,9 @@ body, html{
   }
 }
 
-textarea { 
-  resize: vertical;
-}
-
-hr{
-  border-color: rgba(235, 104, 100, .8);
-  border-width: 3px;
-  margin: 30px 0;
-}
-
-hr.secondary{
-  border-color: rgba(224, 224, 224, 0.8);
-  border-width: 2px;
-  margin: 15px -15px;
-}
-
-.page{
-  overflow-x: hidden;
-  padding: 30px 0 60px 0;
-}
-
-@media screen and #{$break-phone} {
-  hr.secondary{
-    margin: 15px 0;
-  }
-  
-  .page{
-    overflow-x: hidden;
-    padding: 20px 15px 50px 15px;
-  }
-}
-
+// load components
 @import 'text';
+
+// load page elements
 @import 'loader';
 @import 'header-and-footer';

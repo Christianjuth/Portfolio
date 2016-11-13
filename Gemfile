@@ -10,6 +10,7 @@ gem "json"
 gem "sinch_sms"
 gem "database_cleaner"
 gem "rack-google-analytics"
+gem "rdiscount"
 
 group :development, :test do
   gem "shotgun"

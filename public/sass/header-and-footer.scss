@@ -2,11 +2,21 @@
   position: relative;
   margin-bottom: 0;
   border-bottom: 2px solid $primary;
+
+  *{
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+  }
+}
+
+.menu-wrap{
+  padding: 0 20px;
 }
 
 .header.portfolio-entry{
   padding: 50px 0;
-  
+
   & > *{
     font-size: 8vw;
   }
@@ -16,7 +26,7 @@
   background-color: #eb6864;
   display: inline-block;
   width: 100%;
-  padding: 40px 10px 15px 10px;
+  padding: 40px 15px;
 
   .logo{
     font-family: thunder-things;
@@ -35,7 +45,23 @@
 }
 
 @media screen and #{$break-phone} {
+  .navbar-collapse{
+    .navbar-nav{
+      margin: 0 -15px 10px -15px;
+    }
+
+    form{
+      margin: 0 -15px;
+    }
+
+    .btn{
+      margin-left: 13px;
+    }
+  }
+
   .heading-background{
+    padding: 30px 15px;
+
     .logo{
       font-size: 13vw;
     }
@@ -45,7 +71,7 @@
 .footer{
   display: block;
   background-color: #eb6864;
-  padding: 5px;
+  padding: 20px;
   width: 100%;
 
   .social > a{

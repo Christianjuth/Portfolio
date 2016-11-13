@@ -1,25 +1,75 @@
-form,
-h1,h2,h3,h4,h5,h6,.btn{
-  font-family: Signika;
+@font-face {
+  font-family: thunder-things;
+  src: url(/fonts/thunder-things.ttf);
+}
+
+body{
+  font-family: 'PT Sans';
+}
+
+.navbar,
+.btn,
+h1,h2,h3,h4,h5,h6{
+  font-family: Asap;
 }
 
 h1,h2,h3,h4,h5,h6{
-  font-family: Asap, Signika;
-  font-weight: bold;
-  padding: 15px;
+  width: 100%;
+  margin: 10px 0 0 0;
+  padding: 15px 0;
   color: $black;
+  font-weight: bold;
+  text-align: center;
 }
 
 p{
   font-family: 'PT Sans';
-  font-weight: 200;
   font-size: 20px;
   color: $black;
   line-height: 180%;
   letter-spacing: 0.5px;
-  padding-bottom: 25px;
+  padding-bottom: 15px;
+  margin: 0;
 
   &.indent{
     text-indent: 50px;
+  }
+}
+
+textarea { 
+  resize: vertical;
+}
+
+pre{
+  border: none;
+  padding: 20px;
+
+  &, code{
+    // Overwrite syntak highlighter background
+    background-color: $gray !important;
+  }
+}
+
+hr{
+  border-color: rgba(235, 104, 100, .8);
+  border-width: 3px;
+  margin: 6px 0 12px 0;
+}
+
+hr.secondary{
+  border-color: $gray;
+  border-width: 3px;
+  margin: 6px -15px 12px -15px;
+}
+
+@media screen and #{$break-tablet-max} {
+  hr.secondary{
+    margin: 6px 0 12px 0;
+  }
+}
+
+@media screen and #{$break-phone} {
+  p{
+    font-size: 5.5vw;
   }
 }
