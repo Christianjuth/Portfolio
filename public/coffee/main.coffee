@@ -51,6 +51,23 @@ $(document).ready ->
     'persistent': true
   })
   
+  $("blockquote").each ->
+    $this = $(this)
+    $ps = $this.find("p")
+    numberOfQuotes = $ps.length
+    $ps.hide()
+    $ps.first().show()
+    lastQuoteShown = 0
+    quoteShown = 1
+    setInterval(->
+      if quoteShown > (numberOfQuotes - 1)
+        quoteShown = 0
+      $ps.eq(lastQuoteShown - 1).fadeOut 200, ->
+        $ps.eq(quoteShown - 1).fadeIn()
+      lastQuoteShown = quoteShown
+      quoteShown += 1
+    , 4000)
+  
   
 # ---------------------------------------
 # Hide loader once page content is loaded

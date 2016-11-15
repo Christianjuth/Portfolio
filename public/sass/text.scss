@@ -24,11 +24,13 @@ h1,h2,h3,h4,h5,h6{
   text-align: center;
 }
 
-p{
+p,
+.page li,
+blockquote{
   font-family: 'PT Sans';
   text-align: justify;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 19px;
   color: $black;
   line-height: 180%;
   letter-spacing: 0.5px;
@@ -38,6 +40,11 @@ p{
   &.indent{
     text-indent: 50px;
   }
+}
+
+blockquote{
+  border-left: 7px solid $gray;
+  min-height: 150px;
 }
 
 a{
