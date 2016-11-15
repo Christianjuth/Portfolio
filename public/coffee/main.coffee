@@ -67,13 +67,8 @@ $(document).ready ->
       lastQuoteShown = quoteShown
       quoteShown += 1
     , 4000)
-  
-  
-# ---------------------------------------
-# Hide loader once page content is loaded
-# ---------------------------------------
+
 $(window).load ->
-  $('.loader').addClass('loaded')
-  
+  $('.loader').addClass('loaded')  
   $("a").click ->
     $('.loader').removeClass('loaded')
