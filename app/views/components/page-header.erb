@@ -1,6 +1,7 @@
 <% if @entry %>
   <div class="header portfolio-entry" style="background-color: <%= @entry.color %>">
-    <h1 class="text-center <%= @entry.font %>"><%= @entry.title %></h1>
+    <h1 class="title text-center <%= @entry.font %>"><%= @entry.title %></h1>
+    <p class="portfolio-date"><%= @entry.date.strftime("%d/%m/%Y") %></p>
   </div>
 <% else %>
   <div class="row header">

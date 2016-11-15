@@ -26,6 +26,7 @@ h1,h2,h3,h4,h5,h6{
 
 p{
   font-family: 'PT Sans';
+  text-align: justify;
   font-weight: 500;
   font-size: 20px;
   color: $black;
@@ -37,6 +38,14 @@ p{
   &.indent{
     text-indent: 50px;
   }
+}
+
+a{
+  cursor: pointer;
+}
+
+.text-black{
+  color: $black;
 }
 
 textarea { 
@@ -74,5 +83,6 @@ hr.secondary{
 @media screen and #{$break-phone} {
   p{
     font-size: 5.5vw;
+    text-align: left;
   }
 }

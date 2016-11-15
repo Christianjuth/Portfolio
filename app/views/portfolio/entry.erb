@@ -1,10 +1,26 @@
 <% if @user %>
-  <br>
   <a href="/portfolio/edit/<%= @entry.id %>" class="btn btn-link btn-block">Edit</a>
 <% end %>
 
-<div class="portfolio-body">
-  <%= RDiscount.new(@entry.description).to_html %>
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+
+    <div class="portfolio-body">
+      <%= RDiscount.new(@entry.description).to_html %>
+    </div>
+
+  </div>
+
+  <% if @entry.website != "" || @entry.github != "" %>
+    <div class="col-xs-1 sidebar">
+      <% if @entry.website != "" %>
+        <a class="text-black text-center" href="<%= @entry.website %>"><i class="fa fa-compass fa-2x" aria-hidden="true"></i></a>
+      <% end %>
+      <% if @entry.github != "" %>
+        <a class="text-black text-center" href="<%= @entry.github %>"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Knewave|Heebo:900|Lobster|Pacifico|Permanent+Marker">

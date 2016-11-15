@@ -3,6 +3,7 @@ require "./config/environment"
 
 # Require models
 require "./app/models/user"
+require "./app/models/page"
 require "./app/models/api_verification"
 require "./app/models/portfolio_entries"
 
@@ -10,8 +11,104 @@ require "./app/models/portfolio_entries"
 class ApplicationController < Sinatra::Base
   # This routs the home page to the template
   get "/" do
-    @comments = true
-    erb :index
+    if Page.exists?(title: "home")
+      @page = Page.find_by(title: "home")
+      @comments = @page.comments
+      erb :index
+    else
+      erb :"404"
+    end
+  end
+  
+  get "/pages" do
+    erb :"page/pages"
+  end
+  
+  get "/page/:title" do
+    if params[:title].downcase == "home"
+      redirect "/"
+    end
+    @page = Page.find_by(title: params[:title].downcase)
+    erb :"page/page"
+  end
+  
+  post "/page/new_page" do
+    if @user
+      page = Page.new()
+      page.save()
+      case request_type?
+      when :ajax
+        body({
+          success: true, 
+          message: "success",
+          redirect: "/page/edit/#{page.id}"
+          }.to_json)
+      else 
+        redirect "/page/edit/#{page.id}"
+      end
+    end
+  end
+  
+  get "/page/edit/:id" do
+    if @user
+      @page = Page.find(params[:id])
+      erb :"page/edit"
+    else
+      erb :"404"
+    end
+  end
+  
+  post "/page/update/:id" do
+    if @user
+      @page = Page.find(params[:id])
+      @page.title = params[:title]
+      @page.content = params[:content]
+      if @page.valid?
+        @page.save
+        case request_type?
+        when :ajax
+          body({
+            success: true, 
+            message: "success",
+            redirect: request.referer
+            }.to_json)
+        else 
+          redirect request.referer
+        end
+      else
+        case request_type?
+        when :ajax
+          status 500
+          body({
+            success: false, 
+            message: "#{@page.errors.first[0].capitalize} #{@page.errors.first[1]}"
+            }.to_json)
+        else 
+          redirect request.referer
+        end
+      end
+    else
+      erb :"404"
+    end
+  end
+  
+  post "/page/delete/:id" do
+    if @user
+      @page = Page.find(params[:id])
+      @page.delete
+      case request_type?
+      when :ajax
+        body({
+          success: true, 
+          message: "success",
+          redirect: "/pages"
+          }.to_json)
+      else 
+        redirect "/pages"
+      end
+    else
+      erb :"404"
+    end
   end
 
   get "/portfolio" do
@@ -29,6 +126,8 @@ class ApplicationController < Sinatra::Base
     if @user
       @edit_entry = PortfolioEntry.find(params[:id])
       erb :"portfolio/edit"
+    else
+      erb :"404"
     end
   end
   
@@ -61,7 +160,7 @@ class ApplicationController < Sinatra::Base
           status 500
           body({
             success: false, 
-            message: @entry.errors.first[1]
+            message: "#{@entry.errors.first[0].capitalize} #{@entry.errors.first[1]}"
             }.to_json)
         else 
           redirect request.referer
@@ -101,11 +200,9 @@ class ApplicationController < Sinatra::Base
       else 
         redirect "/portfolio"
       end
+    else
+      erb :"404"
     end
-  end
-
-  get "/music" do
-    erb :music
   end
 
   get "/settings" do

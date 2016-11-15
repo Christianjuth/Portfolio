@@ -1,25 +1,27 @@
-<h2 class="text-center">Portfolio</h2>
-<hr class="secondary">
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
 
-<div class="row no-margin">
-  <% if @user %>
-  <div class="col-xs-12">
-    <a type="fake_submit" action="/portfolio/new_entry">
-      <div class="portfolio-entry add-portfolio-entry" method="POST" action="/portfolio/new_entry" style="background-color: #336699">
-        <h6 class="text-center"><i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i></h6>
+    <h2 class="text-center">Portfolio</h2>
+    <hr class="secondary">
+
+    <div class="row no-margin">
+      <% if @user %>
+      <div class="col-xs-12">
+        <a type="fake_submit" class="btn btn-block btn-link" action="/portfolio/new_entry">add</a>
       </div>
-    </a>
-  </div>
-  <% end %>
+      <% end %>
 
-  <% @portfolio_entries.each do |entry| %>
-  <a class="col-xs-12" href="/portfolio/<%= entry.id %>">
-    <div class="portfolio-entry" style="background-color: <%= entry.color %>">
-      <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
-      <div class="blurb" style="color: <%= entry.color %>"><%= entry.blurb %></div>
+      <% @portfolio_entries.each do |entry| %>
+      <a class="col-xs-12" href="/portfolio/<%= entry.id %>">
+        <div class="portfolio-entry" style="background-color: <%= entry.color %>">
+          <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
+          <div class="portfolio-blurb" style="color: <%= entry.color %>"><%= entry.blurb %></div>
+        </div>
+      </a>
+      <% end %>
     </div>
-  </a>
-  <% end %>
+
+  </div>
 </div>
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Knewave|Heebo:900|Lobster|Pacifico|Permanent+Marker">

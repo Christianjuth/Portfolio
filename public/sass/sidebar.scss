@@ -1,0 +1,16 @@
+.sidebar{
+  padding: 10px;
+  border-left: 3px solid $gray;
+  
+  i{
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: -3px;
+  }
+}
+
+@media screen and #{$break-tablet-max} {
+  .sidebar{
+    display: none;
+  }
+}
