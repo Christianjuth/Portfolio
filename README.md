@@ -5,6 +5,9 @@ ChristianJuth.com is a Sinatra web app that incorporates GruntJS, TravisCI, and 
 ### Behind the Scenes
 ChristianJuth.com is a complex Sinatra application based on another project I created [Sinatra Start Point](https://github.com/Christianjuth/sinatra-start-point). Sinatra Start Point is the foundation for every Sinatra project I create. Currently, I have made a bunch of improvements to ChristianJuth.com that I intend to merge back into Sinatra Start Point. After every project I build I assess what makes it better than the last and merge that into Sinatra Start Point. This workflow ensures each project I create is better than the last.
 
+# Getting Started
+Clone the repository
+
 ### Setup environment
 Requirements
 * [Ruby v2 and Rubygems](https://rvm.io/) _(via RVM recommended)_
