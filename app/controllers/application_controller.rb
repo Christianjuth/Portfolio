@@ -29,6 +29,7 @@ class ApplicationController < Sinatra::Base
       redirect "/"
     end
     @page = Page.find_by(title: params[:title].downcase)
+    @comments = @page.comments
     erb :"page/page"
   end
   
@@ -62,6 +63,7 @@ class ApplicationController < Sinatra::Base
     if @user
       @page = Page.find(params[:id])
       @page.title = params[:title]
+      @page.comments = params[:comments]
       @page.content = params[:content]
       if @page.valid?
         @page.save
