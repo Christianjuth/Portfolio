@@ -7,7 +7,7 @@ node_js:
 - 5.0.0
 before_install:
 - ./travis/install-qt.sh
-- rvm install 2.2.1
+- rvm install 2.3.2
 install:
 - npm install -g grunt-cli
 - npm install -g bower
