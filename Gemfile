@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.2.1"
+ruby "2.3.2"
 
 gem "sinatra"
 gem "activerecord"
@@ -9,7 +9,6 @@ gem "bcrypt"
 gem "json"
 gem "sinch_sms"
 gem "database_cleaner"
-gem "rack-google-analytics"
 gem "rdiscount"
 
 group :development, :test do

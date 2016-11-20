@@ -8,7 +8,8 @@ require "./app/models/api_verification"
 require "./app/models/portfolio_entries"
 
 # Set routs
-class ApplicationController < Sinatra::Base
+class MyApp < Sinatra::Base
+  
   # This routs the home page to the template
   get "/" do
     if Page.exists?(title: "home")
@@ -305,6 +306,7 @@ class ApplicationController < Sinatra::Base
   # ----- Config ------
   configure do
     set :public_folder, "public"
+    set :static_cache_control, [:public, {:max_age => 3000}]
     set :views, "app/views"
     enable :sessions
     # Set the session secret

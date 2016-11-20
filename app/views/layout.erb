@@ -27,8 +27,14 @@
   <meta name="description" content="The personal portfolio of Christian Juth">
 </head>
 <body>
+  <!-- Improve Google Ranking  -->
   <h1 class="hidden" style="display:none">Christian Juth</h1>
   
+  <% if Sinatra::Base.production? && defined?(@user).nil? %>
+    <%= ERB.new(File.read("./app/views/components/analytics.erb")).result(binding) %>
+  <% end %>
+  
+  <!-- Loader -->
   <div class="loader hidden">
     <div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div>
   </div>
@@ -41,8 +47,8 @@
   
   <%= if @user
           ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) 
-        end %>
-    <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
+      end %>
+  <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
   
   <div class="container-fluid">
     <div class="row page">
