@@ -8,7 +8,7 @@ require "./app/models/api_verification"
 require "./app/models/portfolio_entries"
 
 # Set routs
-class MyApp < Sinatra::Base
+class ApplicationController < Sinatra::Base
   
   # This routs the home page to the template
   get "/" do
