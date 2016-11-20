@@ -8,6 +8,7 @@ node_js:
 before_install:
 - ./travis/install-qt.sh
 - rvm install 2.3.2
+- gem install bundler
 install:
 - npm install -g grunt-cli
 - npm install -g bower
