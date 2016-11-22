@@ -1,16 +1,16 @@
 # ---------------------------------------
-#       Run once the dom is loaded
+#       Run once the DOM is loaded
 # ---------------------------------------
 $(document).ready ->
   url = window.location
 
   # Will only work if string in href matches with location
-  $('ul.nav a[href="' + url.pathname + '"]').parent().addClass('active')
+  $("ul.nav a[href='" + url.pathname + "']").parent().addClass("active")
 
   # Will also work for relative and absolute hrefs
-  $('ul.nav a').filter ->
+  $("ul.nav a").filter ->
     this.href == url.href
-  .parent().addClass('active')
+  .parent().addClass("active")
 
   # Interupt form
   $("form").submit (e)->
@@ -42,40 +42,52 @@ $(document).ready ->
   hljs.initHighlightingOnLoad()
 
   $(".input-hex").formatter({
-    'pattern': '#{{******}}',
-    'persistent': true
+    "pattern": "\#{{******}}",
+    "persistent": true
   })
 
   $(".input-date").formatter({
-    'pattern': '{{9999}}/{{99}}/{{99}}',
-    'persistent': true
+    "pattern": "{{9999}}/{{99}}/{{99}}",
+    "persistent": true
   })
   
-  $('h1,h2,h3,h4,h5').click ->
+  # Allow user to click on title
+  # and page link to it
+  $("h1,h2,h3,h4,h5").each ->
+    $this = $(this);
+    id = $this.first().text().replace(/\s/,"-")
+    $this.attr("id", id)
+    
+  $("h1,h2,h3,h4,h5").click ->
     $this = $(this)
-    id = $this.attr('id')
+    id = $this.attr("id")
     if id?
-      url = window.location.pathname.replace(/(\/)$/,'')+'#'+id
+      url = window.location.pathname.replace(/(\/)$/,"")+"#"+id
       window.history.replaceState(null, null, url)
   
   $("blockquote").each ->
     $this = $(this)
     $ps = $this.children()
-    numberOfQuotes = $ps.length
+    numberOfQuotes = $ps.length - 1
     $ps.hide()
     $ps.first().show()
     lastQuoteShown = 0
     quoteShown = 1
     setInterval(->
-      if quoteShown > (numberOfQuotes - 1)
+      if quoteShown > numberOfQuotes
         quoteShown = 0
-      $ps.eq(lastQuoteShown - 1).fadeOut 200, ->
-        $ps.eq(quoteShown - 1).fadeIn()
-      lastQuoteShown = quoteShown
-      quoteShown += 1
-    , 4000)
+      $ps.eq(lastQuoteShown).fadeOut 200, ->
+        $ps.eq(quoteShown).fadeIn()
+        lastQuoteShown = quoteShown
+        quoteShown = quoteShown + 1
+    , 5000)
 
+
+
+# ---------------------------------------
+#     Run once page content is loaded
+# ---------------------------------------
 $(window).load ->
-  $('.loader').addClass('loaded')  
+  $(".loader").addClass("loaded")  
   $("a").click ->
-    $('.loader').removeClass('loaded')
+    $(".loader").removeClass("loaded")
