@@ -60,7 +60,7 @@ $(document).ready ->
   
   $("blockquote").each ->
     $this = $(this)
-    $ps = $this.find("p")
+    $ps = $this.children()
     numberOfQuotes = $ps.length
     $ps.hide()
     $ps.first().show()

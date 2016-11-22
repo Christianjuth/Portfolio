@@ -77,8 +77,8 @@ blockquote{
 }
 
 blockquote{
-  border-left: 7px solid $gray;
-  min-height: 150px;
+  border: 5px solid $black;
+  min-height: 175px;
 }
 
 a{
@@ -127,6 +127,16 @@ hr.secondary{
   hr.secondary{
     margin: 6px 0 12px 0;
   }
+  
+  .page ul{
+    margin-top: -7px;
+    margin-bottom: 7px;
+  }
+  
+  .page ul li{
+    display: block;
+    text-align: center;
+  }
 }
 
 @media screen and #{$break-phone} {
@@ -134,11 +144,21 @@ hr.secondary{
     font-size: 5.5vw;
     text-align: left;
   }
+  
+  blockquote{
+    min-height: 250px;
+  }
 }
 
 .social-circle{
   color: $white;
   padding: 15px;
+  margin: 2px;
   border-radius: 100px;
   background-color: $primary;
+  border: 2px solid $white;
+  
+  &:hover{
+    border: 2px solid $primary;
+  }
 }
