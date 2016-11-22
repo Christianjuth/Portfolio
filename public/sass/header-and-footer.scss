@@ -82,4 +82,14 @@
   *{
     color: $white;
   }
+
+  .footer-text{
+    display: block;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 15px 0;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: center;
+  }
 }

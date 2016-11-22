@@ -24,6 +24,39 @@ h1,h2,h3,h4,h5,h6{
   text-align: center;
 }
 
+h1{
+  font-size: 45px;
+  margin-top: 30px;
+}
+
+h2{
+  font-size: 35px;
+  margin-top: 20px;
+}
+
+h3{
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+h4{
+  font-size: 22px;
+  margin: 0;
+  padding: 15px 0 10px 0;
+}
+
+h5{
+  margin: 0;
+  padding: 0 0 10px 0;
+}
+
+h6{
+  text-align: left;
+  font-size: 21px;
+  margin: 0;
+  padding: 15px 0 10px 0;
+}
+
 p,
 .page li,
 blockquote{
@@ -69,6 +102,14 @@ pre{
   }
 }
 
+.page ul {
+  margin-bottom: 20px;
+
+  li{
+    padding-bottom: 0;
+  }
+}
+
 hr{
   border-color: rgba(235, 104, 100, .8);
   border-width: 3px;
@@ -92,4 +133,11 @@ hr.secondary{
     font-size: 5.5vw;
     text-align: left;
   }
+}
+
+.social-circle{
+  color: $white;
+  padding: 15px;
+  border-radius: 100px;
+  background-color: $primary;
 }

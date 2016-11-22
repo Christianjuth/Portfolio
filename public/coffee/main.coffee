@@ -51,6 +51,13 @@ $(document).ready ->
     'persistent': true
   })
   
+  $('h1,h2,h3,h4,h5').click ->
+    $this = $(this)
+    id = $this.attr('id')
+    if id?
+      url = window.location.pathname.replace(/(\/)$/,'')+'#'+id
+      window.history.replaceState(null, null, url)
+  
   $("blockquote").each ->
     $this = $(this)
     $ps = $this.find("p")
