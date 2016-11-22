@@ -42,7 +42,7 @@ h3{
 h4{
   font-size: 22px;
   margin: 0;
-  padding: 15px 0 10px 0;
+  padding: 17px 0 10px 0;
 }
 
 h5{
@@ -52,8 +52,7 @@ h5{
 }
 
 h6{
-  text-align: left;
-  font-size: 21px;
+  font-size: 22px;
   margin: 0;
   padding: 15px 0 10px 0;
 }
@@ -79,6 +78,10 @@ blockquote{
 blockquote{
   border: 5px solid $black;
   min-height: 175px;
+  
+  *{
+    text-align: left;
+  }
 }
 
 a{
@@ -94,6 +97,7 @@ textarea {
 }
 
 pre{
+  font-size: 17px;
   border: none;
   padding: 20px;
 
@@ -104,10 +108,13 @@ pre{
 }
 
 .page ul {
-  margin-bottom: 20px;
-
+  margin: 5px 0 -6px 0;
+  padding: 0;
+  
   li{
-    padding-bottom: 0;
+    display: block;
+    padding: 0;
+    text-align: center;
   }
 }
 
@@ -127,16 +134,6 @@ hr.secondary{
   hr.secondary{
     margin: 6px 0 12px 0;
   }
-  
-  .page ul{
-    margin-top: -7px;
-    margin-bottom: 7px;
-  }
-  
-  .page ul li{
-    display: block;
-    text-align: center;
-  }
 }
 
 @media screen and #{$break-phone} {
@@ -147,6 +144,11 @@ hr.secondary{
   
   blockquote{
     min-height: 250px;
+  }
+  
+  pre{
+    padding: 10px 0;
+    font-size: 14px;
   }
 }
 

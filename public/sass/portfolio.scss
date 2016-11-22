@@ -18,6 +18,11 @@
   // Fixes a bug in chrome THIS IS A HACK
   margin-top: -1px;
 
+  h1{
+    margin-top: 0;
+    padding: 25px;
+  }
+
   &.header{
     margin-bottom: 20px;
     cursor: auto;
