@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "$(uname)" == "Darwin" ]; then
   brew install qt
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then

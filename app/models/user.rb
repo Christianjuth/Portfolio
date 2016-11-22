@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :on => :create
   validates :email, 
     presence: true, 
-    format: { with: /\S+@\S+\.\S+/i,
+    format: { with: /\A\S+@\S+\.\S+\Z/i,
     message: "email is not valid" }
 
 
