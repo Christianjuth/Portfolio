@@ -69,18 +69,21 @@ $(document).ready ->
     $this = $(this)
     $ps = $this.children()
     numberOfQuotes = $ps.length - 1
-    $ps.hide()
-    $ps.first().show()
-    lastQuoteShown = 0
-    quoteShown = 1
-    setInterval(->
+    lastQuoteShown = numberOfQuotes
+    quoteShown = 0
+    animateBlockquote = ->
       if quoteShown > numberOfQuotes
         quoteShown = 0
       $ps.eq(lastQuoteShown).fadeOut 200, ->
-        $ps.eq(quoteShown).fadeIn()
+        $ps.eq(quoteShown).fadeIn(200)
         lastQuoteShown = quoteShown
         quoteShown = quoteShown + 1
-    , 5000)
+        setTimeout ->
+          animateBlockquote()
+        , 5000
+    if numberOfQuotes > 0
+      $ps.hide()
+      animateBlockquote()
 
 
 
