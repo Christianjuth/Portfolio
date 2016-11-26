@@ -10,4 +10,6 @@ end
 configure :test do
   set :db_adapter, "sqlite3"
   set :db_location, "db/cucumber-test.db"
+  SimpleCov.start
+  puts "required simplecov"
 end
