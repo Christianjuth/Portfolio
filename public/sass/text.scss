@@ -61,7 +61,6 @@ p,
 .page li,
 blockquote{
   font-family: 'PT Sans';
-  text-align: justify;
   font-weight: 500;
   font-size: 19px;
   color: $black;
@@ -73,6 +72,12 @@ blockquote{
   &.indent{
     text-indent: 50px;
   }
+}
+
+.page p:not(.text-center),
+.page li,
+.page blockquote{
+  text-align: justify;
 }
 
 blockquote{

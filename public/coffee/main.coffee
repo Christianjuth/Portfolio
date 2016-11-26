@@ -29,15 +29,30 @@ $(document).ready ->
     $(this).val($(this).attr("default"))
     
   $("a[type=fake_submit]").click ->
-    $.post($(this).attr("action"))
-    .success (data)->
-      data = jQuery.parseJSON(data)
-      # data.redirect contains the string URL to redirect to
-      if (data.redirect)
-        window.location.href = data.redirect
-    .fail (data)->
-      data = jQuery.parseJSON(data.responseText)
-      sweetAlert("Error", data.message, "error")
+    $this = $(this)
+    post = ->
+      $.post($this.attr("action"))
+      .success (data)->
+        data = jQuery.parseJSON(data)
+        # data.redirect contains the string URL to redirect to
+        if (data.redirect)
+          window.location.href = data.redirect
+      .fail (data)->
+        data = jQuery.parseJSON(data.responseText)
+        sweetAlert("Error", data.message, "error")
+    $this = $(this)
+    if $this.hasClass("delete")
+      sweetAlert {   
+        title: "Are you sure?",   
+        type: "warning",
+        showCancelButton: true, 
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Delete",
+        closeOnConfirm: false 
+      }, ->
+        post()
+    else
+      post()
       
   hljs.initHighlightingOnLoad()
 

@@ -14,7 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-sweetalert": "~0.4.5",
+    "bootstrap-sweetalert": "^1.0.1",
     "formatter.js": "formatter#^0.1.5",
     "loaders.css": "^0.1.2",
     "normalize-css": "^5.0.0"

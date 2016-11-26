@@ -29,88 +29,43 @@ class ApplicationController < Sinatra::Base
     if params[:title].downcase == "home"
       redirect "/"
     end
-    @page = Page.find_by(title: params[:title].downcase)
-    @comments = @page.comments
+    page = Page.find_by(title: params[:title].downcase)
+    @comments = page.comments
     erb :"page/page"
   end
   
   post "/page/new_page" do
-    if @user
+    if_logged_in do
       page = Page.new()
       page.save()
-      case request_type?
-      when :ajax
-        body({
-          success: true, 
-          message: "success",
-          redirect: "/page/edit/#{page.id}"
-          }.to_json)
-      else 
-        redirect "/page/edit/#{page.id}"
-      end
+      return_request(true, "/page/edit/#{page.id}")
     end
   end
   
   get "/page/edit/:id" do
-    if @user
+    if_logged_in do
       @page = Page.find(params[:id])
       erb :"page/edit"
-    else
-      erb :"404"
     end
   end
   
   post "/page/update/:id" do
-    if @user
-      @page = Page.find(params[:id])
-      @page.title = params[:title]
-      @page.comments = params[:comments]
-      @page.content = params[:content]
-      if @page.valid?
-        @page.save
-        case request_type?
-        when :ajax
-          body({
-            success: true, 
-            message: "success",
-            redirect: request.referer
-            }.to_json)
-        else 
-          redirect request.referer
-        end
-      else
-        case request_type?
-        when :ajax
-          status 500
-          body({
-            success: false, 
-            message: "#{@page.errors.first[0].capitalize} #{@page.errors.first[1]}"
-            }.to_json)
-        else 
-          redirect request.referer
-        end
+    if_logged_in do
+      page = Page.find(params[:id])
+      page.title = params[:title]
+      page.comments = params[:comments]
+      page.content = params[:content]
+      return_request(@page.valid?, request.referer, error_for(page)) do
+        page.save
       end
-    else
-      erb :"404"
     end
   end
   
   post "/page/delete/:id" do
-    if @user
+    if_logged_in do
       @page = Page.find(params[:id])
       @page.delete
-      case request_type?
-      when :ajax
-        body({
-          success: true, 
-          message: "success",
-          redirect: "/pages"
-          }.to_json)
-      else 
-        redirect "/pages"
-      end
-    else
-      erb :"404"
+      return_request(true, "/pages")
     end
   end
 
@@ -126,16 +81,14 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/portfolio/edit/:id" do
-    if @user
+    if_logged_in do
       @edit_entry = PortfolioEntry.find(params[:id])
       erb :"portfolio/edit"
-    else
-      erb :"404"
     end
   end
   
   post "/portfolio/update/:id" do
-    if @user
+    if_logged_in do
       @entry = PortfolioEntry.find(params[:id])
       @entry.title = params[:title]
       @entry.color = params[:color]
@@ -145,72 +98,33 @@ class ApplicationController < Sinatra::Base
       @entry.github = params[:github]
       @entry.website = params[:website]
       @entry.description = params[:description]
-      if @entry.valid?
+      return_request(entry.valid?, request.referer, error_for(entry)) do
         @entry.save
-        case request_type?
-        when :ajax
-          body({
-            success: true, 
-            message: "success",
-            redirect: request.referer
-            }.to_json)
-        else 
-          redirect request.referer
-        end
-      else
-        case request_type?
-        when :ajax
-          status 500
-          body({
-            success: false, 
-            message: "#{@entry.errors.first[0].capitalize} #{@entry.errors.first[1]}"
-            }.to_json)
-        else 
-          redirect request.referer
-        end
       end
     end
   end
   
   post "/portfolio/new_entry" do
-    if @user
+    if_logged_in do
       entry = PortfolioEntry.new()
       entry.save()
-      case request_type?
-      when :ajax
-        body({
-          success: true, 
-          message: "success",
-          redirect: "/portfolio/edit/#{entry.id}"
-          }.to_json)
-      else 
-        redirect "/portfolio/edit/#{entry.id}"
-      end
+      return_request(true, "/portfolio/edit/#{entry.id}")
     end
   end
   
   post "/portfolio/delete/:id" do
-    if @user
+    if_logged_in do
       @entry = PortfolioEntry.find(params[:id])
       @entry.delete
-      case request_type?
-      when :ajax
-        body({
-          success: true, 
-          message: "success",
-          redirect: "/portfolio"
-          }.to_json)
-      else 
-        redirect "/portfolio"
-      end
-    else
-      erb :"404"
+      return_request(true, "/portfolio")
     end
   end
 
   get "/settings" do
-    @api_verification = ApiVerification.all
-    erb :settings
+    if_logged_in do
+      @api_verification = ApiVerification.all
+      erb :settings
+    end
   end
 
   # This routs the login page to the template
@@ -224,78 +138,40 @@ class ApplicationController < Sinatra::Base
       @user = User.find_by({username: params[:username]})
     end
     # check password and set session
-    if @user && @user.password(params[:password])
+    return_request(@user && @user.password(params[:password]), "/", "Incorrect username or password") do
       session[:user_id] = @user.id
-      case request_type?
-      when :ajax
-        body({
-          success: true, 
-          message: "success",
-          redirect: "/"
-          }.to_json)
-      else 
-        redirect "/"
-      end
-    else
-      case request_type?
-      when :ajax
-        status 500
-        body({
-          success: false, 
-          message: "Incorrect username or password"
-          }.to_json)
-      else 
-        redirect "/login"
-      end
     end
   end
 
   post "/change_password" do
     # check password and set session
-    if @user
+    if_logged_in do
       # try and update password
       @user.password = params[:new_password]
-      
-      if params[:new_password] == params[:confirm_password] && @user.valid?
-        # save password to database
+      return_request(
+        params[:new_password] == params[:confirm_password] && @user.valid?, request.referer, "Passwords do not match") do
         @user.save
-        # notify page
-        case request_type?
-        when :ajax
-          body({
-            success: true, 
-            message: "success",
-            redirect: request.referer
-            }.to_json)
-        else 
-          redirect request.referer
-        end
-      else
-        case request_type?
-        when :ajax
-          status 500
-          body({
-            success: false, 
-            message: "Passwords do not match"
-            }.to_json)
-        else 
-          redirect request.referer
-        end
       end
     end
   end
 
   post "/logout" do
     session.destroy
-    case request_type?
-    when :ajax
-      body({
-        success: true, 
-        message: "success",
-        redirect: "/"
-        }.to_json)
-    else 
-      redirect "/"
+    return_request()
+  end
+  
+  post "/api_verification/new_api_verification" do
+    if_logged_in do
+      api = ApiVerification.new()
+      return_request(api.valid?, request.referer, error_for(api)) do
+        api.save()
+      end
+    end
+  end
+  
+  post "/api_verification/delete/:id" do
+    return_request(true, request.referer, nil) do
+      ApiVerification.find(params[:id]).destroy
     end
   end
 
@@ -337,14 +213,12 @@ class ApplicationController < Sinatra::Base
 
   # This function takes a class instance and gets
   # it's validation errors parsing them as a string
-  def error_messages_for(object)
-    all_errors = ""
-    for error in object.errors.messages do
-      key = error.first.to_s.capitalize
-      what_is_wrong = error.second.join(' and ')
-      all_errors += "#{key} #{what_is_wrong}.\n"
+  def error_for(object)
+    if object.errors.first
+      return "#{object.errors.first[0].capitalize} #{object.errors.first[1]}"
+    else
+      return ""
     end
-    all_errors
   end
 
   # This functin allows you to check if the
@@ -352,5 +226,42 @@ class ApplicationController < Sinatra::Base
   def request_type?
     return :ajax    if request.xhr?
     return :normal
+  end
+  
+  def if_logged_in
+    if @user
+      yield
+    else
+      erb :"404"
+    end
+  end
+  
+  def return_request(condition = true, redirect_url = "/", error = "")
+    if condition
+      if block_given?
+        yield
+      end
+      case request_type?
+      when :ajax
+        body({
+          success: true, 
+          message: "success",
+          redirect: redirect_url
+          }.to_json)
+      else 
+        redirect redirect_url
+      end
+    else
+      case request_type?
+      when :ajax
+        status 500
+        body({
+          success: false, 
+          message: error
+          }.to_json)
+      else 
+        redirect request.referer
+      end
+    end
   end
 end
