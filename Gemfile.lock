@@ -31,6 +31,8 @@ GEM
     capybara-webkit (1.11.1)
       capybara (>= 2.3.0, < 2.8.0)
       json
+    codacy-coverage (1.1.1)
+      simplecov (>= 0.10.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
     cucumber (2.4.0)
@@ -122,6 +124,7 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   capybara-webkit
+  codacy-coverage
   cucumber
   database_cleaner
   json

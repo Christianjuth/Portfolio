@@ -11,5 +11,7 @@ configure :test do
   set :db_adapter, "sqlite3"
   set :db_location, "db/cucumber-test.db"
   SimpleCov.start
-  puts "required simplecov"
+  if File.exist?(".github-token")
+    Codacy::Reporter.start
+  end
 end

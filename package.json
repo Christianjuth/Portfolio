@@ -7,7 +7,7 @@
     "postinstall": "bundle install --without production && npm run migrate && npm run seed && bower install && grunt once && ls db/",
     "migrate": "bundle exec rake db:migrate_databases",
     "seed": "bundle exec rake db:seed",
-    "test": "bundle exec rake db:reset_test_database && bundle exec cucumber",
+    "test": "source ./travis/setup-codacy.sh && bundle exec rake db:reset_test_database && bundle exec cucumber",
     "stop": "kill -9 $(lsof -i tcp:3000 | tail -n 1 | perl -lne 'print $& if /(?<=ruby)\\s+[0-9]+/i')",
     "start": "grunt once && shotgun -o 0.0.0.0 -p 3000"
   },

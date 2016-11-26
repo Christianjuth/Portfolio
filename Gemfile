@@ -17,7 +17,6 @@ group :development, :test do
   gem "tux"
   gem "sqlite3"
   gem "sass"
-  gem "simplecov"
 end
 
 group :test do
@@ -26,6 +25,8 @@ group :test do
   gem "capybara-screenshot", require: "capybara-screenshot/cucumber"
   gem "capybara-webkit"
   gem "minitest", require: "minitest/spec"
+  gem "codacy-coverage"
+  gem "simplecov"
 end
 
 group :production do
