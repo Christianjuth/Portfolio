@@ -57,7 +57,7 @@ _This command runs `bundle install` so you do not have to run that yourself._
 ```
 
 ### Testing
-Create a file in the root of the repository called `.github-token` and past your Github token into it. This will setup Codacy coverage.
+Create a file in the root of the repository called `.github-token` and paste your Github token inside. This will enable Codacy coverage.
 
 ```
   # test using mocha
