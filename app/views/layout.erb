@@ -55,6 +55,9 @@
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
         <%= ERB.new(File.read("./app/views/components/page-header.erb")).result(binding) %>
         <%= yield %>
+        <%= if @contact == true
+              ERB.new(File.read("./app/views/components/contact.erb")).result(binding) 
+            end %>
         <%= if @comments == true
               ERB.new(File.read("./app/views/components/disqus.erb")).result(binding) 
             end %>

@@ -15,6 +15,7 @@ class ApplicationController < Sinatra::Base
     if Page.exists?(title: "home")
       @page = Page.find_by(title: "home")
       @comments = @page.comments
+      @contact = true
       erb :index
     else
       erb :"404"
@@ -55,7 +56,7 @@ class ApplicationController < Sinatra::Base
       page.title = params[:title]
       page.comments = params[:comments]
       page.content = params[:content]
-      return_request(@page.valid?, request.referer, error_for(page)) do
+      return_request(page.valid?, request.referer, error_for(page)) do
         page.save
       end
     end
@@ -89,17 +90,17 @@ class ApplicationController < Sinatra::Base
   
   post "/portfolio/update/:id" do
     if_logged_in do
-      @entry = PortfolioEntry.find(params[:id])
-      @entry.title = params[:title]
-      @entry.color = params[:color]
-      @entry.date = Date.parse(params[:date])
-      @entry.blurb = params[:blurb]
-      @entry.font = params[:font]
-      @entry.github = params[:github]
-      @entry.website = params[:website]
-      @entry.description = params[:description]
+      entry = PortfolioEntry.find(params[:id])
+      entry.title = params[:title]
+      entry.color = params[:color]
+      entry.date = params[:date]
+      entry.blurb = params[:blurb]
+      entry.font = params[:font]
+      entry.github = params[:github]
+      entry.website = params[:website]
+      entry.description = params[:description]
       return_request(entry.valid?, request.referer, error_for(entry)) do
-        @entry.save
+        entry.save
       end
     end
   end
@@ -206,6 +207,7 @@ class ApplicationController < Sinatra::Base
       @user = User.find(session[:user_id])
     end
     @comments = false
+    @contact = false
   end
 
 
