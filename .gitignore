@@ -8,6 +8,7 @@ npm-debug.log
 public/css
 public/js
 public/bower
+coverage
 
 db/*.db
 features/screenshots/
