@@ -13,8 +13,8 @@ install:
 - npm install -g grunt-cli
 - npm install -g bower
 - npm install
-before_deploy:
 - grunt production
+before_deploy:
 - rm -rf .bundle/
 deploy:
   provider: heroku

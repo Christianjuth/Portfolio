@@ -196,12 +196,12 @@ class ApplicationController < Sinatra::Base
   get  /js\/.*\.gz/ do
     content_type 'js'
     gzip_file = "public#{request.path_info.gsub(/\.gz/, '.js.gz')}"
-    css_file = "public#{request.path_info.gsub(/\.gz/, '')}"
+    js_file = "public#{request.path_info.gsub(/\.gz/, '.js')}"
     if File.file?(gzip_file)
       headers['Content-Encoding'] = 'gzip'
       File.read(gzip_file)
     else
-      File.read(css_file)
+      File.read(js_file)
     end
   end
 
