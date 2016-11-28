@@ -181,7 +181,7 @@ class ApplicationController < Sinatra::Base
   end
   
   # --------------- Set GZIP ----------------
-  get  /css\/.*\.gz/ do
+  get (/css\/.*\.gz\Z/) do
     content_type 'css'
     gzip_file = "public#{request.path_info.gsub(/\.gz/, '.css.gz')}"
     css_file = "public#{request.path_info.gsub(/\.gz/, '.css')}"
@@ -193,7 +193,7 @@ class ApplicationController < Sinatra::Base
     end
   end
   
-  get  /js\/.*\.gz/ do
+  get (/js\/.*\.gz\Z/) do
     content_type 'js'
     gzip_file = "public#{request.path_info.gsub(/\.gz/, '.js.gz')}"
     js_file = "public#{request.path_info.gsub(/\.gz/, '.js')}"
