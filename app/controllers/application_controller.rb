@@ -179,11 +179,36 @@ class ApplicationController < Sinatra::Base
   error Sinatra::NotFound do
     erb :"404"
   end
+  
+  # --------------- Set GZIP ----------------
+  get  /css\/.*\.gz/ do
+    content_type 'css'
+    gzip_file = "public#{request.path_info.gsub(/\.gz/, '.css.gz')}"
+    css_file = "public#{request.path_info.gsub(/\.gz/, '.css')}"
+    if File.file?(gzip_file)
+      headers['Content-Encoding'] = 'gzip'
+      File.read(gzip_file)
+    else
+      File.read(css_file)
+    end
+  end
+  
+  get  /js\/.*\.gz/ do
+    content_type 'js'
+    gzip_file = "public#{request.path_info.gsub(/\.gz/, '.js.gz')}"
+    css_file = "public#{request.path_info.gsub(/\.gz/, '')}"
+    if File.file?(gzip_file)
+      headers['Content-Encoding'] = 'gzip'
+      File.read(gzip_file)
+    else
+      File.read(css_file)
+    end
+  end
 
   # ----- Config ------
   configure do
     set :public_folder, "public"
-    set :static_cache_control, [:public, {:max_age => 3000}]
+    set :static_cache_control, [:public, {:max_age => 600}]
     set :views, "app/views"
     enable :sessions
     # Set the session secret
