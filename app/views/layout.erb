@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="author" content="Christian Juth">
+  <meta name="keywords" content="Christian Juth, Portfolio, Programming, Coding, Music">
+  <meta name="description" content="The personal portfolio of Christian Juth">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="shortcut icon" href="/images/favicon.ico" />
   <title>Christian Juth</title>
@@ -23,16 +26,10 @@
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/formatter.js/0.1.5/jquery.formatter.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
   <script type="text/javascript" src="/js/main.gz"></script>
-  
-  <meta name="description" content="The personal portfolio of Christian Juth">
 </head>
 <body>
   <!-- Improve Google Ranking  -->
   <h1 class="hidden" style="display:none">Christian Juth</h1>
-  
-  <% if Sinatra::Base.production? && defined?(@user).nil? %>
-    <%= ERB.new(File.read("./app/views/components/analytics.erb")).result(binding) %>
-  <% end %>
   
   <!-- Loader -->
   <div class="loader hidden">
@@ -66,5 +63,9 @@
   </div>
   
   <%= ERB.new(File.read("./app/views/components/footer.erb")).result(binding) %>
+  
+  <% if Sinatra::Base.production? && defined?(@user).nil? %>
+    <%= ERB.new(File.read("./app/views/components/analytics.erb")).result(binding) %>
+  <% end %>
 </body>
 </html>
