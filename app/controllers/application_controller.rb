@@ -30,8 +30,8 @@ class ApplicationController < Sinatra::Base
     if params[:title].downcase == "home"
       redirect "/"
     end
-    page = Page.find_by(title: params[:title].downcase)
-    @comments = page.comments
+    @page = Page.find_by(title: params[:title].downcase)
+    @comments = @page.comments
     erb :"page/page"
   end
   
