@@ -83,7 +83,7 @@ class ApplicationController < Sinatra::Base
   
   get "/portfolio/:id" do
     @comments = true
-    if PortfolioEntry.exists?(params[:id])
+    if PortfolioEntry.exists?({id: params[:id]})
       @entry = PortfolioEntry.find(params[:id])
       erb :"portfolio/entry"
     else
