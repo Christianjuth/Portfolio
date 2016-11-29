@@ -23,16 +23,22 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/pages" do
-    erb :"page/pages"
+    if_logged_in do
+      erb :"page/pages"
+    end
   end
   
   get "/page/:title" do
     if params[:title].downcase == "home"
       redirect "/"
     end
-    @page = Page.find_by(title: params[:title].downcase)
-    @comments = @page.comments
-    erb :"page/page"
+    if Page.exists?({title: params[:title].downcase})
+      @page = Page.find_by(title: params[:title].downcase)
+      @comments = @page.comments
+      erb :"page/page"
+    else
+      erb :"404"
+    end
   end
   
   post "/page/new_page" do
@@ -77,8 +83,12 @@ class ApplicationController < Sinatra::Base
   
   get "/portfolio/:id" do
     @comments = true
-    @entry = PortfolioEntry.find(params[:id])
-    erb :"portfolio/entry"
+    if PortfolioEntry.exists?(params[:id])
+      @entry = PortfolioEntry.find(params[:id])
+      erb :"portfolio/entry"
+    else
+      erb :"404"
+    end
   end
   
   get "/portfolio/edit/:id" do
@@ -185,7 +195,7 @@ class ApplicationController < Sinatra::Base
     content_type 'css'
     gzip_file = "public#{request.path_info.gsub(/\.gz/, '.css.gz')}"
     css_file = "public#{request.path_info.gsub(/\.gz/, '.css')}"
-    if File.file?(gzip_file)
+    if File.file?(gzip_file) && Sinatra::Application.production?
       headers['Content-Encoding'] = 'gzip'
       File.read(gzip_file)
     else
@@ -197,7 +207,7 @@ class ApplicationController < Sinatra::Base
     content_type 'js'
     gzip_file = "public#{request.path_info.gsub(/\.gz/, '.js.gz')}"
     js_file = "public#{request.path_info.gsub(/\.gz/, '.js')}"
-    if File.file?(gzip_file)
+    if File.file?(gzip_file) && Sinatra::Application.production?
       headers['Content-Encoding'] = 'gzip'
       File.read(gzip_file)
     else

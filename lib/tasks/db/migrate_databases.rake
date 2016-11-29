@@ -2,7 +2,6 @@ namespace :db do
   task :migrate_databases do
     Rake::Task['db:migrate_test_database'].invoke
     Rake::Task['db:migrate_development_database'].invoke
-    
   end
   
   task :migrate_test_database do

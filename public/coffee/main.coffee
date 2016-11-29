@@ -28,7 +28,8 @@ $(document).ready ->
   $("select[default]").each ->
     $(this).val($(this).attr("default"))
     
-  $("a[type=fake_submit]").click ->
+  $("a[type=fake_submit]").click (e)->
+    e.preventDefault()
     $this = $(this)
     post = ->
       $.post($this.attr("action"))

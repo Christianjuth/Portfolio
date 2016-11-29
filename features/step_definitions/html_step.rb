@@ -10,6 +10,13 @@ Then /^text "([^']*)" on page$/ do |text|
   })
 end
 
+Then /^no text "([^']*)" on page$/ do |text|
+  assert_cucumber({
+    assersion: lambda{ page.has_no_content?(text) },
+    error: "could not find text"
+  })
+end
+
 Then /^button "([^']*)" on page$/ do |text|
   assert_cucumber({
     assersion: lambda{ page.has_css?("button", text: text) },
@@ -27,8 +34,21 @@ end
 
 Then /^click button "([^']*)" on page$/ do |name|
   assert_cucumber({
-    assersion: lambda{ page.click_button(name) },
+    assersion: lambda{ 
+      page.click_button(name)
+      sleep 3
+    },
     error: "could not find button"
+  })
+end
+
+Then /^click link "([^']*)" on page$/ do |name|
+  assert_cucumber({
+    assersion: lambda{ 
+      page.click_link(name)
+      sleep 3
+    },
+    error: "could not find link"
   })
 end
 
