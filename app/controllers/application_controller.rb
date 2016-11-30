@@ -180,6 +180,18 @@ class ApplicationController < Sinatra::Base
     end
   end
   
+  post "/api_verification/update/:id" do
+    if_logged_in do
+      api = ApiVerification.find(params[:id])
+      api.name = params[:name]
+      api.key = params[:key]
+      api.secret = params[:secret]
+      return_request(api.valid?, request.referer, error_for(api)) do
+        api.save
+      end
+    end
+  end
+  
   post "/api_verification/delete/:id" do
     return_request(true, request.referer, nil) do
       ApiVerification.find(params[:id]).destroy
@@ -235,6 +247,7 @@ class ApplicationController < Sinatra::Base
     force_login_page = false
     exceptions = ["/login"]
     # Check the session and database for current user
+    # !session[:user_id] to prevent session[:user_id] undefined
     if (!session[:user_id] || !User.exists?(session[:user_id])) && !exceptions.include?(request.path)
       session.destroy
       redirect "/login" if force_login_page

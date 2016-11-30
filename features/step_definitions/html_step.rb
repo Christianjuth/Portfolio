@@ -3,6 +3,13 @@ Given /^on page "([^']*)"$/ do |url|
 end
 
 # ----------- search page ------------
+Then /^current page "([^']*)"$/ do |text|
+  assert_cucumber({
+    assersion: lambda{ URI.parse(current_url).path == text },
+    error: "not on correct page"
+  })
+end
+
 Then /^text "([^']*)" on page$/ do |text|
   assert_cucumber({
     assersion: lambda{ page.has_content?(text) },
@@ -14,6 +21,13 @@ Then /^no text "([^']*)" on page$/ do |text|
   assert_cucumber({
     assersion: lambda{ page.has_no_content?(text) },
     error: "could not find text"
+  })
+end
+
+Then /^input "([^']*)" has value "([^']*)"$/ do |name, value|
+  assert_cucumber({
+    assersion: lambda{ page.find("[name=#{name}]").value == value },
+    error: "could not find input"
   })
 end
 

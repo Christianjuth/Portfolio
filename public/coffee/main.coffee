@@ -48,7 +48,7 @@ $(document).ready ->
         type: "warning",
         showCancelButton: true, 
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Delete",
+        confirmButtonText: "Confirm Delete",
         closeOnConfirm: false 
       }, ->
         post()
@@ -100,7 +100,24 @@ $(document).ready ->
     if numberOfQuotes > 0
       $ps.hide()
       animateBlockquote()
-
+      
+  $(".inline-form").each ->
+    $this = $(this)
+    timeout = 0
+    $this.find("input, textarea").focusout ->
+      timeout = setTimeout( ->
+        $this.find(".inline-delete").show()
+        $this.find(".inline-update").addClass("hidden")
+      , 15)
+    $this.find("input, textarea").focusin ->
+      clearTimeout(timeout)
+      $this.find(".inline-delete").hide()
+      $this.find(".inline-update").removeClass("hidden")
+    
+    $this.find(".inline-update").click ->
+      clearTimeout(timeout)
+      $this.find(".inline-delete").hide()
+      $this.find(".inline-update").removeClass("hidden")
 
 
 # ---------------------------------------
@@ -110,3 +127,13 @@ $(window).load ->
   $(".loader").addClass("loaded")  
   $("a").click ->
     $(".loader").removeClass("loaded")
+    
+  saveScroll = ->
+    localStorage.scrollTop = $(window).scrollTop() + ""
+    localStorage.scrollPath = window.location.pathname
+  updateScroll = ->
+    if window.location.pathname == localStorage.scrollPath
+      $(window).scrollTop(localStorage.scrollTop)
+  $(window).scroll ->
+    saveScroll()
+  updateScroll()
