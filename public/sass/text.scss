@@ -81,7 +81,9 @@ blockquote{
 }
 
 blockquote{
-  border: 5px solid $black;
+  background-color: $gray;
+  border: none;
+  padding: 20px 30px;
   min-height: 175px;
   
   *{
@@ -97,8 +99,59 @@ a{
   color: $black;
 }
 
-textarea { 
+input,
+textarea,
+.form-control{
+  background-color: $gray;
+  border-radius: 0;
+  border: 3px solid $gray;
+  outline: none;
+  color: $black;
+  height: 45px;
+  box-shadow: none;
+}
+
+textarea,
+textarea.form-control{ 
+  padding: 20px;
   resize: vertical;
+}
+
+.form-control .icheckbox_square-red{
+  float: right;
+}
+
+thead{
+  background-color: $gray;
+  border-bottom: 3px solid $dark-gray;
+}
+
+table th,
+table td,
+table.table thead tr th,
+table.table tbody tr td{
+  color: $black;
+  padding: 15px 20px;
+  font-size: 17px;
+}
+
+table tr,
+table.table thead tr
+table.table tbody tr{
+  background-color: $gray;
+  border-bottom: 1px solid $dark-gray;
+}
+
+td.text-right a{
+  margin-left: 10px;
+}
+
+.btn{
+  border-radius: 0;
+}
+
+.page .btn{
+  padding: 11px 15px;
 }
 
 .input-phone,
@@ -132,13 +185,13 @@ pre{
 
 hr{
   border-color: rgba(235, 104, 100, .8);
-  border-width: 3px;
+  border-width: 4px;
   margin: 6px 0 12px 0;
 }
 
 hr.secondary{
   border-color: $gray;
-  border-width: 3px;
+  border-width: 4px;
   margin: 6px -15px 12px -15px;
 }
 

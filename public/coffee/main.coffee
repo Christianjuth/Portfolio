@@ -72,6 +72,11 @@ $(document).ready ->
     "persistent": true
   })
   
+  $("input[type=checkbox]").iCheck({
+    checkboxClass: 'icheckbox_square-red',
+    radioClass: 'iradio_square-red'
+  })
+  
   # Allow user to click on title
   # and page link to it
   $("h1,h2,h3,h4,h5").each ->

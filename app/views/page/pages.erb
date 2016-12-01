@@ -2,12 +2,12 @@
   <div class="col-lg-10 col-lg-offset-1">
     
     <h1>Pages</h1>
+    <br>
     
     <table class="table">
       <thead>
         <tr>
           <th>Title</th>
-          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -15,8 +15,10 @@
         <% Page.all.each do |page| %>
           <tr>
             <td><%= page.title %></td>
-            <td><a href="/page/edit/<%= page.id %>">Edit</a></td>
-            <td><a href="#" type="fake_submit" class="delete" action="/page/delete/<%= page.id %>">Delete</a></td>
+            <td class="text-right">
+              <a href="/page/edit/<%= page.id %>">Edit</a>
+              <a href="#" type="fake_submit" class="delete" action="/page/delete/<%= page.id %>">Delete</a>
+            </td>
           </tr>
         <% end %>
       </tbody>
