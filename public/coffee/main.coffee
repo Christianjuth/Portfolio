@@ -67,6 +67,11 @@ $(document).ready ->
     "persistent": true
   })
   
+  $(".input-phone").formatter({
+    "pattern": "{{9}}-({{999}})-{{999}}-{{9999}}",
+    "persistent": true
+  })
+  
   # Allow user to click on title
   # and page link to it
   $("h1,h2,h3,h4,h5").each ->
@@ -108,12 +113,11 @@ $(document).ready ->
       timeout = setTimeout( ->
         $this.find(".inline-delete").show()
         $this.find(".inline-update").addClass("hidden")
-      , 15)
+      , 300)
     $this.find("input, textarea").focusin ->
       clearTimeout(timeout)
       $this.find(".inline-delete").hide()
       $this.find(".inline-update").removeClass("hidden")
-    
     $this.find(".inline-update").click ->
       clearTimeout(timeout)
       $this.find(".inline-delete").hide()
@@ -125,8 +129,6 @@ $(document).ready ->
 # ---------------------------------------
 $(window).load ->
   $(".loader").addClass("loaded")  
-  $("a").click ->
-    $(".loader").removeClass("loaded")
     
   saveScroll = ->
     localStorage.scrollTop = $(window).scrollTop() + ""

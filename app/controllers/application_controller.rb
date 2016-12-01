@@ -43,8 +43,8 @@ class ApplicationController < Sinatra::Base
   
   post "/page/new_page" do
     if_logged_in do
-      page = Page.new()
-      page.save()
+      page = Page.new
+      page.save
       return_request(true, "/page/edit/#{page.id}")
     end
   end
@@ -117,8 +117,8 @@ class ApplicationController < Sinatra::Base
   
   post "/portfolio/new_entry" do
     if_logged_in do
-      entry = PortfolioEntry.new()
-      entry.save()
+      entry = PortfolioEntry.new
+      entry.save
       return_request(true, "/portfolio/edit/#{entry.id}")
     end
   end
@@ -153,8 +153,53 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
     end
   end
+  
+  post "/user/update/:id" do
+    if_logged_in do
+      user = User.find(params[:id])
+      user.username = params[:username]
+      if user.phone_number != params[:phone_number]
+        code = SecureRandom.urlsafe_base64(30, true)
+        user.phone_number = params[:phone_number]
+        user.phone_number_verified = false
+        user.phone_verification_code = code
+        send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{user.id}&code=#{code}", params[:phone_number])
+      end
+      return_request(user.valid?, request.referer, error_for(user)) do
+        user.save
+      end
+    end
+  end
+  
+  post "/phone/resend_verification/:id" do
+    if_logged_in do
+      user = User.find(params[:id])
+      if !user.phone_number_verified
+        code = SecureRandom.urlsafe_base64(30, true)
+        user.phone_verification_code = code
+        send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{user.id}&code=#{code}", user.phone_number)
+      end
+      return_request(user.valid?, request.referer, error_for(user)) do
+        user.save
+      end
+    end
+  end
+  
+  get "/phone/verify" do
+    verify_user = User.find(params[:id])
+    if verify_user.phone_verification_code == params[:code]
+      verify_user.phone_number_verified = true
+      verify_user.phone_verification_code = ""
+      verify_user.save
+      if @user
+        redirect "/settings"
+      else
+        redirect "/"
+      end
+    end
+  end
 
-  post "/change_password" do
+  post "/user/change_password" do
     # check password and set session
     if_logged_in do
       # try and update password
@@ -168,14 +213,14 @@ class ApplicationController < Sinatra::Base
 
   post "/logout" do
     session.destroy
-    return_request()
+    return_request
   end
   
   post "/api_verification/new_api_verification" do
     if_logged_in do
-      api = ApiVerification.new()
+      api = ApiVerification.new
       return_request(api.valid?, request.referer, error_for(api)) do
-        api.save()
+        api.save
       end
     end
   end
@@ -312,6 +357,13 @@ class ApplicationController < Sinatra::Base
       else 
         redirect request.referer
       end
+    end
+  end
+  
+  def send_text(message, number)
+    if ApiVerification.exists?({name: "sinch"})
+      api = ApiVerification.find_by({name: "sinch"})
+      SinchSms.send(api.key, api.secret, message, number)
     end
   end
 end

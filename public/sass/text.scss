@@ -8,8 +8,8 @@ body{
   font-weight: 500;
 }
 
-.navbar,
 .btn,
+.navbar,
 h1,h2,h3,h4,h5,h6{
   font-family: Asap;
   font-weight: 700;
@@ -99,6 +99,13 @@ a{
 
 textarea { 
   resize: vertical;
+}
+
+.input-phone,
+input[type=tel]{
+  font-family: 'Droid Sans Mono', monospace;
+  font-size: 12.7px;
+  letter-spacing: -.3px;
 }
 
 pre{
