@@ -49,7 +49,7 @@ class ApplicationController < Sinatra::Base
     return_request(message.valid?, request.referer, error_for(message)) do
       message.save
       if User.first.phone_number_verified
-        send_text("New form submission ChristianJuth.com from #{params[:email]}", @user.first.phone_number)
+        send_text("New form submission ChristianJuth.com from #{params[:email]}", User.first.phone_number)
       end
     end
   end
