@@ -5,7 +5,8 @@ require "./config/environment"
 require "./app/models/user"
 require "./app/models/page"
 require "./app/models/api_verification"
-require "./app/models/portfolio_entries"
+require "./app/models/portfolio_entry"
+require "./app/models/message"
 
 # Set routs
 class ApplicationController < Sinatra::Base
@@ -19,6 +20,45 @@ class ApplicationController < Sinatra::Base
       erb :index
     else
       erb :"404"
+    end
+  end
+  
+  get "/messages" do
+    if_logged_in do
+      @messages = Message.order("created_at DESC").all
+      erb :"message/messages"
+    end
+  end
+  
+  get "/message/:id" do
+    if_logged_in do
+      @message = Message.find(params[:id])
+      @message.unread = false
+      @message.save
+      erb :"message/message"
+    end
+  end
+  
+  post "/message/submit" do
+    message = Message.new({
+      name: params[:name],
+      email: params[:email],
+      fun_fact: params[:fun_fact],
+      message: params[:message]
+    })
+    return_request(message.valid?, request.referer, error_for(message)) do
+      message.save
+      if User.first.phone_number_verified
+        send_text("New form submission ChristianJuth.com from #{params[:email]}", @user.first.phone_number)
+      end
+    end
+  end
+  
+  post "/message/delete/:id" do
+    if_logged_in do
+      @message = Message.find(params[:id])
+      @message.destroy
+      return_request(true, "/messages")
     end
   end
   
@@ -77,7 +117,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/portfolio" do
-    @portfolio_entries = PortfolioEntry.order(:date).reverse
+    @portfolio_entries = PortfolioEntry.order("date DESC")
     erb :"portfolio/portfolio"
   end
   
@@ -158,12 +198,15 @@ class ApplicationController < Sinatra::Base
     if_logged_in do
       user = User.find(params[:id])
       user.username = params[:username]
-      if user.phone_number != params[:phone_number]
+      phone = params[:phone_number].gsub(/\s-\(\s{3}\)-\s{3}-\s{4}/, "")
+      if phone == ""
+        user.phone_number = phone
+      elsif user.phone_number != phone
         code = SecureRandom.urlsafe_base64(30, true)
-        user.phone_number = params[:phone_number]
+        user.phone_number = phone
         user.phone_number_verified = false
         user.phone_verification_code = code
-        send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{user.id}&code=#{code}", params[:phone_number])
+        send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{user.id}&code=#{code}", phone)
       end
       return_request(user.valid?, request.referer, error_for(user)) do
         user.save
@@ -174,7 +217,7 @@ class ApplicationController < Sinatra::Base
   post "/phone/resend_verification/:id" do
     if_logged_in do
       user = User.find(params[:id])
-      if !user.phone_number_verified
+      unless user.phone_number_verified
         code = SecureRandom.urlsafe_base64(30, true)
         user.phone_verification_code = code
         send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{user.id}&code=#{code}", user.phone_number)
@@ -192,9 +235,9 @@ class ApplicationController < Sinatra::Base
       verify_user.phone_verification_code = ""
       verify_user.save
       if @user
-        redirect "/settings"
+        return_request(true, "/settings")
       else
-        redirect "/"
+        return_request(true, "/")
       end
     end
   end
@@ -310,7 +353,7 @@ class ApplicationController < Sinatra::Base
   # it's validation errors parsing them as a string
   def error_for(object)
     if object.errors.first
-      return "#{object.errors.first[0].capitalize} #{object.errors.first[1]}"
+      return "#{object.errors.first[0].to_s.gsub(/_/, "\s").capitalize} #{object.errors.first[1]}"
     else
       return ""
     end
@@ -363,7 +406,7 @@ class ApplicationController < Sinatra::Base
   def send_text(message, number)
     if ApiVerification.exists?({name: "sinch"})
       api = ApiVerification.find_by({name: "sinch"})
-      SinchSms.send(api.key, api.secret, message, number)
+      SinchSms.send(api.key, api.secret, message, number) if Sinatra::Application.production?
     end
   end
 end

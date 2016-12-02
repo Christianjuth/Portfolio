@@ -16,7 +16,14 @@ class User < ActiveRecord::Base
   validates :email, 
     presence: true, 
     format: { with: /\A\S+@\S+\.\S+\Z/i,
-    message: "email is not valid" }
+    message: "is not valid" },
+    allow_blank: true
+  
+  validates :phone_number, 
+    presence: true, 
+    format: { with: /\A[0-9]-\([0-9]{3}\)-[0-9]{3}-[0-9]{4}\Z/i,
+    message: "is not valid" },
+    allow_blank: true
 
 
   def password=(password)

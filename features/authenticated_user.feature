@@ -2,7 +2,6 @@ Feature: unauthenticated user
 
 Scenario: login user
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -10,7 +9,6 @@ Scenario: login user
   
 Scenario: verify /settings page
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -22,7 +20,6 @@ Scenario: verify /settings page
   
 Scenario: setup home page
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -39,7 +36,6 @@ Scenario: setup home page
   
 Scenario: setup another page
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -67,7 +63,6 @@ Scenario: setup and delete page
   
 Scenario: setup and delete page from /pages
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -79,7 +74,6 @@ Scenario: setup and delete page from /pages
   
 Scenario: add and update portfolio entry
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -107,7 +101,6 @@ Scenario: add and update portfolio entry
   
 Scenario: add and delete portfolio entry
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -118,7 +111,6 @@ Scenario: add and delete portfolio entry
   
 Scenario: update invalid portfolio entry
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -133,7 +125,6 @@ Scenario: update invalid portfolio entry
   
 Scenario: add, update, and delete api_verification
   Given on page "/login"
-  When button "Login" on page
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
@@ -148,3 +139,30 @@ Scenario: add, update, and delete api_verification
   Then input "secret" has value "shhh"
   Then click link "Delete" on page
   Then click button "Confirm Delete" on page
+  
+Scenario: update user from /settings
+  Given on page "/login"
+  Then fill input "username" with "admin"
+  Then fill input "password" with "password"
+  Then click button "Login" on page
+  Given on page "/settings"
+  Then fill input "username" with "john"
+  Then fill input "phone_number" with "1-(800)-000-0000"
+  Then click button "Update User" on page
+  Given on page "/"
+  Then text "WELCOME, JOHN" on page
+  
+Scenario: update user password from /settings
+  Given on page "/login"
+  Then fill input "username" with "admin"
+  Then fill input "password" with "password"
+  Then click button "Login" on page
+  Given on page "/settings"
+  Then fill input "new_password" with "newpassword"
+  Then fill input "confirm_password" with "newpassword"
+  Then click button "Update Password" on page
+  Then click button "Logout" on page
+  Given on page "/login"
+  Then fill input "username" with "admin"
+  Then fill input "password" with "newpassword"
+  Then click button "Login" on page

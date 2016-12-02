@@ -4,7 +4,7 @@
     
     <hr class="secondary">
     <h4 class="text-center">Account Info</h4>
-    <% if !@user.phone_number_verified %>
+    <% if !@user.phone_number_verified && @user.phone_number != "" %>
       <a href="#" type="fake_submit" class="btn btn-link btn-info btn-block" action="/phone/resend_verification/<%= @user.id %>">Phone number is not verified. Resend Code <i class="fa fa-repeat" aria-hidden="true"></i></a>
     <% else %>
       <br>

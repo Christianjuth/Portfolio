@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+    
+    <h1>Messages</h1>
+    <br>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Email</th>
+          <th class="text-right">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @messages.each do |message| %>
+          <tr>
+            <td><%= message.name %></td>
+            <td><%= message.created_at.strftime("%d/%m/%Y") %></td>
+            <td class="text-right">
+              <a href="/message/<%= message.id %>">Read</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+  </div>
+</div>

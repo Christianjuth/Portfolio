@@ -14,6 +14,10 @@ class Page < ActiveRecord::Base
     presence: true,
     allow_blank: true
   
+  # -- Functions --
+  before_save do |record|
+    record.title.downcase!
+  end
   
   after_initialize :init
   def init

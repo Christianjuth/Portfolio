@@ -15,6 +15,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav navbar-right">
             <li>
+              <a href="/messages">Messages 
+                <% if Message.where({unread: true}).length > 0 %>
+                  <span class="badge"><%= Message.where({unread: true}).length %></span>
+                <% end %>
+              </a>
+            </li>
+            <li>
               <a href="/pages">Pages</a>
             </li>
             <li>
