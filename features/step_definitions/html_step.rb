@@ -3,9 +3,9 @@ Given /^on page "([^']*)"$/ do |url|
 end
 
 # ----------- search page ------------
-Then /^current page "([^']*)"$/ do |text|
+Then /^current page "([^']*)"$/ do |url|
   assert_cucumber({
-    assersion: lambda{ URI.parse(current_url).path == text },
+    assersion: lambda{ URI.parse(current_url).path == url },
     error: "not on correct page"
   })
 end

@@ -1,5 +1,17 @@
 Feature: unauthenticated user
 
+Scenario: test home page
+  Given on page "/"
+  Then text "Contact" on page
+
+Scenario: submit message on /
+  Given on page "/"
+  Then fill input "name" with "Tim Smith"
+  Then fill input "email" with "timsmith101@gmail.com"
+  Then fill input "fun_fact" with "I like trains!"
+  Then fill input "message" with "How you doing man?"
+  Then click button "Send" on page
+
 Scenario: test portfolio page
   Given on page "/portfolio"
   Then text "Portfolio" on page

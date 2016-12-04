@@ -7,16 +7,33 @@ Scenario: login user
   Then click button "Login" on page
   Then click button "Logout" on page
   
-Scenario: verify /settings page
+Scenario: update user from /settings
   Given on page "/login"
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
   Given on page "/settings"
-  Then text "Application running" on page
-  Then fill input "new_password" with "secure"
-  Then fill input "confirm_password" with "secure"
+  Then fill input "username" with "john"
+  Then fill input "phone_number" with "1-(800)-000-0000"
+  Then click button "Update User" on page
+  Then click link "Resend Code" on page
+  Given on page "/"
+  Then text "WELCOME, JOHN" on page
+  
+Scenario: update user password from /settings
+  Given on page "/login"
+  Then fill input "username" with "admin"
+  Then fill input "password" with "password"
+  Then click button "Login" on page
+  Given on page "/settings"
+  Then fill input "new_password" with "newpassword"
+  Then fill input "confirm_password" with "newpassword"
   Then click button "Update Password" on page
+  Then click button "Logout" on page
+  Given on page "/login"
+  Then fill input "username" with "admin"
+  Then fill input "password" with "newpassword"
+  Then click button "Login" on page
   
 Scenario: setup home page
   Given on page "/login"
@@ -140,29 +157,18 @@ Scenario: add, update, and delete api_verification
   Then click link "Delete" on page
   Then click button "Confirm Delete" on page
   
-Scenario: update user from /settings
+Scenario: submit, read, and delete message
   Given on page "/login"
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
-  Given on page "/settings"
-  Then fill input "username" with "john"
-  Then fill input "phone_number" with "1-(800)-000-0000"
-  Then click button "Update User" on page
   Given on page "/"
-  Then text "WELCOME, JOHN" on page
+  Then fill input "name" with "Tim Smith"
+  Then fill input "email" with "timsmith101@gmail.com"
+  Then fill input "fun_fact" with "I like trains!"
+  Then fill input "message" with "How you doing man?"
+  Then click button "Send" on page
+  Given on page "/messages"
+  Then click link "Read" on page
+  Then click link "Delete" on page
   
-Scenario: update user password from /settings
-  Given on page "/login"
-  Then fill input "username" with "admin"
-  Then fill input "password" with "password"
-  Then click button "Login" on page
-  Given on page "/settings"
-  Then fill input "new_password" with "newpassword"
-  Then fill input "confirm_password" with "newpassword"
-  Then click button "Update Password" on page
-  Then click button "Logout" on page
-  Given on page "/login"
-  Then fill input "username" with "admin"
-  Then fill input "password" with "newpassword"
-  Then click button "Login" on page

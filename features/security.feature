@@ -9,7 +9,7 @@ Scenario: try and access /pages without permission
   Then no text "Settings" on page
   
 Scenario: try and access /portfolio/edit without permission
-  Given table "portfolio_entry" a record
+  Given table "portfolio_entries" a record
     | description | Hello World! |
   Given on page "/portfolio/1"
   Then text "Hello World!" on page
@@ -18,11 +18,11 @@ Scenario: try and access /portfolio/edit without permission
   
 Scenario: try and access /pages without permission
   Given on page "/settings"
-  Then no text "settings" on page
+  Then text "404" on page
   
 Scenario: try and access /page/edit without permission
   Given table "pages" a record
-    | title   | about             |
+    | title   | about           |
     | content | This is a page. |
   Given on page "/page/about"
   Then text "This is a page." on page

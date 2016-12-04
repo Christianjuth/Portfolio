@@ -1,4 +1,8 @@
+# Require helpers
+require "./app/helpers/helpers"
+
 class User < ActiveRecord::Base
+  include Helpers
 
   # -- Validators --
 
@@ -34,6 +38,18 @@ class User < ActiveRecord::Base
 
   def password(password)
     self.hashed_password == BCrypt::Engine.hash_secret(password, self.hash_salt)
+  end
+  
+  def phone=(number)
+    if number == ""
+      self.phone_number = number
+    elsif self.phone_number != number
+      code = SecureRandom.urlsafe_base64(30, true)
+      self.phone_number = number
+      self.phone_number_verified = false
+      self.phone_verification_code = code
+      send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{self.id}&code=#{code}", number)
+    end
   end
 
 

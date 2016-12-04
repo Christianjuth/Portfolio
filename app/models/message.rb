@@ -1,7 +1,6 @@
 class Message < ActiveRecord::Base
 
   # -- Validators --
-
   validates :name, 
     presence: true
 

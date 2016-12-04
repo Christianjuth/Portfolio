@@ -79,12 +79,12 @@ $(document).ready ->
   
   # Allow user to click on title
   # and page link to it
-  $("h1,h2,h3,h4,h5").each ->
+  $(".page").find("h1,h2,h3,h4,h5").each ->
     $this = $(this);
     id = $this.first().text().replace(/\s/,"-")
     $this.attr("id", id)
     
-  $("h1,h2,h3,h4,h5").click ->
+  $(".page").find("h1,h2,h3,h4,h5").click ->
     $this = $(this)
     id = $this.attr("id")
     if id?

@@ -1,6 +1,7 @@
 @import 'variables';
 
 body, html{
+  height: 100%;
   margin: 0;
   padding: 0;  
   background-color: $white;
@@ -27,6 +28,27 @@ body, html{
 .page{
   overflow-x: hidden;
   padding: 30px 0 60px 0;
+}
+
+.flex-center-wrap {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center{
+  width: 40vw;
+}
+
+.panel-body > *:first-child{
+  margin: 0;
 }
 
 .inline-form{

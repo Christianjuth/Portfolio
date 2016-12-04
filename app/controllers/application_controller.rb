@@ -1,6 +1,9 @@
 # Setup environment
 require "./config/environment"
 
+# Require helpers
+require "./app/helpers/helpers"
+
 # Require models
 require "./app/models/user"
 require "./app/models/page"
@@ -10,16 +13,17 @@ require "./app/models/message"
 
 # Set routs
 class ApplicationController < Sinatra::Base
+  include Helpers
   
   # This routs the home page to the template
   get "/" do
     if Page.exists?(title: "home")
       @page = Page.find_by(title: "home")
       @comments = @page.comments
-      @contact = true
       erb :index
     else
-      erb :"404"
+      @page = false
+      erb :index
     end
   end
   
@@ -180,7 +184,7 @@ class ApplicationController < Sinatra::Base
 
   # This routs the login page to the template
   get "/login" do
-    erb :login
+    erb :login, :layout => :centered_blank_layout
   end
 
   post "/login" do
@@ -199,15 +203,7 @@ class ApplicationController < Sinatra::Base
       user = User.find(params[:id])
       user.username = params[:username]
       phone = params[:phone_number].gsub(/\s-\(\s{3}\)-\s{3}-\s{4}/, "")
-      if phone == ""
-        user.phone_number = phone
-      elsif user.phone_number != phone
-        code = SecureRandom.urlsafe_base64(30, true)
-        user.phone_number = phone
-        user.phone_number_verified = false
-        user.phone_verification_code = code
-        send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{user.id}&code=#{code}", phone)
-      end
+      user.phone = phone
       return_request(user.valid?, request.referer, error_for(user)) do
         user.save
       end
@@ -344,69 +340,5 @@ class ApplicationController < Sinatra::Base
     end
     @comments = false
     @contact = false
-  end
-
-
-  # ----- Helpers -----
-
-  # This function takes a class instance and gets
-  # it's validation errors parsing them as a string
-  def error_for(object)
-    if object.errors.first
-      return "#{object.errors.first[0].to_s.gsub(/_/, "\s").capitalize} #{object.errors.first[1]}"
-    else
-      return ""
-    end
-  end
-
-  # This functin allows you to check if the
-  # request is form a form subbmission or ajax
-  def request_type?
-    return :ajax    if request.xhr?
-    return :normal
-  end
-  
-  def if_logged_in
-    if @user
-      yield
-    else
-      erb :"404"
-    end
-  end
-  
-  def return_request(condition = true, redirect_url = "/", error = "")
-    if condition
-      if block_given?
-        yield
-      end
-      case request_type?
-      when :ajax
-        body({
-          success: true, 
-          message: "success",
-          redirect: redirect_url
-          }.to_json)
-      else 
-        redirect redirect_url
-      end
-    else
-      case request_type?
-      when :ajax
-        status 500
-        body({
-          success: false, 
-          message: error
-          }.to_json)
-      else 
-        redirect request.referer
-      end
-    end
-  end
-  
-  def send_text(message, number)
-    if ApiVerification.exists?({name: "sinch"})
-      api = ApiVerification.find_by({name: "sinch"})
-      SinchSms.send(api.key, api.secret, message, number) if Sinatra::Application.production?
-    end
   end
 end
