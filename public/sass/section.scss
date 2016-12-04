@@ -1,0 +1,39 @@
+section{
+  position: relative;
+  padding: 25px 0;
+  margin: 25px 0;
+  
+  blockquote{
+    background-color: $primary;
+  }
+  
+  *{
+    position:relative;
+  }
+} 
+
+section:before{
+  position: absolute;
+  display: block;
+  content: " ";
+  width: 200vw;
+  left: -50vw;
+  height: 100%;
+}
+
+section:before{
+  background-color: $secondary;
+  border-bottom: 5px solid $dark-secondary;
+}
+
+section *{
+  color: $white !important;
+}
+
+section:nth-of-type(odd):before{
+  -webkit-transform: rotate(0.5deg); 
+}
+
+section:nth-of-type(even):before{
+  -webkit-transform: rotate(-0.5deg); 
+}
