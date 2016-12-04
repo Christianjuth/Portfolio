@@ -60,4 +60,5 @@ module Helpers
       SinchSms.send(api.key, api.secret, message, number) if Sinatra::Application.production?
     end
   end
+  
 end
