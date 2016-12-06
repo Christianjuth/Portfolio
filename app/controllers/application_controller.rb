@@ -6,10 +6,11 @@ require "./app/helpers/helpers"
 
 # Require models
 require "./app/models/user"
-require "./app/models/page"
+require "./app/models/password_reset"
 require "./app/models/api_verification"
-require "./app/models/portfolio_entry"
 require "./app/models/message"
+require "./app/models/page"
+require "./app/models/portfolio_entry"
 
 # Set routs
 class ApplicationController < Sinatra::Base
@@ -50,7 +51,7 @@ class ApplicationController < Sinatra::Base
       fun_fact: params[:fun_fact],
       message: params[:message]
     })
-    return_request(message.valid?, request.referer, error_for(message)) do
+    return_request(message.valid?, "/?message_sent=true#Contact", error_for(message)) do
       message.save
       if User.first.phone_number_verified
         send_text("New form submission ChristianJuth.com from #{params[:email]}", User.first.phone_number)
@@ -182,19 +183,65 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  # This routs the login page to the template
   get "/login" do
     erb :login, :layout => :centered_blank_layout
+  end
+  
+  get "/forgot_password" do
+    erb :forgot_password, :layout => :centered_blank_layout
+  end
+  
+  post "/request_password_reset" do
+    if !User.find_by({username: params[:username]})
+      return_request(false, request.referer, "User not found")
+    elsif User.find_by({username: params[:username]}).phone_number_verified == false
+      return_request(false, request.referer, "User's phone number is not verified")
+    else
+      user = User.find_by({username: params[:username]})
+      token = SecureRandom.urlsafe_base64(30, true)
+      if user.password_resets.any?
+        user.password_resets.destroy_all
+      end
+      password_reset = PasswordReset.new({
+        user_id: user.id,
+        token: token
+      })
+      return_request(password_reset.valid?, "/login?requested_password_reset=true", error_for(password_reset)) do
+        send_text("Reset password http://www.christianjuth.com/reset_password?id=#{user.id}&token=#{token}", user.phone_number)
+        password_reset.save
+      end
+    end
+  end
+  
+  get "/reset_password" do
+    erb :reset_password, :layout => :centered_blank_layout
+  end
+  
+  post "/reset_password" do
+    if !User.find(params[:id])
+      return_request(false, request.referer, "user not found")
+    elsif params[:new_password] != params[:confirm_password]
+      return_request(false, request.referer, "Passwords do not match")
+    else
+      user = User.find(params[:id])
+      token = user.password_resets.find_by({token: params[:token]})
+      user.password = params[:new_password]
+      error = user.valid? ? "Password resent token is invalid or has already ben used." : error_for(user)
+      return_request(user.valid? && token, "/login", error) do
+        user.save
+        token.destroy
+      end
+    end
   end
 
   post "/login" do
     # check if user exsists
     if User.find_by({username: params[:username]})
-      @user = User.find_by({username: params[:username]})
+      user = User.find_by({username: params[:username]})
     end
     # check password and set session
-    return_request(@user && @user.password(params[:password]), "/", "Incorrect username or password") do
-      session[:user_id] = @user.id
+    return_request(user && user.password(params[:password]), "/", "Incorrect username or password") do
+      session[:user_id] = user.id
     end
   end
   
@@ -339,6 +386,5 @@ class ApplicationController < Sinatra::Base
       @user = User.find(session[:user_id])
     end
     @comments = false
-    @contact = false
   end
 end

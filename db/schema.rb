@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115013349) do
+ActiveRecord::Schema.define(version: 20161206041834) do
 
   create_table "api_verifications", force: :cascade do |t|
     t.string   "name"
@@ -20,10 +20,27 @@ ActiveRecord::Schema.define(version: 20161115013349) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "fun_fact"
+    t.string   "message"
+    t.boolean  "unread"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.boolean  "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "password_resets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,8 +63,11 @@ ActiveRecord::Schema.define(version: 20161115013349) do
     t.string   "email"
     t.string   "hash_salt"
     t.string   "hashed_password"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "phone_number"
+    t.string   "phone_verification_code"
+    t.boolean  "phone_number_verified"
   end
 
 end

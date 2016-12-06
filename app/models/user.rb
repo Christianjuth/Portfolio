@@ -3,6 +3,7 @@ require "./app/helpers/helpers"
 
 class User < ActiveRecord::Base
   include Helpers
+  has_many :password_resets
 
   # -- Validators --
 
@@ -28,9 +29,11 @@ class User < ActiveRecord::Base
     format: { with: /\A[0-9]-\([0-9]{3}\)-[0-9]{3}-[0-9]{4}\Z/i,
     message: "is not valid" },
     allow_blank: true
-
+  
+  validate :check_password
 
   def password=(password)
+    @new_password = password
     self.hash_salt = BCrypt::Engine.generate_salt
     self.hashed_password = BCrypt::Engine.hash_secret(password, self.hash_salt)
     self.save
@@ -38,6 +41,13 @@ class User < ActiveRecord::Base
 
   def password(password)
     self.hashed_password == BCrypt::Engine.hash_secret(password, self.hash_salt)
+  end
+  
+  def check_password
+    if @new_password == ""
+      self.errors.add(:password, "can't be blank")
+      return false
+    end
   end
   
   def phone=(number)

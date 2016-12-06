@@ -39,5 +39,12 @@
   <% if Sinatra::Base.production? && defined?(@user).nil? %>
     <%= ERB.new(File.read("./app/views/components/analytics.erb")).result(binding) %>
   <% end %>
+  
+  <style>
+    html,
+    body{
+      height: 100%;
+    }
+  </style>
 </body>
 </html>
