@@ -300,11 +300,14 @@ class ApplicationController < Sinatra::Base
   post "/user/change_password" do
     # check password and set session
     if_logged_in do
-      # try and update password
-      @user.password = params[:new_password]
-      return_request(
-        params[:new_password] == params[:confirm_password] && @user.valid?, request.referer, "Passwords do not match") do
-        @user.save
+      if params[:new_password] != params[:confirm_password]
+        return_request(false, request.referer, "Passwords do not match")
+      else
+        # try and update password
+        @user.password = params[:new_password]
+        return_request(@user.valid?, request.referer, error_for(@user)) do
+          @user.save
+        end
       end
     end
   end
