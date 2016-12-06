@@ -24,6 +24,14 @@ module Helpers
       erb :"404"
     end
   end
+  
+  def recaptcha
+    if !ApiVerification.exists?({name: "recaptcha"}) || verify_recaptcha
+      yield
+    else
+      return_request(false, request.referer, "Recaptcha failed")
+    end
+  end
 
   def return_request(condition = true, redirect_url = "/", error = "")
     if condition

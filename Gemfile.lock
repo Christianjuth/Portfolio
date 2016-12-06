@@ -77,6 +77,8 @@ GEM
       rack (>= 1.0)
     rake (11.3.0)
     rdiscount (2.2.0.1)
+    recaptcha (4.0.0)
+      json
     ripl (0.7.1)
       bond (~> 0.5.1)
     ripl-multi_line (0.3.1)
@@ -133,6 +135,7 @@ DEPENDENCIES
   pry
   rake
   rdiscount
+  recaptcha
   sass
   shotgun
   simplecov

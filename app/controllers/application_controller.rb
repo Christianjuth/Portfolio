@@ -12,9 +12,19 @@ require "./app/models/message"
 require "./app/models/page"
 require "./app/models/portfolio_entry"
 
+Recaptcha.configure do |config|
+  if ApiVerification.exists?({name: "recaptcha"})
+    api = ApiVerification.find_by({name: "recaptcha"})
+    config.site_key = api.key
+    config.secret_key = api.secret
+  end
+end
+
 # Set routs
 class ApplicationController < Sinatra::Base
   include Helpers
+  include Recaptcha::ClientHelper
+  include Recaptcha::Verify
   
   # This routs the home page to the template
   get "/" do
@@ -192,23 +202,25 @@ class ApplicationController < Sinatra::Base
   end
   
   post "/request_password_reset" do
-    if !User.find_by({username: params[:username]})
-      return_request(false, request.referer, "User not found")
-    elsif User.find_by({username: params[:username]}).phone_number_verified == false
-      return_request(false, request.referer, "User's phone number is not verified")
-    else
-      user = User.find_by({username: params[:username]})
-      token = SecureRandom.urlsafe_base64(30, true)
-      if user.password_resets.any?
-        user.password_resets.destroy_all
-      end
-      password_reset = PasswordReset.new({
-        user_id: user.id,
-        token: token
-      })
-      return_request(password_reset.valid?, "/login?requested_password_reset=true", error_for(password_reset)) do
-        send_text("Reset password http://www.christianjuth.com/reset_password?id=#{user.id}&token=#{token}", user.phone_number)
-        password_reset.save
+    recaptcha do
+      if !User.find_by({username: params[:username]})
+        return_request(false, request.referer, "User not found")
+      elsif User.find_by({username: params[:username]}).phone_number_verified == false
+        return_request(false, request.referer, "User's phone number is not verified")
+      else
+        user = User.find_by({username: params[:username]})
+        token = SecureRandom.urlsafe_base64(30, true)
+        if user.password_resets.any?
+          user.password_resets.destroy_all
+        end
+        password_reset = PasswordReset.new({
+          user_id: user.id,
+          token: token
+        })
+        return_request(password_reset.valid?, "/login?requested_password_reset=true", error_for(password_reset)) do
+          send_text("Reset password http://www.christianjuth.com/reset_password?id=#{user.id}&token=#{token}", user.phone_number)
+          password_reset.save
+        end
       end
     end
   end

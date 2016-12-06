@@ -10,6 +10,7 @@ gem "json"
 gem "sinch_sms"
 gem "database_cleaner"
 gem "rdiscount"
+gem "recaptcha"
 
 group :development, :test do
   gem "shotgun"
