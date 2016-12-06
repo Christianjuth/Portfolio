@@ -55,16 +55,18 @@ class ApplicationController < Sinatra::Base
   end
   
   post "/message/submit" do
-    message = Message.new({
-      name: params[:name],
-      email: params[:email],
-      fun_fact: params[:fun_fact],
-      message: params[:message]
-    })
-    return_request(message.valid?, "/?message_sent=true#Contact", error_for(message)) do
-      message.save
-      if User.first.phone_number_verified
-        send_text("New form submission ChristianJuth.com from #{params[:email]}", User.first.phone_number)
+    recaptcha do
+      message = Message.new({
+        name: params[:name],
+        email: params[:email],
+        fun_fact: params[:fun_fact],
+        message: params[:message]
+      })
+      return_request(message.valid?, "/?message_sent=true#Contact", error_for(message)) do
+        message.save
+        if User.first.phone_number_verified
+          send_text("New form submission ChristianJuth.com from #{params[:email]}", User.first.phone_number)
+        end
       end
     end
   end
@@ -230,30 +232,34 @@ class ApplicationController < Sinatra::Base
   end
   
   post "/reset_password" do
-    if !User.find(params[:id])
-      return_request(false, request.referer, "user not found")
-    elsif params[:new_password] != params[:confirm_password]
-      return_request(false, request.referer, "Passwords do not match")
-    else
-      user = User.find(params[:id])
-      token = user.password_resets.find_by({token: params[:token]})
-      user.password = params[:new_password]
-      error = user.valid? ? "Password resent token is invalid or has already ben used." : error_for(user)
-      return_request(user.valid? && token, "/login", error) do
-        user.save
-        token.destroy
+    recaptcha do
+      if !User.find(params[:id])
+        return_request(false, request.referer, "user not found")
+      elsif params[:new_password] != params[:confirm_password]
+        return_request(false, request.referer, "Passwords do not match")
+      else
+        user = User.find(params[:id])
+        token = user.password_resets.find_by({token: params[:token]})
+        user.password = params[:new_password]
+        error = user.valid? ? "Password resent token is invalid or has already ben used." : error_for(user)
+        return_request(user.valid? && token, "/login", error) do
+          user.save
+          token.destroy
+        end
       end
     end
   end
 
   post "/login" do
-    # check if user exsists
-    if User.find_by({username: params[:username]})
-      user = User.find_by({username: params[:username]})
-    end
-    # check password and set session
-    return_request(user && user.password(params[:password]), "/", "Incorrect username or password") do
-      session[:user_id] = user.id
+    recaptcha do
+      # check if user exsists
+      if User.find_by({username: params[:username]})
+        user = User.find_by({username: params[:username]})
+      end
+      # check password and set session
+      return_request(user && user.password(params[:password]), "/", "Incorrect username or password") do
+        session[:user_id] = user.id
+      end
     end
   end
   

@@ -76,8 +76,10 @@ body, html{
   }
 }
 
-.g-recaptcha{
-  margin-bottom: 15px;
+.g-recaptcha,
+.g-recaptcha.form-control{
+  height: auto;
+  padding-bottom: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
