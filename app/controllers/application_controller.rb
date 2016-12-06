@@ -213,7 +213,6 @@ class ApplicationController < Sinatra::Base
     end
   end
   
-  
   get "/reset_password" do
     erb :reset_password, :layout => :centered_blank_layout
   end
