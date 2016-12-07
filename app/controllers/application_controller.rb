@@ -138,6 +138,16 @@ class ApplicationController < Sinatra::Base
     erb :"portfolio/portfolio"
   end
   
+  get "/portfolio/image/:id.png" do
+    content_type "png"
+    if PortfolioEntry.exists?({id: params[:id]})
+      @entry = PortfolioEntry.find(params[:id])
+      kit = IMGKit.new(erb :"portfolio/image", :layout => false)
+      kit.stylesheets << "./public/css/portfolio.css"
+      img = kit.to_img(:png)
+    end
+  end
+  
   get "/portfolio/:id" do
     @comments = true
     if PortfolioEntry.exists?({id: params[:id]})
@@ -220,7 +230,7 @@ class ApplicationController < Sinatra::Base
           token: token
         })
         return_request(password_reset.valid?, "/login?requested_password_reset=true", error_for(password_reset)) do
-          send_text("Reset password http://www.christianjuth.com/reset_password?id=#{user.id}&token=#{token}", user.phone_number)
+          send_text("Reset password #{@host}/reset_password?id=#{user.id}&token=#{token}", user.phone_number)
           password_reset.save
         end
       end
@@ -281,7 +291,7 @@ class ApplicationController < Sinatra::Base
       unless user.phone_number_verified
         code = SecureRandom.urlsafe_base64(30, true)
         user.phone_verification_code = code
-        send_text("Verify your phone number http://www.christianjuth.com/phone/verify?id=#{user.id}&code=#{code}", user.phone_number)
+        send_text("Verify your phone number #{@host}/phone/verify?id=#{user.id}&code=#{code}", user.phone_number)
       end
       return_request(user.valid?, request.referer, error_for(user)) do
         user.save
@@ -407,5 +417,6 @@ class ApplicationController < Sinatra::Base
       @user = User.find(session[:user_id])
     end
     @comments = false
+    @host = request.base_url
   end
 end

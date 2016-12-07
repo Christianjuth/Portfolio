@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      html,
+      body{
+        padding: 0;
+        margin: 0;
+        width: 1024px;
+        height: 538px;
+        display: inline-block;
+        overflow: hidden;
+      }
+
+      h1,h2,h3,h4,h5,h6{
+        width: 100%;
+        margin: 10px 0 0 0;
+        padding: 15px 0 10px 0;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      @font-face {
+        font-family: 'Heebo';
+        font-style: normal;
+        font-weight: 900;
+        src: local('Heebo Black'), local('Heebo-Black'), url(http://fonts.gstatic.com/s/heebo/v2/68I0BQEi72oESKtZsJcjznYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+      }
+      @font-face {
+        font-family: 'Knewave';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Knewave'), local('Knewave-Regular'), url(http://fonts.gstatic.com/s/knewave/v5/QoIkQCg7-RvNFDCSqflgfQLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+      }
+      @font-face {
+        font-family: 'Lobster';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Lobster'), local('Lobster-Regular'), url(http://fonts.gstatic.com/s/lobster/v18/NIaFDq6p6eLpSvtV2DTNDQLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+      }
+      @font-face {
+        font-family: 'Pacifico';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Pacifico Regular'), local('Pacifico-Regular'), url(http://fonts.gstatic.com/s/pacifico/v7/yunJt0R8tCvMyj_V4xSjaXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+      }
+      @font-face {
+        font-family: 'Permanent Marker';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Permanent Marker'), local('PermanentMarker'), url(http://fonts.gstatic.com/s/permanentmarker/v5/9vYsg5VgPHKK8SXYbf3sMmVSxyvLCPm9firj_jMeQtQ.woff) format('woff');
+      }
+    </style>
+  </head>
+  <body>
+    <div class="portfolio-entry portfolio-open-graph" style="background-color: <%= @entry.color %>">
+      <h1 class="title text-center <%= @entry.font %>"><%= @entry.title %></h1>
+    </div>
+  </body>
+</html>

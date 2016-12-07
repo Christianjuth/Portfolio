@@ -51,6 +51,7 @@ GEM
     docile (1.1.5)
     gherkin (4.0.0)
     i18n (0.7.0)
+    imgkit (1.6.1)
     json (2.0.2)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -129,6 +130,7 @@ DEPENDENCIES
   codacy-coverage
   cucumber
   database_cleaner
+  imgkit
   json
   minitest
   pg

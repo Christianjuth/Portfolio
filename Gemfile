@@ -11,6 +11,7 @@ gem "sinch_sms"
 gem "database_cleaner"
 gem "rdiscount"
 gem "recaptcha"
+gem "imgkit"
 
 group :development, :test do
   gem "shotgun"

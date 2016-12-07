@@ -84,7 +84,7 @@
     font-family: 'Permanent Marker', cursive;
   }
 
-  .kenwave{
+  .knewave{
     font-family: 'Knewave', cursive;
   }
 
@@ -97,6 +97,18 @@
   iframe[src*="embed.spotify.com/"]{
     width: 100%;
     height: auto;
+  }
+}
+
+.portfolio-entry.portfolio-open-graph{
+  width: 1024px;
+  height: 538px;
+
+  *{
+    display: block;
+    width: auto;
+    margin-top: 140px;
+    font-size: 100px; 
   }
 }
 
