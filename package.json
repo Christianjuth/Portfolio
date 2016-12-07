@@ -4,7 +4,7 @@
   "description": "Sinatra startpoint",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bundle install --without production && npm run migrate && npm run seed && bower install && grunt once && ls db/",
+    "postinstall": "brew install Caskroom/cask/wkhtmltopdf && bundle install --without production && npm run migrate && npm run seed && bower install && grunt once && ls db/",
     "migrate": "bundle exec rake db:migrate_databases",
     "seed": "bundle exec rake db:seed",
     "test": "source ./travis/setup-codacy.sh && bundle exec cucumber",
