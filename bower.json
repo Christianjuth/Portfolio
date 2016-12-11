@@ -7,5 +7,6 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "css-ripple-effect": "^1.0.1"
   }
 }

@@ -1,11 +1,16 @@
 @import 'variables';
+@import 'mixins';
 
 body, html{
-  height: auto;
+  height: 100%;
   margin: 0;
   padding: 0;  
   background-color: $white;
-  overflow-x: hidden;
+  overflow: visible;
+  
+  &.primary{
+    background-color: $primary;
+  }
 }
 
 .menu.row,
@@ -28,6 +33,10 @@ body, html{
 .page{
   overflow-x: hidden;
   padding: 30px 0 60px 0;
+  
+  &.overflow{
+    overflow-x: visible;
+  }
 }
 
 .flex-center-wrap {
@@ -85,12 +94,53 @@ body, html{
   justify-content: center;
 }
 
+pre{
+  padding: 0;
+  border: none;
+  margin: 15px 0 10px 0;
+
+  code,
+  code.hljs{
+    display: block;
+    position: relative;
+    padding: 20px;
+    background-color: $gray;
+
+    &.shell{
+      border-top: 20px solid $gray;
+      background-color: $black;
+      color: $white;
+
+      @include prefix(box-shadow, $shadow-low, webkit moz);
+
+      &:before{
+        content: "$";
+      }
+
+      &:after{
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px; 
+        background-color: $primary;
+        position: absolute;
+        top: -15px;
+        left: 5px;
+      }
+    }
+  }
+}
+
 
 // load components
 @import 'text';
+@import 'ripple';
 
 // load page elements
-@import 'loader';
-@import 'header-and-footer';
+@import 'header';
+@import 'footer';
 @import 'sidebar';
 @import 'section';
+@import 'panel';
+@import 'loader';

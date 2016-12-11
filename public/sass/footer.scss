@@ -1,0 +1,29 @@
+
+.footer{
+  display: block;
+  background-color: #eb6864;
+  padding: 20px;
+  width: 100%;
+
+  @include prefix(box-shadow, $shadow-high, webkit moz);
+
+  .social > a{
+    padding: 0 15px;
+    color: $white;
+  }
+
+  *{
+    display: inline-block;
+    color: $white;
+  }
+
+  .footer-text{
+    display: block;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 15px 0;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: center;
+  }
+}

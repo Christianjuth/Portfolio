@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono|Asap:700|PT+Sans">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/red.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/github.min.css">
+  <link rel="stylesheet" href="/bower/css-ripple-effect/dist/ripple.min.css">
   <link rel="stylesheet" href="/css/style.gz">
 
   <!-- Scripts -->
@@ -56,7 +57,9 @@
     <div class="row page">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
         <%= ERB.new(File.read("./app/views/components/page-header.erb")).result(binding) %>
-        <%= yield %>
+        <div class="page-content">
+          <%= yield %>
+        </div>
         <%= if @contact == true
               ERB.new(File.read("./app/views/components/contact.erb")).result(binding) 
             end %>

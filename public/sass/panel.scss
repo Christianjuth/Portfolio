@@ -1,0 +1,12 @@
+.panel{
+  border: none;
+  @include prefix(box-shadow, $shadow-low, webkit moz);
+  
+  &:hover{
+    @include prefix(box-shadow, $shadow-medium, webkit moz);
+  }
+
+  .panel-footer{
+    background-color: #fff;
+  }
+}

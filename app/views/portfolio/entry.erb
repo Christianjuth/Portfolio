@@ -1,8 +1,10 @@
+<% if @user %>
+  <a href="/portfolio/edit/<%= @entry.id %>" class="btn btn-link btn-block">Edit</a>
+  <br>
+<% end %>
+
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
-    <% if @user %>
-      <a href="/portfolio/edit/<%= @entry.id %>" class="btn btn-link btn-block">Edit</a>
-    <% end %>
 
     <div class="portfolio-body">
       <%= RDiscount.new(@entry.description).to_html %>

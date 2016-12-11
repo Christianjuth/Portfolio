@@ -55,7 +55,11 @@ $(document).ready ->
     else
       post()
       
-  hljs.initHighlightingOnLoad()
+  $(".btn").addClass("ripple");
+      
+  $("pre code").not(".shell").each((i, block)->
+    hljs.highlightBlock(block);
+  )
 
   $(".input-hex").formatter({
     "pattern": "\#{{******}}",

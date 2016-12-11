@@ -1,7 +1,8 @@
 .navbar{
   position: relative;
   margin-bottom: 0;
-  border-bottom: 2px solid $primary;
+  border-bottom: 1px solid $dark-primary;
+  @include prefix(box-shadow, $shadow-low, webkit moz);
 
   *{
     border: none;
@@ -11,6 +12,12 @@
 
 .menu-wrap{
   padding: 0 20px;
+}
+
+.header{
+  @include prefix(box-shadow, $shadow-low, webkit moz);
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .header.portfolio-entry{
@@ -25,7 +32,8 @@
   background-color: #eb6864;
   display: inline-block;
   width: 100%;
-  padding: 40px 15px;
+  padding: 50px 15px;
+  @include prefix(box-shadow, $shadow-high, webkit moz);
 
   .logo{
     font-family: thunder-things;
@@ -64,31 +72,5 @@
     .logo{
       font-size: 13vw;
     }
-  }
-}
-
-.footer{
-  display: block;
-  background-color: #eb6864;
-  padding: 20px;
-  width: 100%;
-
-  .social > a{
-    padding: 0 15px;
-    color: $white;
-  }
-
-  *{
-    color: $white;
-  }
-
-  .footer-text{
-    display: block;
-    width: 100%;
-    margin: 10px 0 0;
-    padding: 15px 0;
-    font-weight: 700;
-    font-size: 13px;
-    text-align: center;
   }
 }

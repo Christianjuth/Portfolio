@@ -1,25 +1,33 @@
 <div class="row">
-  <div class="col-lg-10 col-lg-offset-1">
+  <div class="col-lg-8 col-lg-offset-2">
 
     <h1 class="text-center">Portfolio</h1>
-    <hr class="secondary">
+    <hr>
 
-    <div class="row no-margin">
-      <% if @user %>
-      <div class="col-xs-12">
-        <a href="#" type="fake_submit" class="btn btn-block btn-link" action="/portfolio/new_entry">add</a>
-      </div>
-      <% end %>
+    <% if @user %>
+    <div class="col-xs-12">
+      <a href="#" type="fake_submit" class="btn btn-block btn-link" action="/portfolio/new_entry">add</a>
+    </div>
+    <% end %>
+
+    <div class="portfolio-timeline">
 
       <% @portfolio_entries.each do |entry| %>
-      <a class="col-xs-12" href="/portfolio/<%= entry.id %>">
-        <div class="portfolio-entry" style="background-color: <%= entry.color %>">
-          <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
-          <div class="portfolio-blurb" style="color: <%= entry.color %>"><%= entry.blurb %></div>
+      <div class="panel panel-default">
+        <div class="panel-heading pannel-portfolio-header">
+          <div class="portfolio-entry" style="background-color: <%= entry.color %>">
+            <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
+            <p class="portfolio-date"><%= entry.date.strftime("%m/%d/%Y") %></p>
+          </div>
         </div>
-      </a>
+        <div class="panel-body">
+          <%= entry.blurb %>
+          <a href="/portfolio/<%= entry.id %>">Read More</a>
+        </div>
+      </div>
       <% end %>
     </div>
+
 
   </div>
 </div>

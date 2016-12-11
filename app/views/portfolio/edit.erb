@@ -1,11 +1,11 @@
+<br>
+<a target="_blank" href="/portfolio/<%= @edit_entry.id %>" class="btn btn-link btn-block">Open Entry</a>
+
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
+    <br>
 
     <form action="/portfolio/update/<%= @edit_entry.id %>" method="POST">
-
-      <br>
-      <a href="/portfolio/<%= @edit_entry.id %>" class="btn btn-link btn-block">Back</a>
-      <br>
       <div class="portfolio-entry" style="background-color: <%= @edit_entry.color %>">
         <h1>
           <input class="<%= @edit_entry.font %>" type="text" name="title" class="form-control" value="<%= @edit_entry.title %>">

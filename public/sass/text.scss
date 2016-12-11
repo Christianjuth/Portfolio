@@ -68,6 +68,7 @@ blockquote{
   letter-spacing: 0.5px;
   padding-bottom: 15px;
   margin: 0;
+  border-radius: 3px;
 
   &.indent{
     text-indent: 50px;
@@ -85,7 +86,7 @@ blockquote{
   border: none;
   padding: 20px 30px;
   min-height: 175px;
-  
+
   *{
     text-align: left;
   }
@@ -103,18 +104,22 @@ input,
 textarea,
 .form-control,
 .form-control[readonly]{
-  background-color: $gray;
-  border-radius: 0;
-  border: 3px solid $gray;
-  outline: none;
+  border-radius: 3px;
+  padding: 12px 16px;
+  border: 1px solid $gray;
+  @include prefix(box-shadow, $shadow-low, webkit moz);
   color: $black;
   height: 45px;
-  box-shadow: none;
+
+  &:focus{
+    outline: none !important;
+    border: 1px solid $gray;
+    @include prefix(box-shadow, $shadow-medium, webkit moz);
+  }
 }
 
 textarea,
 textarea.form-control{ 
-  padding: 8px 12px;
   resize: vertical;
   min-height: 200px;
 }
@@ -149,11 +154,16 @@ td.text-right a{
 }
 
 .btn{
-  border-radius: 0;
+  border-radius: 3px;
 }
 
-.page .btn{
+.page .btn:not(.btn-link){
   padding: 11px 15px;
+  @include prefix(box-shadow, $shadow-low, webkit moz);
+
+  &:hover{
+    @include prefix(box-shadow, $shadow-medium, webkit moz);
+  }
 }
 
 .input-phone,
@@ -163,21 +173,10 @@ input[type=tel]{
   letter-spacing: -.3px;
 }
 
-pre{
-  font-size: 17px;
-  border: none;
-  padding: 20px;
-
-  &, code{
-    // Overwrite syntak highlighter background
-    background-color: $gray !important;
-  }
-}
-
 .page ul {
   margin: 5px 0 -6px 0;
   padding: 0;
-  
+
   li{
     display: block;
     padding: 0;
@@ -186,12 +185,6 @@ pre{
 }
 
 hr{
-  border-color: rgba(235, 104, 100, .8);
-  border-width: 4px;
-  margin: 6px 0 12px 0;
-}
-
-hr.secondary{
   border-color: $gray;
   border-width: 4px;
   margin: 6px -15px 12px -15px;
@@ -204,17 +197,21 @@ hr.secondary{
 }
 
 @media screen and #{$break-phone} {
+  h1{
+    margin-top: 12px;
+  }
+
   .page p:not(.text-center),
   .page li,
   .page blockquote{
     font-size: 5.5vw;
     text-align: left;
   }
-  
+
   blockquote{
     min-height: 250px;
   }
-  
+
   pre{
     padding: 10px 0;
     font-size: 14px;
@@ -228,7 +225,7 @@ hr.secondary{
   border-radius: 100px;
   background-color: $primary;
   border: 2px solid $white;
-  
+
   &:hover{
     border: 2px solid $primary;
   }
