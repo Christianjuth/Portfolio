@@ -3,7 +3,7 @@ class BlogPost < ActiveRecord::Base
   # -- Validators --
   validates :title, 
     presence: true,
-    format: { with: /\A[\S]+\Z/i,
+    format: { with: /\A([\S]|\s)+\Z/i,
     message: "invalid title" }
   
   validates :content, 
