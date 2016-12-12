@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class BlogPost < ActiveRecord::Base
   
   # -- Validators --
   validates :title, 
@@ -14,10 +14,15 @@ class Page < ActiveRecord::Base
     presence: true,
     allow_blank: true
   
+  validates :publish, 
+    presence: true,
+    allow_blank: true
+  
   after_initialize :init
   def init
     self.title       ||= Time.now.to_i
     self.content     ||= ""
     self.comments    ||= false
+    self.publish     ||= false
   end
 end

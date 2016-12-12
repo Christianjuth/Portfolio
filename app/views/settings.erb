@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
     <h1 class="text-center">Settings</h1>
-    
+
     <hr class="secondary">
     <h4 class="text-center">Account Info</h4>
     <% if !@user.phone_number_verified && @user.phone_number != "" %>
-      <a href="#" type="fake_submit" class="btn btn-link btn-info btn-block" action="/phone/resend_verification/<%= @user.id %>">Phone number is not verified. Resend Code <i class="fa fa-repeat" aria-hidden="true"></i></a>
+    <a href="#" type="fake_submit" class="btn btn-link btn-info btn-block" action="/phone/resend_verification/<%= @user.id %>">Phone number is not verified. Resend Code <i class="fa fa-repeat" aria-hidden="true"></i></a>
     <% else %>
-      <br>
+    <br>
     <% end %>
     <form action="/user/update/<%= @user.id %>" method="POST">
       <div class="row">
@@ -39,9 +39,11 @@
         </div>
       </div>
     </form>
-    
+
     <hr class="secondary">
     <h4 class="text-center">API Integrations</h4>
+
+    <a href="#" class="btn btn-block btn-link" type="fake_submit" action="/api_verification/new_api_verification">add</a>
     <br>
 
     <% @api_verification.each do |api| %>
@@ -63,12 +65,6 @@
       </div>
     </form>
     <% end %>
-    <div class="row">
-      <div class="col-xs-12">
-        <a href="#" class="btn btn-block btn-link" type="fake_submit" action="/api_verification/new_api_verification">add</a>
-        <br>
-      </div>
-    </div>
 
     <hr class="secondary">
     <h4 class="text-center">About</h4>

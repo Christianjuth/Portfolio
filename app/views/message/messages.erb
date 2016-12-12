@@ -9,7 +9,7 @@
         <tr>
           <th>Title</th>
           <th>Email</th>
-          <th class="text-right">Status</th>
+          <th class="text-right">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +19,7 @@
             <td><%= message.created_at.strftime("%d/%m/%Y") %></td>
             <td class="text-right">
               <a href="/message/<%= message.id %>">Read</a>
+              <a href="#" type="fake_submit" class="delete" action="/message/delete/<%= message.id %>">Delete</a>
             </td>
           </tr>
         <% end %>

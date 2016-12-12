@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+    
+    <h1>Blog Posts</h1>
+    <a href="#" id="add" class="text-center btn btn-block btn-link" type="fake_submit" action="/blog_post/new">add</a>
+    <br>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% BlogPost.all.each do |posts| %>
+          <tr>
+            <td><%= posts.title %></td>
+            <td class="text-right">
+              <a href="/blog_post/edit/<%= posts.id %>">Edit</a>
+              <a href="#" type="fake_submit" class="delete" action="/blog_post/delete/<%= posts.id %>">Delete</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+        
+  </div>
+</div>

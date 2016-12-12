@@ -1,15 +1,69 @@
 <div class="footer">
-  <h4 class="text-center social">
-    <a href="https://www.instagram.com/christianjuth/">
-      <i class="fa fa-instagram" aria-hidden="true"></i>
-    </a>
-    <a href="https://www.facebook.com/christian.juth">
-      <i class="fa fa-facebook-official" aria-hidden="true"></i>
-    </a>
-    <a href="https://twitter.com/christianjuth">
-      <i class="fa fa-twitter" aria-hidden="true"></i>
-    </a>
-  </h4>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 
-  <span class="footer-text text-center">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2016 / Built with <i class="fa fa-heart" aria-hidden="true"></i></span>
+
+      <div class="row">
+        <ul class="col-sm-4">
+          <h6>Recent Posts</h6>
+          <% BlogPost.where({publish: true}).order("created_at DESC").limit(4).each do |post| %>
+          <li>
+            <a href="/blog/<%= post.id %>">
+              <%= post.title %>
+            </a>
+          </li>
+          <% end %>
+        </ul>
+        <ul class="col-sm-4">
+          <h6>Social Media</h6>
+          <li>
+            <a href="https://www.instagram.com/christianjuth/">
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://www.snapchat.com/add/christianjuth">
+              Snapchat
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/christianjuth">
+              Twitter
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/christian.juth">
+              Facebook
+            </a>
+          </li>
+        </ul>
+        <ul class="col-sm-4">
+          <h6>Professional</h6>
+          <li>
+            <a href="https://www.linkedin.com/in/christianjuth">
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="http://stackoverflow.com/users/3052484/christian-juth">
+              StackOverflow
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Christianjuth">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://www.codecademy.com/christianjuth">
+              Codecademy
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <br>
+      <span class="footer-text text-center">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2016 / Built with <i class="fa fa-heart" aria-hidden="true"></i></span>
+    </div>
+  </div>
 </div>

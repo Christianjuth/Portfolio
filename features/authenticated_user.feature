@@ -89,6 +89,45 @@ Scenario: setup and delete page from /pages
   Then click link "Delete" on page
   Then click button "Confirm Delete" on page
   
+Scenario: create blog post
+  Given on page "/login"
+  Then fill input "username" with "admin"
+  Then fill input "password" with "password"
+  Then click button "Login" on page
+  Given on page "/blog_posts"
+  Then click link "add" on page
+  Then fill input "title" with "Headline"
+  Then fill input "content" with "Welcome to a blog post!"
+  Then check input "publish"
+  Then click button "Update" on page
+  Given on page "/blog/1"
+  Then text "Welcome to a blog post!" on page
+  Given on page "/blog_post/edit/1"
+  Then input "title" has value "Headline"
+  Then input "content" has value "Welcome to a blog post!"
+  
+Scenario: setup and delete blog_post
+  Given on page "/login"
+  When button "Login" on page
+  Then fill input "username" with "admin"
+  Then fill input "password" with "password"
+  Then click button "Login" on page
+  Given on page "/blog_posts"
+  Then click link "add" on page
+  Then click link "Delete" on page
+  Then click button "Confirm Delete" on page
+  
+Scenario: setup and blog post page from /blog_posts
+  Given on page "/login"
+  Then fill input "username" with "admin"
+  Then fill input "password" with "password"
+  Then click button "Login" on page
+  Given on page "/blog_posts"
+  Then click link "add" on page
+  Given on page "/blog_posts"
+  Then click link "Delete" on page
+  Then click button "Confirm Delete" on page
+  
 Scenario: add and update portfolio entry
   Given on page "/login"
   Then fill input "username" with "admin"

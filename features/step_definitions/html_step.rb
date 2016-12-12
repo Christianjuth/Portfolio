@@ -46,6 +46,20 @@ Then /^fill input "([^']*)" with "([^']*)"$/ do |name, value|
   })
 end
 
+Then /^check input "([^']*)"$/ do |name|
+  assert_cucumber({
+    assersion: lambda{ page.check(name) },
+    error: "could not find input"
+  })
+end
+
+Then /^uncheck input "([^']*)"$/ do |name|
+  assert_cucumber({
+    assersion: lambda{ page.uncheck(name) },
+    error: "could not find input"
+  })
+end
+
 Then /^click button "([^']*)" on page$/ do |name|
   assert_cucumber({
     assersion: lambda{ 

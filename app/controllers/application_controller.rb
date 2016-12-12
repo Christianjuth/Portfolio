@@ -10,6 +10,7 @@ require "./app/models/password_reset"
 require "./app/models/api_verification"
 require "./app/models/message"
 require "./app/models/page"
+require "./app/models/blog_post"
 require "./app/models/portfolio_entry"
 
 Recaptcha.configure do |config|
@@ -108,8 +109,12 @@ class ApplicationController < Sinatra::Base
   
   get "/page/edit/:id" do
     if_logged_in do
-      @page = Page.find(params[:id])
-      erb :"page/edit"
+      if Page.exists?({id: params[:id]})
+        @page = Page.find(params[:id])
+        erb :"page/edit"
+      else
+        erb :"404"
+      end
     end
   end
   
@@ -132,6 +137,62 @@ class ApplicationController < Sinatra::Base
       return_request(true, "/pages")
     end
   end
+  
+  get "/blog_posts" do
+    if_logged_in do
+      erb :"blog/posts"
+    end
+  end
+  
+  get "/blog/:id" do
+    if BlogPost.exists?({id: params[:id]}) && (BlogPost.find(params[:id]).publish || @user)
+      @blog_post = BlogPost.find(params[:id])
+      @comments = @blog_post.comments
+      erb :"blog/post"
+    else
+      erb :"404"
+    end
+  end
+  
+  post "/blog_post/new" do
+    if_logged_in do
+      blog_post = BlogPost.new
+      blog_post.save
+      return_request(true, "/blog_post/edit/#{blog_post.id}")
+    end
+  end
+  
+  get "/blog_post/edit/:id" do
+    if_logged_in do
+      if BlogPost.exists?({id: params[:id]})
+        @blog_post = BlogPost.find(params[:id])
+        erb :"blog/edit"
+      else
+        erb :"404"
+      end
+    end
+  end
+  
+  post "/blog_post/update/:id" do
+    if_logged_in do
+      blog_post = BlogPost.find(params[:id])
+      blog_post.title = params[:title]
+      blog_post.comments = params[:comments]
+      blog_post.content = params[:content]
+      blog_post.publish = params[:publish]
+      return_request(blog_post.valid?, request.referer, error_for(blog_post)) do
+        blog_post.save
+      end
+    end
+  end
+  
+  post "/blog_post/delete/:id" do
+    if_logged_in do
+      @blog_post = BlogPost.find(params[:id])
+      @blog_post.delete
+      return_request(true, "/blog_posts")
+    end
+  end
 
   get "/portfolio" do
     @portfolio_entries = PortfolioEntry.order("date DESC")
@@ -144,7 +205,7 @@ class ApplicationController < Sinatra::Base
       @entry = PortfolioEntry.find(params[:id])
       kit = IMGKit.new(erb :"portfolio/image", :layout => false)
       kit.stylesheets << "./public/css/portfolio.css"
-      img = kit.to_img(:png)
+      kit.to_img(:png)
     end
   end
   

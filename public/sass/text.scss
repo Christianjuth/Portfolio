@@ -59,6 +59,7 @@ h6{
 
 p,
 .page li,
+.footer li,
 blockquote{
   font-family: 'PT Sans';
   font-weight: 500;
@@ -104,8 +105,9 @@ input,
 textarea,
 .form-control,
 .form-control[readonly]{
+  background-color: $white;
   border-radius: 3px;
-  padding: 12px 16px;
+  padding: 11px 16px;
   border: 1px solid $gray;
   @include prefix(box-shadow, $shadow-low, webkit moz);
   color: $black;
@@ -129,28 +131,40 @@ textarea.form-control{
 }
 
 thead{
-  background-color: $gray;
-  border-bottom: 3px solid $dark-gray;
-}
-
-table th,
-table td,
-table.table thead tr th,
-table.table tbody tr td{
-  color: $black;
-  padding: 15px 20px;
-  font-size: 17px;
-}
-
-table tr,
-table.table thead tr
-table.table tbody tr{
-  background-color: $gray;
+  background-color: $white;
   border-bottom: 1px solid $dark-gray;
 }
 
-td.text-right a{
-  margin-left: 10px;
+table,
+table.table{
+  border-radius: 3px;
+  overflow: hidden;
+  border-bottom: 1px solid $dark-gray;
+  @include prefix(box-shadow, $shadow-low, webkit moz);
+
+  th,
+  td,
+  thead tr th,
+  tbody tr td{
+    color: $black;
+    padding: 15px 20px;
+    font-size: 17px;
+  }
+
+  tr,
+  thead tr,
+  tbody tr{
+    background-color: $white;
+    border-bottom: 1px solid $dark-gray;
+  }
+  
+  tr:last-child{
+    border: none;
+  }
+
+  td.text-right a{
+    margin-left: 10px;
+  }
 }
 
 .btn{
@@ -173,7 +187,8 @@ input[type=tel]{
   letter-spacing: -.3px;
 }
 
-.page ul {
+.page ul,
+.footer ul{
   margin: 5px 0 -6px 0;
   padding: 0;
 
@@ -203,6 +218,7 @@ hr{
 
   .page p:not(.text-center),
   .page li,
+  .footer li,
   .page blockquote{
     font-size: 5.5vw;
     text-align: left;
