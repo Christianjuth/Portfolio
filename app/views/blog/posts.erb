@@ -9,17 +9,23 @@
       <thead>
         <tr>
           <th>Title</th>
+          <th>Published</th>
           <th class="text-right">Action</th>
         </tr>
       </thead>
       <tbody>
-        <% BlogPost.all.each do |posts| %>
+        <% @blog_posts.each do |post| %>
           <tr>
-            <td><%= posts.title %></td>
+            <td><%= post.title %></td>
+            <td>
+              <% if post.publish %>
+                <%= post.publish_date.strftime("%m/%d/%Y") %>
+              <% end %>
+            </td>
             <td class="text-right">
-              <a href="/blog/<%= posts.id %>">View</a>
-              <a href="/blog_post/edit/<%= posts.id %>">Edit</a>
-              <a href="#" type="fake_submit" class="delete" action="/blog_post/delete/<%= posts.id %>">Delete</a>
+              <a href="/blog/<%= post.id %>">View</a>
+              <a href="/blog_post/edit/<%= post.id %>">Edit</a>
+              <a href="#" type="fake_submit" class="delete" action="/blog_post/delete/<%= post.id %>">Delete</a>
             </td>
           </tr>
         <% end %>

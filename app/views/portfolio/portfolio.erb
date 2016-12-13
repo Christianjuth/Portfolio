@@ -5,7 +5,7 @@
     <br>
 
     <div class="portfolio-timeline">
-      <% PortfolioEntry.where({publish: true}).order("created_at DESC").each do |entry| %>
+      <% @portfolio_entries.each do |entry| %>
       <div class="panel panel-default">
         <div class="panel-heading pannel-portfolio-header">
           <div class="portfolio-entry" style="background-color: <%= entry.color %>">

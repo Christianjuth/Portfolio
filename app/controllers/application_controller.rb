@@ -82,6 +82,7 @@ class ApplicationController < Sinatra::Base
   
   get "/pages" do
     if_logged_in do
+      @pages = Page.order("title ASC")
       erb :"page/pages"
     end
   end
@@ -128,6 +129,7 @@ class ApplicationController < Sinatra::Base
   
   get "/blog_posts" do
     if_logged_in do
+      @blog_posts = BlogPost.order("publish_date DESC")
       erb :"blog/posts"
     end
   end
@@ -185,11 +187,13 @@ class ApplicationController < Sinatra::Base
   
   get "/portfolio/entries" do
     if_logged_in do
+      @portfolio_entries = PortfolioEntry.order("date DESC")
       erb :"portfolio/entries"
     end
   end
 
   get "/portfolio" do
+    @portfolio_entries = PortfolioEntry.where({publish: true}).order("date DESC")
     erb :"portfolio/portfolio"
   end
   
