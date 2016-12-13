@@ -22,6 +22,7 @@ class Message < ActiveRecord::Base
     presence: true,
     allow_blank: true
   
+  
   after_initialize :init
   def init
     self.fun_fact    ||= ""

@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   
   validate :check_password
 
+  
   def password=(password)
     @new_password = password
     self.hash_salt = BCrypt::Engine.generate_salt

@@ -67,7 +67,7 @@ $(document).ready ->
   })
 
   $(".input-date").formatter({
-    "pattern": "{{9999}}/{{99}}/{{99}}",
+    "pattern": "{{99}}/{{99}}/{{9999}}",
     "persistent": true
   })
   
@@ -76,11 +76,12 @@ $(document).ready ->
     "persistent": true
   })
   
-  $("input[type=checkbox]").iCheck({
-    checkboxClass: 'icheckbox_square-red',
-    radioClass: 'iradio_square-red'
-  })
-  
+  if $().iCheck != undefined
+    $("input[type=checkbox]").iCheck({
+      checkboxClass: 'icheckbox_square-red',
+      radioClass: 'iradio_square-red'
+    })
+
   # Allow user to click on title
   # and page link to it
   $(".page").find("h1,h2,h3,h4,h5").each ->

@@ -61,7 +61,7 @@ Scenario: setup another page
   Then fill input "title" with "another"
   Then fill input "content" with "Welcome to another page!"
   Then click button "Update" on page
-  Given on page "/page/another"
+  Given on page "/another"
   Then text "Welcome to another page!" on page
   Given on page "/page/edit/1"
   Then input "title" has value "another"
@@ -98,7 +98,6 @@ Scenario: create blog post
   Then click link "add" on page
   Then fill input "title" with "Headline"
   Then fill input "content" with "Welcome to a blog post!"
-  Then check input "publish"
   Then click button "Update" on page
   Given on page "/blog/1"
   Then text "Welcome to a blog post!" on page
@@ -133,7 +132,7 @@ Scenario: add and update portfolio entry
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
-  Given on page "/portfolio"
+  Given on page "/portfolio/entries"
   Then click link "add" on page
   Then fill input "title" with "Project 1"
   Then fill input "color" with "#222222"
@@ -141,6 +140,7 @@ Scenario: add and update portfolio entry
   Then fill input "description" with "This is a project."
   Then fill input "website" with "http://christianjuth.com"
   Then fill input "github" with "https://github.com/Christianjuth/Portfolio"
+  Then check input "publish"
   Then click button "Update" on page
   Given on page "/portfolio"
   Then text "Project 1" on page
@@ -160,7 +160,7 @@ Scenario: add and delete portfolio entry
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
-  Given on page "/portfolio"
+  Given on page "/portfolio/entries"
   Then click link "add" on page
   Then click link "Delete" on page
   Then click button "Confirm Delete" on page
@@ -170,7 +170,7 @@ Scenario: update invalid portfolio entry
   Then fill input "username" with "admin"
   Then fill input "password" with "password"
   Then click button "Login" on page
-  Given on page "/portfolio"
+  Given on page "/portfolio/entries"
   Then click link "add" on page
   Then fill input "title" with "Project 1"
   Then fill input "color" with "#22"

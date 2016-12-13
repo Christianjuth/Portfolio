@@ -27,6 +27,14 @@
     cursor: auto;
   }
 
+  &.portfolio-entry-shadow{
+    @include prefix(box-shadow, $shadow-medium, webkit moz);
+    
+    &:hover{
+      @include prefix(box-shadow, $shadow-high, webkit moz);
+    }
+  }
+
   *{
     color: #fff;
   }

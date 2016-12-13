@@ -48,14 +48,14 @@ end
 
 Then /^check input "([^']*)"$/ do |name|
   assert_cucumber({
-    assersion: lambda{ page.check(name) },
+    assersion: lambda{ page.find("input[name='#{name}']").set(true) },
     error: "could not find input"
   })
 end
 
 Then /^uncheck input "([^']*)"$/ do |name|
   assert_cucumber({
-    assersion: lambda{ page.uncheck(name) },
+    assersion: lambda{ page.find("input[name='#{name}']").set(false) },
     error: "could not find input"
   })
 end

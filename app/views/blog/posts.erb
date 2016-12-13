@@ -9,7 +9,7 @@
       <thead>
         <tr>
           <th>Title</th>
-          <th>Action</th>
+          <th class="text-right">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +17,7 @@
           <tr>
             <td><%= posts.title %></td>
             <td class="text-right">
+              <a href="/blog/<%= posts.id %>">View</a>
               <a href="/blog_post/edit/<%= posts.id %>">Edit</a>
               <a href="#" type="fake_submit" class="delete" action="/blog_post/delete/<%= posts.id %>">Delete</a>
             </td>

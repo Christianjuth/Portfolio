@@ -29,6 +29,10 @@ class PortfolioEntry < ActiveRecord::Base
     message: "invalid github url" },
     allow_blank: true
   
+  validates :publish, 
+    presence: true,
+    allow_blank: true
+  
   
   after_initialize :init
   def init
@@ -40,5 +44,6 @@ class PortfolioEntry < ActiveRecord::Base
     self.date        ||= Date.parse(Time.now.to_s)
     self.website     ||= ""
     self.github      ||= ""
+    self.publish     ||= false
   end
 end

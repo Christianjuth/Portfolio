@@ -86,19 +86,6 @@ class ApplicationController < Sinatra::Base
     end
   end
   
-  get "/page/:title" do
-    if params[:title].downcase == "home"
-      redirect "/"
-    end
-    if Page.exists?({title: params[:title].downcase})
-      @page = Page.find_by(title: params[:title].downcase)
-      @comments = @page.comments
-      erb :"page/page"
-    else
-      erb :"404"
-    end
-  end
-  
   post "/page/new_page" do
     if_logged_in do
       page = Page.new
@@ -124,6 +111,7 @@ class ApplicationController < Sinatra::Base
       page.title = params[:title]
       page.comments = params[:comments]
       page.content = params[:content]
+      page.publish = params[:publish]
       return_request(page.valid?, request.referer, error_for(page)) do
         page.save
       end
@@ -180,6 +168,7 @@ class ApplicationController < Sinatra::Base
       blog_post.comments = params[:comments]
       blog_post.content = params[:content]
       blog_post.publish = params[:publish]
+      blog_post.publish_date = Date.strptime(params[:publish_date], "%m/%d/%Y")
       return_request(blog_post.valid?, request.referer, error_for(blog_post)) do
         blog_post.save
       end
@@ -193,9 +182,14 @@ class ApplicationController < Sinatra::Base
       return_request(true, "/blog_posts")
     end
   end
+  
+  get "/portfolio/entries" do
+    if_logged_in do
+      erb :"portfolio/entries"
+    end
+  end
 
   get "/portfolio" do
-    @portfolio_entries = PortfolioEntry.order("date DESC")
     erb :"portfolio/portfolio"
   end
   
@@ -231,12 +225,13 @@ class ApplicationController < Sinatra::Base
       entry = PortfolioEntry.find(params[:id])
       entry.title = params[:title]
       entry.color = params[:color]
-      entry.date = params[:date]
+      entry.date = Date.strptime(params[:date], "%m/%d/%Y")
       entry.blurb = params[:blurb]
       entry.font = params[:font]
       entry.github = params[:github]
       entry.website = params[:website]
       entry.description = params[:description]
+      entry.publish = params[:publish]
       return_request(entry.valid?, request.referer, error_for(entry)) do
         entry.save
       end
@@ -255,7 +250,7 @@ class ApplicationController < Sinatra::Base
     if_logged_in do
       @entry = PortfolioEntry.find(params[:id])
       @entry.delete
-      return_request(true, "/portfolio")
+      return_request(true, "/portfolio/entries")
     end
   end
 
@@ -418,6 +413,19 @@ class ApplicationController < Sinatra::Base
   post "/api_verification/delete/:id" do
     return_request(true, request.referer, nil) do
       ApiVerification.find(params[:id]).destroy
+    end
+  end
+  
+  get "/:title" do
+    if params[:title].downcase == "home"
+      redirect "/"
+    end
+    if Page.exists?({title: params[:title].downcase}) && (Page.find_by(title: params[:title].downcase).publish || @user)
+      @page = Page.find_by(title: params[:title].downcase)
+      @comments = @page.comments
+      erb :"page/page"
+    else
+      erb :"404"
     end
   end
 

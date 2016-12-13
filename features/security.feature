@@ -24,7 +24,8 @@ Scenario: try and access /page/edit without permission
   Given table "pages" a record
     | title   | about           |
     | content | This is a page. |
-  Given on page "/page/about"
+    | publish | true            |
+  Given on page "/about"
   Then text "This is a page." on page
   Given on page "/portfolio/edit/1"
   Then text "404" on page

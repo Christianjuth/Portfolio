@@ -1,6 +1,7 @@
 class Page < ActiveRecord::Base
   
   # -- Validators --
+  validates_uniqueness_of :title
   validates :title, 
     presence: true,
     format: { with: /\A[\S]+\Z/i,
@@ -14,10 +15,16 @@ class Page < ActiveRecord::Base
     presence: true,
     allow_blank: true
   
+  validates :publish, 
+    presence: true,
+    allow_blank: true
+  
+  
   after_initialize :init
   def init
     self.title       ||= Time.now.to_i
     self.content     ||= ""
+    self.publish     ||= false
     self.comments    ||= false
   end
 end

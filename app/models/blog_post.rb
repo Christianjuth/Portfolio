@@ -18,11 +18,16 @@ class BlogPost < ActiveRecord::Base
     presence: true,
     allow_blank: true
   
+  validates :publish_date, 
+    presence: true
+  
+  
   after_initialize :init
   def init
-    self.title       ||= Time.now.to_i
-    self.content     ||= ""
-    self.comments    ||= false
-    self.publish     ||= false
+    self.title        ||= "Untitled"
+    self.content      ||= ""
+    self.comments     ||= false
+    self.publish      ||= false
+    self.publish_date ||= Date.parse(Time.now.to_s)
   end
 end
