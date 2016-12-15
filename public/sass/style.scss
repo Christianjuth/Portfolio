@@ -32,11 +32,15 @@ body, html{
 
 .page{
   overflow-x: hidden;
-  padding: 30px 0 60px 0;
+  padding: 30px 0 75px 0;
 
   &.overflow{
     overflow-x: visible;
   }
+}
+
+.comments{
+  padding: 150px 0 0 0;
 }
 
 .flex-center-wrap {
@@ -115,6 +119,7 @@ pre{
 
       &:before{
         content: "$";
+        margin-right: -8px;
       }
 
       &:after{

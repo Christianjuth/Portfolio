@@ -30,6 +30,7 @@
   <% end %>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/formatter.js/0.1.5/jquery.formatter.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/scss.min.js"></script>
   <script src="//www.google.com/recaptcha/api.js"></script>
   <script type="text/javascript" src="/js/main.gz"></script>
   
@@ -50,9 +51,9 @@
     }
   </script>
   
-  <%= if @user
-          ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) 
-      end %>
+  <% if @user %>
+    <%= ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) %>
+  <% end %>
   <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
   
   <div class="container-fluid">
@@ -62,12 +63,20 @@
         <div class="page-content">
           <%= yield %>
         </div>
-        <%= if @contact == true
-              ERB.new(File.read("./app/views/components/contact.erb")).result(binding) 
-            end %>
-        <%= if @comments == true
-              ERB.new(File.read("./app/views/components/disqus.erb")).result(binding) 
-            end %>
+        
+        <% if @contact == true %>
+          <%= ERB.new(File.read("./app/views/components/contact.erb")).result(binding) %>
+        <% end %>
+        
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1">
+            <div class="comments">
+              <% if @comments == true %>
+                <%= ERB.new(File.read("./app/views/components/disqus.erb")).result(binding) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

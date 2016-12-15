@@ -478,6 +478,7 @@ class ApplicationController < Sinatra::Base
   # pass @user as the current user into the
   # requested view
   before do
+    @production = Sinatra::Application.production?
     # Force the user to login before using the app
     force_login_page = false
     exceptions = ["/login"]
@@ -491,5 +492,6 @@ class ApplicationController < Sinatra::Base
     end
     @comments = false
     @host = request.base_url
+    @disqus_url = @production ? "christianjuth.disqus.com" : "development-4.disqus.com"  
   end
 end

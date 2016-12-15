@@ -109,14 +109,14 @@ textarea,
   border-radius: 3px;
   padding: 11px 16px;
   border: 1px solid $gray;
-  @include prefix(box-shadow, $shadow-low, webkit moz);
+  @include prefix(box-shadow, $shadow-low, $prefixes);
   color: $black;
   height: 45px;
 
   &:focus{
     outline: none !important;
     border: 1px solid $gray;
-    @include prefix(box-shadow, $shadow-medium, webkit moz);
+    @include prefix(box-shadow, $shadow-medium, $prefixes);
   }
 }
 
@@ -139,7 +139,7 @@ table.table{
   border-radius: 3px;
   overflow: hidden;
   border-bottom: 1px solid $dark-gray;
-  @include prefix(box-shadow, $shadow-low, webkit moz);
+  @include prefix(box-shadow, $shadow-low, $prefixes);
 
   th,
   td,
@@ -172,10 +172,10 @@ table.table{
 
 .page .btn:not(.btn-link){
   padding: 11px 15px;
-  @include prefix(box-shadow, $shadow-low, webkit moz);
+  @include prefix(box-shadow, $shadow-low, $prefixes);
 
   &:hover{
-    @include prefix(box-shadow, $shadow-medium, webkit moz);
+    @include prefix(box-shadow, $shadow-medium, $prefixes);
   }
 }
 
@@ -228,7 +228,6 @@ hr{
   }
 
   pre{
-    padding: 10px 0;
     font-size: 14px;
   }
 }
