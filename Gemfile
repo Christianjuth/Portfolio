@@ -12,6 +12,7 @@ gem "database_cleaner"
 gem "rdiscount"
 gem "recaptcha"
 gem "imgkit"
+gem "cloudinary"
 
 group :development, :test do
   gem "shotgun"

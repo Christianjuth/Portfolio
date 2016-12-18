@@ -136,7 +136,6 @@ Scenario: add and update portfolio entry
   Then click link "add" on page
   Then fill input "title" with "Project 1"
   Then fill input "color" with "#222222"
-  Then fill input "blurb" with "Hello World!"
   Then fill input "description" with "This is a project."
   Then fill input "website" with "http://christianjuth.com"
   Then fill input "github" with "https://github.com/Christianjuth/Portfolio"
@@ -150,7 +149,6 @@ Scenario: add and update portfolio entry
   Given on page "/portfolio/edit/1"
   Then input "title" has value "Project 1"
   Then input "color" has value "#222222"
-  Then input "blurb" has value "Hello World!"
   Then input "description" has value "This is a project."
   Then input "website" has value "http://christianjuth.com"
   Then input "github" has value "https://github.com/Christianjuth/Portfolio"
@@ -174,7 +172,6 @@ Scenario: update invalid portfolio entry
   Then click link "add" on page
   Then fill input "title" with "Project 1"
   Then fill input "color" with "#22"
-  Then fill input "blurb" with "Hello World!"
   Then fill input "description" with "This is a project."
   Then click button "Update" on page
   Then text "Error" on page

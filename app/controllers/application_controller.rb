@@ -21,6 +21,15 @@ Recaptcha.configure do |config|
   end
 end
 
+if ApiVerification.exists?({name: "cloudinary"})
+  Cloudinary.config do |config|
+    config.cloud_name = "christianjuth-juth"
+    config.api_key = ApiVerification.find_by({name: "cloudinary"}).key
+    config.api_secret = ApiVerification.find_by({name: "cloudinary"}).secret
+    config.cdn_subdomain = true
+  end
+end
+
 # Set routs
 class ApplicationController < Sinatra::Base
   include Helpers
@@ -32,6 +41,7 @@ class ApplicationController < Sinatra::Base
     if Page.exists?(title: "home")
       @page = Page.find_by(title: "home")
       @comments = @page.comments
+      @disqus_id = record_uid(@page)
       erb :index
     else
       @page = false
@@ -112,6 +122,11 @@ class ApplicationController < Sinatra::Base
       page.title = params[:title]
       page.comments = params[:comments]
       page.content = params[:content]
+      if params[:image] && params[:image][:filename]
+        file = params[:image][:tempfile]
+        upload = Cloudinary::Uploader.upload(file)
+        page.content = params[:content] + "\r\n![alt text](#{upload["url"]})"
+      end
       page.publish = params[:publish]
       return_request(page.valid?, request.referer, error_for(page)) do
         page.save
@@ -127,6 +142,11 @@ class ApplicationController < Sinatra::Base
     end
   end
   
+  get "/blog" do
+    @blog_posts = BlogPost.order("publish_date DESC")
+    erb :"blog/blog"
+  end
+  
   get "/blog_posts" do
     if_logged_in do
       @blog_posts = BlogPost.order("publish_date DESC")
@@ -137,6 +157,7 @@ class ApplicationController < Sinatra::Base
   get "/blog/:id" do
     if BlogPost.exists?({id: params[:id]}) && (BlogPost.find(params[:id]).publish || @user)
       @blog_post = BlogPost.find(params[:id])
+      @disqus_id = record_uid(@blog_post)
       @comments = @blog_post.comments
       erb :"blog/post"
     else
@@ -169,6 +190,11 @@ class ApplicationController < Sinatra::Base
       blog_post.title = params[:title]
       blog_post.comments = params[:comments]
       blog_post.content = params[:content]
+      if params[:image] && params[:image][:filename]
+        file = params[:image][:tempfile]
+        upload = Cloudinary::Uploader.upload(file)
+        blog_post.content = params[:content] + "\r\n![alt text](#{upload["url"]})"
+      end
       blog_post.publish = params[:publish]
       blog_post.publish_date = Date.strptime(params[:publish_date], "%m/%d/%Y")
       return_request(blog_post.valid?, request.referer, error_for(blog_post)) do
@@ -211,6 +237,7 @@ class ApplicationController < Sinatra::Base
     @comments = true
     if PortfolioEntry.exists?({id: params[:id]})
       @entry = PortfolioEntry.find(params[:id])
+      @disqus_id = record_uid(@entry)
       erb :"portfolio/entry"
     else
       erb :"404"
@@ -235,6 +262,11 @@ class ApplicationController < Sinatra::Base
       entry.github = params[:github]
       entry.website = params[:website]
       entry.description = params[:description]
+      if params[:image] && params[:image][:filename]
+        file = params[:image][:tempfile]
+        upload = Cloudinary::Uploader.upload(file)
+        entry.description = params[:description] + "\r\n![alt text](#{upload["url"]})"
+      end
       entry.publish = params[:publish]
       return_request(entry.valid?, request.referer, error_for(entry)) do
         entry.save
@@ -426,6 +458,7 @@ class ApplicationController < Sinatra::Base
     end
     if Page.exists?({title: params[:title].downcase}) && (Page.find_by(title: params[:title].downcase).publish || @user)
       @page = Page.find_by(title: params[:title].downcase)
+      @disqus_id = record_uid(@page)
       @comments = @page.comments
       erb :"page/page"
     else
@@ -439,11 +472,11 @@ class ApplicationController < Sinatra::Base
   
   # --------------- Set GZIP ----------------
   get (/css\/.*\.gz\Z/) do
-    content_type 'css'
+    content_type "css"
     gzip_file = "public#{request.path_info.gsub(/\.gz/, '.css.gz')}"
     css_file = "public#{request.path_info.gsub(/\.gz/, '.css')}"
     if File.file?(gzip_file) && Sinatra::Application.production?
-      headers['Content-Encoding'] = 'gzip'
+      headers["Content-Encoding"] = "gzip"
       File.read(gzip_file)
     else
       File.read(css_file)
@@ -451,11 +484,11 @@ class ApplicationController < Sinatra::Base
   end
   
   get (/js\/.*\.gz\Z/) do
-    content_type 'js'
+    content_type "js"
     gzip_file = "public#{request.path_info.gsub(/\.gz/, '.js.gz')}"
     js_file = "public#{request.path_info.gsub(/\.gz/, '.js')}"
     if File.file?(gzip_file) && Sinatra::Application.production?
-      headers['Content-Encoding'] = 'gzip'
+      headers["Content-Encoding"] = "gzip"
       File.read(gzip_file)
     else
       File.read(js_file)

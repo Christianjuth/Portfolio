@@ -1,4 +1,8 @@
 module Helpers
+  
+  def record_uid(record)
+    "#{record.class.table_name}_#{record.id}"
+  end
 
   # This function takes a class instance and gets
   # it's validation errors parsing them as a string

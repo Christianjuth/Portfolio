@@ -34,7 +34,7 @@
   <script src="//www.google.com/recaptcha/api.js"></script>
   <script type="text/javascript" src="/js/main.gz"></script>
   
-  <%= ERB.new(File.read("./app/views/components/open-graph.erb")).result(binding) %>
+  <%= ERB.new(File.read("./app/views/components/open_graph.erb")).result(binding) %>
 </head>
 <body>
   <!-- Improve Google Ranking  -->
@@ -52,14 +52,14 @@
   </script>
   
   <% if @user %>
-    <%= ERB.new(File.read("./app/views/components/admin-header.erb")).result(binding) %>
+    <%= ERB.new(File.read("./app/views/components/admin_header.erb")).result(binding) %>
   <% end %>
   <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
   
   <div class="container-fluid">
     <div class="row page">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-        <%= ERB.new(File.read("./app/views/components/page-header.erb")).result(binding) %>
+        <%= ERB.new(File.read("./app/views/components/page_header.erb")).result(binding) %>
         <div class="page-content">
           <%= yield %>
         </div>
@@ -70,11 +70,11 @@
         
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1">
-            <div class="comments">
-              <% if @comments == true %>
+            <% if @comments == true %>
+              <div class="comments">
                 <%= ERB.new(File.read("./app/views/components/disqus.erb")).result(binding) %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

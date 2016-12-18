@@ -6,7 +6,7 @@
       <div class="row">
         <ul class="col-sm-4">
           <h6>Recent Posts</h6>
-          <% BlogPost.where({publish: true}).order("created_at DESC").limit(4).each do |post| %>
+          <% BlogPost.where({publish: true}).order("publish_date DESC").limit(4).each do |post| %>
           <li>
             <a href="/blog/<%= post.id %>">
               <%= post.title %>

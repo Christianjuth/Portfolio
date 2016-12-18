@@ -37,6 +37,11 @@ body, html{
   &.overflow{
     overflow-x: visible;
   }
+
+  img{
+    width: 100%;
+    display: block
+  }
 }
 
 .comments{
@@ -141,7 +146,7 @@ pre{
   overflow: hidden;
   border-radius: 3px;
   @include prefix(box-shadow, $shadow-medium, webkit moz);
-  
+
   iframe{
     overflow: hidden;
   } 

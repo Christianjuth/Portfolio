@@ -6,7 +6,7 @@
 
     <div class="portfolio-timeline">
       <% @portfolio_entries.each do |entry| %>
-      <div class="panel panel-default">
+      <div class="panel panel-primary portfolio-panel">
         <div class="panel-heading pannel-portfolio-header">
           <div class="portfolio-entry" style="background-color: <%= entry.color %>">
             <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
@@ -14,8 +14,10 @@
           </div>
         </div>
         <div class="panel-body">
-          <%= entry.blurb %>
-          <a href="/portfolio/<%= entry.id %>">Read More</a>
+          <%= RDiscount.new(entry.description).to_html %>
+        </div>
+        <div class="panel-footer">
+          <a class="btn btn-link btn-block" href="/portfolio/<%= entry.id %>">Read More</a>
         </div>
       </div>
       <% end %>

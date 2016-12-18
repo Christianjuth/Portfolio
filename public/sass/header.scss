@@ -62,9 +62,14 @@
   padding: 50px 15px;
   @include prefix(box-shadow, $shadow-high, webkit moz);
 
-  .logo{
+  .logo,
+  .logo:hover{
     font-family: thunder-things;
     font-size: 4.5vw;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    text-align: center;
     padding: 60px 0 25px 0;
     margin: 0;
     padding: 10px;
@@ -97,7 +102,7 @@
     padding: 30px 15px;
 
     .logo{
-      font-size: 13vw;
+      font-size: 12vw;
     }
   }
 }

@@ -15,15 +15,28 @@ $(document).ready ->
   # Interupt form
   $("form").submit (e)->
     e.preventDefault()
-    $.post($(this).attr("action"), $(this).serialize())
-    .success (data)->
-      data = jQuery.parseJSON(data)
-      # data.redirect contains the string URL to redirect to
-      if (data.redirect)
-        window.location.href = data.redirect
-    .fail (data)->
-      data = jQuery.parseJSON(data.responseText)
-      sweetAlert("Error", data.message, "error")
+    $this = $(this)
+    formData = new FormData($this[0])
+    $.ajax({
+      url: $this.attr("action")
+      type: $this.attr("method")
+      data: formData
+      async: false
+      cache: false
+      contentType: false
+      processData: false
+      success: (data)->
+        data = jQuery.parseJSON(data)
+        # data.redirect contains the string URL to redirect to
+        if (data.redirect)
+          window.location.href = data.redirect
+      error: (data)->
+        data = jQuery.parseJSON(data.responseText)
+        sweetAlert("Error", data.message, "error")
+    })
+
+  $("input:file").change ()->
+     $(this).closest("form").submit()
   
   $("select[default]").each ->
     $(this).val($(this).attr("default"))
@@ -78,8 +91,8 @@ $(document).ready ->
   
   if $().iCheck != undefined
     $("input[type=checkbox]").iCheck({
-      checkboxClass: 'icheckbox_square-red',
-      radioClass: 'iradio_square-red'
+      checkboxClass: "icheckbox_square-red",
+      radioClass: "iradio_square-red"
     })
 
   # Allow user to click on title

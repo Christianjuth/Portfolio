@@ -5,16 +5,19 @@
     <a target="_blank" href="/blog/<%= @blog_post.id %>" class="btn btn-link btn-block">Open Post</a>
     <br>
 
-    <form action="/blog_post/update/<%= @blog_post.id %>" method="POST">
+    <form action="/blog_post/update/<%= @blog_post.id %>" enctype="multipart/form-data" method="POST">
       <div class="row">
-        <div class='form-group col-xs-6'>
-          <input name="title" type='text' class="form-control" value="<%= @blog_post.title %>">
+        <div class="form-group col-xs-6">
+          <input name="title" type="text" class="form-control" value="<%= @blog_post.title %>">
         </div>
-        <div class='form-group col-xs-6'>
-          <input name="publish_date" type='text' class="form-control input-date" value="<%= @blog_post.publish_date.strftime("%m/%d/%Y") %>">
+        <div class="form-group col-xs-6">
+          <input name="publish_date" type="text" class="form-control input-date" value="<%= @blog_post.publish_date.strftime("%m/%d/%Y") %>">
         </div>
         <div class="form-group col-xs-12">
           <textarea name="content" class="form-control" rows="15"><%= @blog_post.content %></textarea>
+        </div>
+        <div class="form-group col-xs-12">
+          <input class="form-control" type="file" name="image" accept="image/gif, image/jpeg, image/png">
         </div>
         <div class="form-group col-xs-6">
           <div class="form-control">
