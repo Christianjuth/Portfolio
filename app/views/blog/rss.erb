@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title><![CDATA[Hi I'm Christian]]></title>
+    <description><![CDATA[My Personal Portfolio]]></description>
+    <link>http://<%= @host %>/</link>
+    <lastBuildDate><%= @blog_posts.first.publish_date.rfc822 %></lastBuildDate>
+    <atom:link href="http://<%= @host %>/blog/rss" rel="self" type="application/rss+xml"/>
+    <ttl>60</ttl>
+<% @blog_posts.each do |post| %>
+    <item>
+      <title><![CDATA[<%= post.title %>]]></title>
+      <description><![CDATA[<%= post.content.split[0...75].join(' ') %>]]></description>
+      <link>http://<%= @host %>/blog/<%= post.id %></link>
+      <guid isPermaLink="true">http://<%= @host %>/blog/<%= post.id %></guid>
+      <dc:creator><![CDATA[Christian Juth]]></dc:creator>
+      <pubDate><%= post.publish_date.rfc822 %></pubDate>
+      <content:encoded><![CDATA[<%= RDiscount.new(post.content).to_html %>]]></content:encoded>
+    </item>
+<% end %>
+  </channel>
+</rss>

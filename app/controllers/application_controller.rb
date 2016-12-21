@@ -147,6 +147,29 @@ class ApplicationController < Sinatra::Base
     erb :"blog/blog"
   end
   
+  get "/blog/rss" do
+    content_type "rss"
+    @blog_posts = BlogPost.order("publish_date DESC")
+    
+    content = RSS::Maker.make('2.0') do |m|
+      m.channel.title = "ChristianJuth.com | Blog"
+      m.channel.about = "My Personal Portfolio"
+      m.channel.link  = "www.ChristianJuth.com"
+      m.channel.description = "desc"
+      m.items.do_sort = true
+
+      @blog_posts.each do |post|
+        item = m.items.new_item
+        item.title = post.title
+        item.link = "#{@host}/blog/#{post.id}"
+        item.description = RDiscount.new(post.content).to_html
+        item.date = post.publish_date.to_s
+      end
+    end
+
+    content.to_s
+  end
+  
   get "/blog_posts" do
     if_logged_in do
       @blog_posts = BlogPost.order("publish_date DESC")
@@ -221,6 +244,29 @@ class ApplicationController < Sinatra::Base
   get "/portfolio" do
     @portfolio_entries = PortfolioEntry.where({publish: true}).order("date DESC")
     erb :"portfolio/portfolio"
+  end
+  
+  get "/portfolio/rss" do
+    content_type "rss"
+    @portfolio_entries = PortfolioEntry.where({publish: true}).order("date DESC")
+    
+    content = RSS::Maker.make('2.0') do |m|
+      m.channel.title = "ChristianJuth.com | Portfolio"
+      m.channel.about = "My Personal Portfolio"
+      m.channel.link  = "www.ChristianJuth.com"
+      m.channel.description = "desc"
+      m.items.do_sort = true
+
+      @portfolio_entries.each do |post|
+        item = m.items.new_item
+        item.title = post.title
+        item.link = "#{@host}/blog/#{post.id}"
+        item.description = RDiscount.new(post.description).to_html
+        item.date = post.date.to_s
+      end
+    end
+
+    content.to_s
   end
   
   get "/portfolio/image/:id.png" do

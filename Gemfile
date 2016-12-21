@@ -13,6 +13,7 @@ gem "rdiscount"
 gem "recaptcha"
 gem "imgkit"
 gem "cloudinary"
+require "rss"
 
 group :development, :test do
   gem "shotgun"
