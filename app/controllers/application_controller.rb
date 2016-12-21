@@ -143,13 +143,13 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/blog" do
-    @blog_posts = BlogPost.order("publish_date DESC")
+    @blog_posts = BlogPost.where({publish: true}).order("publish_date DESC")
     erb :"blog/blog"
   end
   
   get "/blog/rss" do
     content_type "rss"
-    @blog_posts = BlogPost.order("publish_date DESC")
+    @blog_posts = BlogPost.where({publish: true}).order("publish_date DESC")
     
     content = RSS::Maker.make('2.0') do |m|
       m.channel.title = "ChristianJuth.com | Blog"
