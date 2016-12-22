@@ -42,6 +42,11 @@ body, html{
     width: 100%;
     display: block
   }
+  
+  a > img{
+    width: auto;
+    display: inline-block;
+  }
 }
 
 .comments{

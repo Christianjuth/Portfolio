@@ -49,6 +49,13 @@ class ApplicationController < Sinatra::Base
     end
   end
   
+  get "/open_graph_image.png" do
+    content_type "png"
+    kit = IMGKit.new(erb :"components/open_graph_image", :layout => false)
+    kit.stylesheets << "./public/css/open-graph.css"
+    kit.to_img(:png)
+  end
+  
   get "/messages" do
     if_logged_in do
       @messages = Message.order("created_at DESC").all
@@ -188,6 +195,19 @@ class ApplicationController < Sinatra::Base
     end
   end
   
+  
+  get "/blog/image/:id.png" do
+    if BlogPost.exists?({id: params[:id]}) && BlogPost.find(params[:id]).publish
+      content_type "png"
+      @entry = BlogPost.find(params[:id])
+      kit = IMGKit.new(erb :"blog/image", :layout => false)
+      kit.stylesheets << "./public/css/open-graph.css"
+      kit.to_img(:png)
+    else
+      erb :"404"
+    end
+  end
+  
   post "/blog_post/new" do
     if_logged_in do
       blog_post = BlogPost.new
@@ -270,12 +290,14 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/portfolio/image/:id.png" do
-    content_type "png"
-    if PortfolioEntry.exists?({id: params[:id]})
+    if PortfolioEntry.exists?({id: params[:id]}) && PortfolioEntry.find(params[:id]).publish
+      content_type "png"
       @entry = PortfolioEntry.find(params[:id])
       kit = IMGKit.new(erb :"portfolio/image", :layout => false)
-      kit.stylesheets << "./public/css/portfolio.css"
+      kit.stylesheets << "./public/css/open-graph.css"
       kit.to_img(:png)
+    else
+      erb :"404"
     end
   end
   
