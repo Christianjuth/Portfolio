@@ -21,10 +21,15 @@ class BlogPost < ActiveRecord::Base
   validates :publish_date, 
     presence: true
   
+  validates :header_image, 
+    presence: true,
+    allow_blank: true
+  
   
   after_initialize :init
   def init
     self.title        ||= "Untitled"
+    self.header_image ||= ""
     self.content      ||= ""
     self.comments     ||= false
     self.publish      ||= false

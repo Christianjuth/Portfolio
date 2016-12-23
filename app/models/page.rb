@@ -19,12 +19,17 @@ class Page < ActiveRecord::Base
     presence: true,
     allow_blank: true
   
+  validates :header_image, 
+    presence: true,
+    allow_blank: true
+  
   
   after_initialize :init
   def init
-    self.title       ||= Time.now.to_i
-    self.content     ||= ""
-    self.publish     ||= false
-    self.comments    ||= false
+    self.title        ||= Time.now.to_i
+    self.header_image ||= ""
+    self.content      ||= ""
+    self.publish      ||= false
+    self.comments     ||= false
   end
 end

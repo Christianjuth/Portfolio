@@ -116,6 +116,9 @@ class ApplicationController < Sinatra::Base
     if_logged_in do
       if Page.exists?({id: params[:id]})
         @page = Page.find(params[:id])
+        if @page.header_image && @page.header_image != ""
+          @header_image = @page.header_image
+        end
         erb :"page/edit"
       else
         erb :"404"
@@ -129,6 +132,11 @@ class ApplicationController < Sinatra::Base
       page.title = params[:title]
       page.comments = params[:comments]
       page.content = params[:content]
+      if params[:header_image] && params[:header_image][:filename]
+        file = params[:header_image][:tempfile]
+        upload = Cloudinary::Uploader.upload(file)
+        page.header_image = upload["url"]
+      end
       if params[:image] && params[:image][:filename]
         file = params[:image][:tempfile]
         upload = Cloudinary::Uploader.upload(file)
@@ -187,6 +195,9 @@ class ApplicationController < Sinatra::Base
   get "/blog/:id" do
     if BlogPost.exists?({id: params[:id]}) && (BlogPost.find(params[:id]).publish || @user)
       @blog_post = BlogPost.find(params[:id])
+      if @blog_post.header_image && @blog_post.header_image != ""
+        @header_image = @blog_post.header_image
+      end
       @disqus_id = record_uid(@blog_post)
       @comments = @blog_post.comments
       erb :"blog/post"
@@ -220,6 +231,9 @@ class ApplicationController < Sinatra::Base
     if_logged_in do
       if BlogPost.exists?({id: params[:id]})
         @blog_post = BlogPost.find(params[:id])
+        if @blog_post.header_image && @blog_post.header_image != ""
+          @header_image = @blog_post.header_image
+        end
         erb :"blog/edit"
       else
         erb :"404"
@@ -232,6 +246,11 @@ class ApplicationController < Sinatra::Base
       blog_post = BlogPost.find(params[:id])
       blog_post.title = params[:title]
       blog_post.comments = params[:comments]
+      if params[:header_image] && params[:header_image][:filename]
+        file = params[:header_image][:tempfile]
+        upload = Cloudinary::Uploader.upload(file)
+        blog_post.header_image = upload["url"]
+      end
       blog_post.content = params[:content]
       if params[:image] && params[:image][:filename]
         file = params[:image][:tempfile]
@@ -329,6 +348,11 @@ class ApplicationController < Sinatra::Base
       entry.font = params[:font]
       entry.github = params[:github]
       entry.website = params[:website]
+      if params[:header_image] && params[:header_image][:filename]
+        file = params[:header_image][:tempfile]
+        upload = Cloudinary::Uploader.upload(file)
+        entry.header_image = upload["url"]
+      end
       entry.description = params[:description]
       if params[:image] && params[:image][:filename]
         file = params[:image][:tempfile]
@@ -526,6 +550,9 @@ class ApplicationController < Sinatra::Base
     end
     if Page.exists?({title: params[:title].downcase}) && (Page.find_by(title: params[:title].downcase).publish || @user)
       @page = Page.find_by(title: params[:title].downcase)
+      if @page.header_image && @page.header_image != ""
+        @header_image = @page.header_image
+      end
       @disqus_id = record_uid(@page)
       @comments = @page.comments
       erb :"page/page"

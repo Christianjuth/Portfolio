@@ -14,6 +14,9 @@
           <input name="publish_date" type="text" class="form-control input-date" value="<%= @blog_post.publish_date.strftime("%m/%d/%Y") %>">
         </div>
         <div class="form-group col-xs-12">
+          <input class="form-control" type="file" name="header_image" accept="image/gif, image/jpeg, image/png">
+        </div>
+        <div class="form-group col-xs-12">
           <textarea name="content" class="form-control" rows="15"><%= @blog_post.content %></textarea>
         </div>
         <div class="form-group col-xs-12">
