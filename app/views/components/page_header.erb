@@ -1,11 +1,13 @@
 <% if @entry %>
   <div class="header portfolio-entry" style="background-color: <%= @entry.color %>">
     <h1 class="title text-center <%= @entry.font %>"><%= @entry.title %></h1>
-    <p class="portfolio-date"><%= @entry.date.strftime("%m/%d/%Y") %></p>
+    <div class="header-profile-image">
+      <img src="/images/header/IMG_0532.jpg" class="img-responsive">
+    </div>
   </div>
 <% elsif @header_image %>
   <div class="header">
-    <div class="header-image <%= @blog_post ? 'header-profile-image-spacing' : '' %>" style="background-image: url(<%= @header_image %>)"></div>
+    <div class="header-image" style="background-image: url(<%= @header_image %>)"></div>
     <% if @blog_post %>
       <div class="header-profile-image">
         <img src="/images/header/IMG_0532.jpg" class="img-responsive">
@@ -13,9 +15,11 @@
     <% end %>
   </div>
 <% else %>
-  <div class="row header">
-    <div class="col-xs-4"><img src="/images/header/IMG_0185.jpg" class="img-responsive"></div>
-    <div class="col-xs-4"><img src="/images/header/IMG_0532.jpg" class="img-responsive"></div>
-    <div class="col-xs-4"><img src="/images/header/IMG_0392.jpg" class="img-responsive"></div>	
+  <div class="header">
+    <div class="row">
+      <div class="col-xs-4"><img src="/images/header/IMG_0185.jpg" class="img-responsive"></div>
+      <div class="col-xs-4"><img src="/images/header/IMG_0532.jpg" class="img-responsive"></div>
+      <div class="col-xs-4"><img src="/images/header/IMG_0392.jpg" class="img-responsive"></div>	
+    </div>
   </div>
 <% end %>

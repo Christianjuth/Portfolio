@@ -13,8 +13,12 @@ body, html{
   }
 }
 
+br{
+  height: 10px;
+}
+
 .menu.row,
-.header.row,
+.header .row,
 .row.no-margin{
   margin-left: -1px;
   margin-right: -1px;
@@ -125,8 +129,6 @@ pre{
       background-color: $black;
       color: $white;
 
-      @include prefix(box-shadow, $shadow-low, webkit moz);
-
       &:before{
         content: "$";
         margin-right: -8px;
@@ -150,7 +152,6 @@ pre{
 .embed-responsive{
   overflow: hidden;
   border-radius: 3px;
-  @include prefix(box-shadow, $shadow-medium, webkit moz);
 
   iframe{
     overflow: hidden;

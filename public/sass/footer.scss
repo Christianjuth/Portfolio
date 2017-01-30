@@ -4,7 +4,6 @@
   background-color: #eb6864;
   padding: 40px 20px 35px 20px;
   width: 100%;
-  @include prefix(box-shadow, $shadow-high, webkit moz);
 
   p,
   *,

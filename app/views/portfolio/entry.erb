@@ -1,7 +1,11 @@
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
-
+    
+    <!-- for spacing -->
+    <br>
+    
     <div class="portfolio-body">
+      <p class="text-muted text-center slim-text">Published: <%= @entry.date.strftime("%m/%d/%Y") %></p>
       <%= RDiscount.new(@entry.description).to_html %>
     </div>
 

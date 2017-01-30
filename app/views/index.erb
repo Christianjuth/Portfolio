@@ -1,5 +1,7 @@
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
+    
+    <h1>Home</h1>
 
     <% if @page %>
       <%= RDiscount.new(@page.content).to_html %>
@@ -35,5 +37,11 @@
       </form>
     <% end %>
     
+  </div>
+  
+  <div class="col-xs-1 sidebar">
+    <a class="text-black text-center" href="https://linkedin.com/in/christianjuth"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+    <a class="text-black text-center" href="https://github.com/Christianjuth"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+    <a class="text-black text-center" href="http://codepen.io/christianjuth/"><i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
   </div>
 </div>

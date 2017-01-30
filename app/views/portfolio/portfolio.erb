@@ -6,14 +6,14 @@
 
     <div class="portfolio-timeline">
       <% @portfolio_entries.each do |entry| %>
-      <div class="panel panel-primary portfolio-panel">
+      <div class="panel panel-primary portfolio-panel" style="border-color: <%= entry.color %>">
         <div class="panel-heading pannel-portfolio-header">
           <div class="portfolio-entry" style="background-color: <%= entry.color %>">
             <h1 class="text-center <%= entry.font %>"><%= entry.title %></h1>
-            <p class="portfolio-date"><%= entry.date.strftime("%m/%d/%Y") %></p>
           </div>
         </div>
         <div class="panel-body">
+          <p class="text-muted text-center slim-text">Published: <%= entry.date.strftime("%m/%d/%Y") %></p>
           <%= RDiscount.new(entry.description).to_html %>
         </div>
         <div class="panel-footer">

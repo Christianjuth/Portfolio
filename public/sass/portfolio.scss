@@ -15,7 +15,7 @@
   border: none;
   padding: 15px 0;
   margin: 0;
-  border-radius: 3px;
+  
 
   h1{
     margin-top: 0;
@@ -25,14 +25,6 @@
   &.header{
     margin-bottom: 20px;
     cursor: auto;
-  }
-
-  &.portfolio-entry-shadow{
-    @include prefix(box-shadow, $shadow-medium, webkit moz);
-    
-    &:hover{
-      @include prefix(box-shadow, $shadow-high, webkit moz);
-    }
   }
 
   *{
@@ -77,14 +69,6 @@
     }
   }
 
-  .portfolio-date{
-    position: absolute;
-    right: 11px;
-    bottom: 5px;
-    margin: 0;
-    padding: 0;
-  }
-
   .lobster{
     font-family: 'Lobster', cursive;
   }
@@ -117,6 +101,7 @@
   padding: 0;
   overflow: hidden;
   border: none;
+  border-radius: 0;
 }
 
 .portfolio-timeline{
@@ -141,10 +126,6 @@
 
 @media screen and #{$break-phone} {
   .portfolio-entry{
-    &.header{
-      margin-bottom: 15px;
-    }
-
     *{
       font-size: 9vw;
     }

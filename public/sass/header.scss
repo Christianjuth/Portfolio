@@ -3,7 +3,6 @@
   position: relative;
   margin-bottom: 0;
   border-bottom: 1px solid $dark-primary;
-  @include prefix(box-shadow, $shadow-low, webkit moz);
 
   *{
     border: none;
@@ -20,7 +19,6 @@
     width: 100%;
     border-radius: 0;
     background-color: $primary;
-    @include prefix(box-shadow, $shadow-medium, webkit moz);
 
     *{
       color: $white; 
@@ -42,10 +40,15 @@
 }
 
 .header{
-  @include prefix(box-shadow, $shadow-low, webkit moz);
   border-radius: 3px;
   overflow: visible;
   position: relative;
+  margin-bottom: 30px;
+  
+  & > div{
+    overflow: hidden;
+    border-radius: 3px;
+  }
 
   .header-image{
     border-radius: 3px;
@@ -53,10 +56,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    
-    &.header-profile-image-spacing{
-      margin-bottom: 20px;
-    }
   }
   
   .header-profile-image{
@@ -64,9 +63,8 @@
     border-radius: 100%;
     overflow: hidden;
     position: absolute;
-    bottom: -50px;
+    bottom: -35px;
     left: calc(50% - 50px);
-    @include prefix(box-shadow, $shadow-medium, webkit moz);
   }
 
   &.portfolio-entry{
@@ -84,7 +82,6 @@
   display: inline-block;
   width: 100%;
   padding: 50px 15px;
-  @include prefix(box-shadow, $shadow-high, webkit moz);
 
   .logo,
   .logo:hover{

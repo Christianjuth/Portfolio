@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
     
+    <br>
     <h1><%= @blog_post.title %></h1>
+    
     <% if @blog_post.publish %>
       <p class="text-muted text-center">Published: <%= @blog_post.publish_date.strftime("%m/%d/%Y") %>
         <% if @blog_post.publish_date.to_date < @blog_post.updated_at.to_date %>
@@ -9,6 +11,7 @@
         <% end %>
       </p>
     <% end %>
+    
     <%= RDiscount.new(@blog_post.content).to_html %>
     
   </div>

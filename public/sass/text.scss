@@ -17,8 +17,8 @@ h1,h2,h3,h4,h5,h6{
 
 h1,h2,h3,h4,h5,h6{
   width: 100%;
-  margin: 10px 0 0 0;
-  padding: 15px 0 10px 0;
+  margin: 0;
+  padding: 0;
   color: $black;
   font-weight: bold;
   text-align: center;
@@ -26,34 +26,31 @@ h1,h2,h3,h4,h5,h6{
 
 h1{
   font-size: 45px;
-  margin-top: 30px;
+  margin-bottom: 5px;
 }
 
 h2{
   font-size: 35px;
-  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 h3{
   font-size: 28px;
-  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 h4{
   font-size: 22px;
-  margin: 0;
   padding: 17px 0 10px 0;
 }
 
 h5{
   font-size: 22px;
-  margin: 0;
   padding: 0 0 10px 0;
 }
 
 h6{
   font-size: 22px;
-  margin: 0;
   padding: 15px 0 10px 0;
 }
 
@@ -70,6 +67,10 @@ blockquote{
   padding-bottom: 15px;
   margin: 0;
   border-radius: 3px;
+  
+  &.slim-text{
+    padding-bottom: 5px;
+  }
 
   &.indent{
     text-indent: 50px;
@@ -101,22 +102,22 @@ a{
   color: $black;
 }
 
-input,
 textarea,
+input[type=text],
 .form-control,
 .form-control[readonly]{
-  background-color: $white;
+  background-color: $gray;
   border-radius: 3px;
   padding: 11px 16px;
-  border: 1px solid $gray;
-  @include prefix(box-shadow, $shadow-low, $prefixes);
+  border: none;
   color: $black;
   height: 45px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 
   &:focus{
     outline: none !important;
-    border: 1px solid $gray;
-    @include prefix(box-shadow, $shadow-medium, $prefixes);
   }
 }
 
@@ -130,7 +131,7 @@ textarea.form-control{
 }
 
 thead{
-  background-color: $white;
+  background-color: $gray;
   border-bottom: 1px solid $dark-gray;
 }
 
@@ -139,7 +140,6 @@ table.table{
   border-radius: 3px;
   overflow: hidden;
   border-bottom: 1px solid $dark-gray;
-  @include prefix(box-shadow, $shadow-low, $prefixes);
 
   th,
   td,
@@ -153,7 +153,7 @@ table.table{
   tr,
   thead tr,
   tbody tr{
-    background-color: $white;
+    background-color: $gray;
     border-bottom: 1px solid $dark-gray;
   }
   
@@ -172,11 +172,6 @@ table.table{
 
 .page .btn:not(.btn-link){
   padding: 11px 15px;
-  @include prefix(box-shadow, $shadow-low, $prefixes);
-
-  &:hover{
-    @include prefix(box-shadow, $shadow-medium, $prefixes);
-  }
 }
 
 .input-phone,
