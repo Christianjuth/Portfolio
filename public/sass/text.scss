@@ -225,6 +225,23 @@ hr{
   pre{
     font-size: 14px;
   }
+  
+  table,
+  table.table{
+    th, td,
+    thead tr th,
+    tbody tr td{
+      padding: 15px;
+      font-size: 13px;
+      max-width:1px;
+      
+      &:not(.text-right){
+        white-space: nowrap;
+        text-overflow: ellipsis; 
+        overflow: hidden; 
+      }
+    }
+  }
 }
 
 .social-circle{
