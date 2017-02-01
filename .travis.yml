@@ -8,6 +8,7 @@ node_js:
 before_install:
 - ./travis/install-qt.sh
 - brew install openssl
+- rvm get stable
 - rvm install 2.4.0
 - gem install bundler
 install:
