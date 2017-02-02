@@ -32,6 +32,8 @@ module Helpers
   def recaptcha
     if Sinatra::Application.test? || (ApiVerification.exists?({name: "recaptcha"}) && verify_recaptcha)
       yield
+    else if !ApiVerification.exists?({name: "recaptcha"})
+      yield
     else
       return_request(false, request.referer, "Recaptcha failed")
     end
