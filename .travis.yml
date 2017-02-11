@@ -6,7 +6,7 @@ os:
 node_js:
 - 5.0.0
 before_install:
-- ./travis/install-qt.sh
+- "./travis/install-qt.sh"
 - brew install openssl --force || true
 - brew install readline --force || true
 - rvm install 2.3.3
@@ -20,11 +20,11 @@ before_deploy:
 - rm -rf .bundle/
 deploy:
   provider: heroku
-  condition: $(uname) == Darwin
-  api_key:
-    secure: TPqGFzCdHLEQGg8nON9cLbqICQy2wKP0BfWDv5Awxu1bYbYvkZHnUbCH9yURckSi0b6o/h9/upsJYGs9XYzAIoN3/mxbGtRXS6NX+hsZSa7Xz92FFxQGd0jgpPLn1XAqkE0hQ/HMnlBywZsXKDzhb3iG1Ed5AvjfSwubSzaupzDGklV8YU5nwV/XCMkEu1yE0918a5wcLxwKacLswqP2FBv8Q2jUolMRMwKe5nUelO3bSlRisPmZq60LZjS+qOo/E9Edyp6Ef67TuqyiF5xjhHffRm8BH8LobcijA+s/ep92gbWw5Kcrjw9sVrxtyQh/51j8rxJgw5riGFeh5PMPETwLc4JUrINmdDXfIt8Te+/H+sm4WLU+v87kgrS8Cm4+Flz8U3aUpELRGWI/M7UYhOaEzySAz5HlCx2B/2M4j2w22Kqn77V6IQ5Sf0BE48TwC9CyBRXFLCNzwha6EKtt2QODg1cTX5/dhRk+K5VK5+9c5Q7T+Ah2+ve/hUW4l6rKrftZeqWDzKpiE5+DoNHH0ZMroxq1ecO6/h14Emf15/Nqxn00GNLgRGoTDD+97R65QVbQZ1iCLrWJMv26PcxgxegIuXMfM5Edz1D4VyfFSgviUaVnuut2fdpyFaocMyVrdvRFVQ1ZsLGqzZRps6QyX10FeFlCtwIQ2wMJkZZjcNQ=
+  condition: "$(uname) == Darwin"
   app: christianjuth
   skip_cleanup: true
   run: rake db:migrate
   on:
     repo: Christianjuth/Portfolio
+  api_key:
+    secure: XW32ibms7DgHnvAVmNVTk3AJ+IJkg6a76lzw/b9qYHo5U97TW9k01lcSNjRr6HxAPzBy4y1AsSPInUJXVBVsy9jFZ5/QCHape9MTRalS2uewYVJWnL/a4skpCQLB6QaeeDhNbMWDG8ssQndSPZosslIXC2km5nPVK/M5o7zyd2yg1sCdWNaY+j+h9xwOA7X3a5dRPhAcWjeKjMq9HAS3BacA0IPXmjW5fYpU8rtoln8xcd6/ACGSTu/ibW9R4OmGXc4dc46NscAOR6SloNfk4qC1iPoHkn091R+0Chnx1AVjBkFs2IgNrA9uzz6fFoLArb67+HIVCHJNd8JXeM7duEBmlAqnApFeuFE/noxagMGRXyhyhb02sfRf1aaGIEWt/40IMvxP5KumYFoNowsIcHI3JXb1JNjNVNXnPB8hYsHPzw0X02CWU7m9w6etRAeYXF4yi9NO0gOzTlWHXA3ATRjKbqlPiwsN1yXQX6616DOLOwKQF0t7N5Qer95UxtbnTr3Kx+glmdsegYGr4S/iri29RJxS8uglu/GWs6Uw6ARJgwl4GkShcCcLOKe+j9xabP2FminEaCWOZ/i0Ilj2AEVfK9U7So/PsmPmkEfa6crNCBdGQRgXY54ArOY4Iob7vs2yRV67Opuxo3Hm+A1ESJguHFfBzp290kYgiMr4+GA=
