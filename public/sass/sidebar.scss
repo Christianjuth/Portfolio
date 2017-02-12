@@ -11,7 +11,7 @@
   }
 }
 
-@media screen and #{$break-tablet-max} {
+@media screen and #{$break-medium-computer-max} {
   .sidebar{
     display: none;
   }

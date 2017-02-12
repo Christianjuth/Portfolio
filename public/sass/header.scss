@@ -83,11 +83,10 @@
   width: 100%;
   padding: 50px 15px;
 
-  .logo,
-  .logo:hover{
-    font-family: thunder-things;
-    font-size: 4.5vw;
-    text-decoration: none;
+  .logo{
+    font-family: 'Oleo Script';
+    font-size: 6.8vw;
+    line-height: 7vw;
     width: 100%;
     display: block;
     text-align: center;
@@ -95,12 +94,26 @@
     margin: 0;
     padding: 10px;
     margin-bottom: 0;
-    color: $white;
+    
+    &,
+    &:hover{
+      color: $white; 
+      text-decoration: none;
+    }
   }
 
   a > *{
     color: $white;
     padding: 0;
+  }
+}
+
+@media screen and #{$break-tablet} {
+  .heading-background{
+    .logo{
+      font-size: 8.6vw;
+      line-height: 8.7vw;
+    }
   }
 }
 
@@ -123,7 +136,8 @@
     padding: 30px 15px;
 
     .logo{
-      font-size: 12vw !important;
+      font-size: 12vw;
+      line-height: 12.5vw;
     }
   }
 }
