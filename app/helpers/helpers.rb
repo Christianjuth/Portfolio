@@ -20,10 +20,20 @@ module Helpers
     return :ajax    if request.xhr?
     return :normal
   end
+  
+  def secure
+    if !Sinatra::Application.production? || request.secure?
+      yield
+    else
+      erb :security_warning
+    end
+  end
 
   def if_logged_in
     if @user
-      yield
+      secure do
+        yield
+      end
     else
       erb :"404"
     end

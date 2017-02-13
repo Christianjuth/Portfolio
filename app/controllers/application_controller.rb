@@ -390,11 +390,15 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/login" do
-    erb :login, :layout => :centered_blank_layout
+    secure do
+      erb :login, :layout => :centered_blank_layout
+    end
   end
   
   get "/forgot_password" do
-    erb :forgot_password, :layout => :centered_blank_layout
+    secure do
+      erb :forgot_password, :layout => :centered_blank_layout
+    end
   end
   
   post "/request_password_reset" do
@@ -422,7 +426,9 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/reset_password" do
-    erb :reset_password, :layout => :centered_blank_layout
+    secure do
+      erb :reset_password, :layout => :centered_blank_layout
+    end
   end
   
   post "/reset_password" do
