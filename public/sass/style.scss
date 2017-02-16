@@ -34,27 +34,8 @@ br{
   }
 }
 
-.page{
-  overflow-x: hidden;
-  padding: 30px 0 75px 0;
-
-  &.overflow{
-    overflow-x: visible;
-  }
-
-  img{
-    width: 100%;
-    display: block
-  }
-  
-  a > img{
-    width: auto;
-    display: inline-block;
-  }
-}
-
 .comments{
-  padding: 150px 0 0 0;
+  padding: 100px 0 0 0;
 }
 
 .flex-center-wrap {
@@ -169,4 +150,62 @@ pre{
 @import 'sidebar';
 @import 'section';
 @import 'panel';
-@import 'loader';
+
+.page{
+  overflow-x: hidden;
+  padding: 30px 0 75px 0;
+  position: relative;
+
+  .page-content{
+    position: relative;
+    margin-top: 50px;
+  }
+
+  &.overflow{
+    overflow-x: visible;
+  }
+
+  .page-title,
+  .page-title-lg{
+    position: absolute;
+    width: 100%;
+    top: -50px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .page-title-md{
+    position: absolute;
+    width: 100%;
+    top: -40px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .page-title-sm{
+    position: absolute;
+    width: 100%;
+    top: -38px;
+    margin: 0;
+    padding: 0;
+  }
+
+  img{
+    width: 100%;
+    display: block
+  }
+
+  .btn-link{
+    margin-bottom: 8px;
+  }
+  
+  a > img{
+    width: auto;
+    display: inline-block;
+  }
+
+  &:first-child{
+    padding-top: 0;
+    margin-top: 0;
+  }
+}

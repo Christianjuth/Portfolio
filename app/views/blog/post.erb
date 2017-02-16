@@ -1,18 +1,11 @@
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1">
-    
-    <br>
-    <h1><%= @blog_post.title %></h1>
-    
-    <% if @blog_post.publish %>
-      <p class="text-muted text-center">Published: <%= @blog_post.publish_date.strftime("%m/%d/%Y") %>
-        <% if @blog_post.publish_date.to_date < @blog_post.updated_at.to_date %>
-          - Edited: <%= @blog_post.updated_at.strftime("%m/%d/%Y") %>
-        <% end %>
-      </p>
+<h2 class="page-title-md"><%= @blog_post.title %></h2>
+
+<% if @blog_post.publish %>
+  <p class="text-muted text-center">Published: <%= @blog_post.publish_date.strftime("%m/%d/%Y") %>
+    <% if @blog_post.publish_date.to_date < @blog_post.updated_at.to_date %>
+    - Edited: <%= @blog_post.updated_at.strftime("%m/%d/%Y") %>
     <% end %>
-    
-    <%= RDiscount.new(@blog_post.content).to_html %>
-    
-  </div>
-</div>
+  </p>
+<% end %>
+
+<%= RDiscount.new(@blog_post.content).to_html %>

@@ -1,27 +1,18 @@
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1">
-    
-    <!-- for spacing -->
-    <br>
-    
-    <div class="portfolio-body">
-      <p class="text-muted text-center slim-text">Published: <%= @entry.date.strftime("%m/%d/%Y") %></p>
-      <%= RDiscount.new(@entry.description).to_html %>
-    </div>
-
-  </div>
-
-  <% if @entry.website != "" || @entry.github != "" %>
-    <div class="col-xs-1 sidebar">
-      <% if @entry.website != "" %>
-        <a class="text-black text-center" href="<%= @entry.website %>"><i class="fa fa-compass fa-2x" aria-hidden="true"></i></a>
-      <% end %>
-      <% if @entry.github != "" %>
-        <a class="text-black text-center" href="<%= @entry.github %>"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
-      <% end %>
-    </div>
-  <% end %>
+<div class="portfolio-body">
+  <p class="page-title-sm text-muted text-center slim-text">Published: <%= @entry.date.strftime("%m/%d/%Y") %></p>
+  <%= RDiscount.new(@entry.description).to_html %>
 </div>
+
+<% if @entry.website != "" || @entry.github != "" %>
+  <div class="col-xs-1 sidebar">
+    <% if @entry.website != "" %>
+    <a class="text-black text-center" href="<%= @entry.website %>"><i class="fa fa-compass fa-2x" aria-hidden="true"></i></a>
+    <% end %>
+    <% if @entry.github != "" %>
+    <a class="text-black text-center" href="<%= @entry.github %>"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+    <% end %>
+  </div>
+<% end %>
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Knewave|Heebo:900|Lobster|Pacifico|Permanent+Marker">
 <link rel="stylesheet" href="/css/portfolio.css">

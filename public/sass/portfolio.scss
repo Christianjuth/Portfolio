@@ -14,7 +14,6 @@
   position: relative;
   border: none;
   padding: 15px 0;
-  margin: 0;
   
 
   h1{
@@ -23,11 +22,11 @@
   }
 
   &.header{
-    margin-bottom: 20px;
     cursor: auto;
   }
 
-  *{
+  *,
+  input{
     color: #fff;
   }
 

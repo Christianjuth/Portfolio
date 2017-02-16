@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <%= ERB.new(File.read("./app/views/components/favicon.erb")).result(binding) %>
+  
   <meta name="author" content="Christian Juth">
   <meta name="keywords" content="Christian Juth, Portfolio, Programming, Coding, Music">
   <meta name="description" content="The personal portfolio of Christian Juth">
@@ -11,7 +13,6 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/loaders.css/0.1.2/loaders.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/journal/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -41,17 +42,6 @@
   <!-- Improve Google Ranking  -->
   <h1 class="hidden" style="display:none">Christian Juth</h1>
   
-  <!-- Loader -->
-  <div class="loader hidden">
-    <div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div>
-  </div>
-  <script type="text/javascript">
-    isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)
-    if (isChrome == true) {
-      document.getElementsByClassName("loader")[0].classList.remove("hidden");
-    }
-  </script>
-  
   <% if @user %>
     <%= ERB.new(File.read("./app/views/components/admin_header.erb")).result(binding) %>
   <% end %>
@@ -61,8 +51,12 @@
     <div class="row page">
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
         <%= ERB.new(File.read("./app/views/components/page_header.erb")).result(binding) %>
-        <div class="page-content">
-          <%= yield %>
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <div class="page-content">
+              <%= yield %>
+            </div>
+          </div>
         </div>
         
         <% if @contact == true %>
@@ -70,7 +64,7 @@
         <% end %>
         
         <div class="row">
-          <div class="col-lg-10 col-lg-offset-1">
+          <div class="col-md-10 col-md-offset-1">
             <% if @comments == true %>
               <div class="comments">
                 <%= ERB.new(File.read("./app/views/components/disqus.erb")).result(binding) %>

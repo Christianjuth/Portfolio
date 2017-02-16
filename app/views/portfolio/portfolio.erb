@@ -1,9 +1,8 @@
+<h2 class="page-title text-center">Portfolio</h2>
+
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
-
-    <h1 class="text-center">Portfolio</h1>
-    <br>
-
+    
     <div class="portfolio-timeline">
       <% @portfolio_entries.each do |entry| %>
       <div class="panel panel-primary portfolio-panel" style="border-color: <%= entry.color %>">
@@ -22,7 +21,7 @@
       </div>
       <% end %>
     </div>
-    
+
   </div>
 </div>
 

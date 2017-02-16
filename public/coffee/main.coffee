@@ -157,7 +157,11 @@ $(window).load ->
     localStorage.scrollTop = $(window).scrollTop() + ""
     localStorage.scrollPath = window.location.pathname
   updateScroll = ->
-    if window.location.pathname == localStorage.scrollPath
+    if location.hash != ""
+      setTimeout ->
+        $(window).scrollTop($(location.hash).offset().top)
+      , 1
+    else if window.location.pathname == localStorage.scrollPath
       $(window).scrollTop(localStorage.scrollTop)
   $(window).scroll ->
     saveScroll()

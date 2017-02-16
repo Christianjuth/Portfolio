@@ -20,23 +20,23 @@ h1,h2,h3,h4,h5,h6{
 }
 
 h1{
-  font-size: 45px;
-  margin-bottom: 5px;
+  font-size: 40px;
+  margin: 20px 0 12px 0;
 }
 
 h2{
   font-size: 35px;
-  margin-bottom: 5px;
+  margin: 20px 0 7px 0;
 }
 
 h3{
   font-size: 28px;
-  margin-bottom: 5px;
+  margin: 20px 0 7px 0;
 }
 
 h4{
   font-size: 22px;
-  padding: 17px 0 10px 0;
+  padding: 10px 0;
 }
 
 h5{
@@ -57,12 +57,12 @@ blockquote{
   font-weight: 500;
   font-size: 19px;
   color: $black;
-  line-height: 180%;
+  line-height: 175%;
   letter-spacing: 0.5px;
   padding-bottom: 15px;
   margin: 0;
   border-radius: 3px;
-  
+
   &.slim-text{
     padding-bottom: 5px;
   }
@@ -102,17 +102,22 @@ input[type=text],
 .form-control,
 .form-control[readonly]{
   background-color: $gray;
+  border: 1px solid $gray;
   border-radius: 3px;
   padding: 11px 16px;
-  border: none;
   color: $black;
   height: 45px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 
-  &:focus{
+  &, &:focus{
+    box-shadow: none !important;
     outline: none !important;
+  }
+  
+  &:focus{
+    border-color: $secondary;
   }
 }
 
@@ -151,7 +156,7 @@ table.table{
     background-color: $gray;
     border-bottom: 1px solid $dark-gray;
   }
-  
+
   tr:last-child{
     border: none;
   }
@@ -191,12 +196,12 @@ input[type=tel]{
 hr{
   border-color: $gray;
   border-width: 4px;
-  margin: 6px -15px 12px -15px;
+  margin: 6px -15px;
 }
 
 @media screen and #{$break-tablet-max} {
   hr.secondary{
-    margin: 6px 0 12px 0;
+    margin: 6px 0;
   }
 }
 
@@ -219,7 +224,7 @@ hr{
   pre{
     font-size: 14px;
   }
-  
+
   table,
   table.table{
     th, td,
@@ -228,7 +233,7 @@ hr{
       padding: 15px;
       font-size: 13px;
       max-width:1px;
-      
+
       &:not(.text-right){
         white-space: nowrap;
         text-overflow: ellipsis; 

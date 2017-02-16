@@ -1,48 +1,40 @@
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1">
-    
-    <h1>Home</h1>
+<h1 class="page-title">Home</h1>
 
-    <% if @page %>
-      <%= RDiscount.new(@page.content).to_html %>
-    <% end %>
+<% if @page %>
+<%= RDiscount.new(@page.content).to_html %>
+<% end %>
 
-    <div class="clearfix"></div>
-    <br>
-    <h1>Contact</h1>
-    <% if params[:message_sent] == "true" %>
-      <p class="text-center">Message Sent!</p>
-    <% else %>
-      <br>
-      <form action="/message/submit" method="POST">
-        <div class="row">
-          <div class="form-group col-xs-6">
-            <input class="form-control" name="name" placeholder="Name">
-          </div>
-          <div class="form-group col-xs-6">
-            <input class="form-control" name="email" placeholder="Email">
-          </div>
-          <div class="form-group col-xs-12">
-            <input class="form-control" name="fun_fact" placeholder="Favorite song">
-          </div>
-          <div class="form-group col-xs-12">
-            <textarea class="form-control" name="message" rows="7" placeholder="Message..."></textarea>
-          </div>
-          <div class="form-group col-xs-12">
-            <div class="g-recaptcha form-control" data-sitekey="6LfCEw4UAAAAAD_dZPNTUq8tZGnZ4IJkLtCKaknk"></div>
-          </div>
-          <div class="form-group col-xs-12">
-            <button type="submit" class="btn btn-primary btn-block">Send</button>
-          </div>
-        </div>
-      </form>
-    <% end %>
-    
+<div class="clearfix"></div>
+<h1>Contact</h1>
+<% if params[:message_sent] == "true" %>
+<p class="text-center">Message Sent!</p>
+<% else %>
+<form action="/message/submit" method="POST">
+  <div class="row">
+    <div class="form-group col-xs-12 col-sm-6">
+      <input class="form-control" name="name" placeholder="Name">
+    </div>
+    <div class="form-group col-xs-12 col-sm-6">
+      <input class="form-control" name="email" placeholder="Email">
+    </div>
+    <div class="form-group col-xs-12">
+      <input class="form-control" name="fun_fact" placeholder="Favorite song">
+    </div>
+    <div class="form-group col-xs-12">
+      <textarea class="form-control" name="message" rows="7" placeholder="Message..."></textarea>
+    </div>
+    <div class="form-group col-xs-12">
+      <div class="g-recaptcha form-control" data-sitekey="6LfCEw4UAAAAAD_dZPNTUq8tZGnZ4IJkLtCKaknk"></div>
+    </div>
+    <div class="form-group col-xs-12">
+      <button type="submit" class="btn btn-primary btn-block">Send</button>
+    </div>
   </div>
-  
-  <div class="col-xs-1 sidebar">
-    <a class="text-black text-center" href="https://linkedin.com/in/christianjuth"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
-    <a class="text-black text-center" href="https://github.com/Christianjuth"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
-    <a class="text-black text-center" href="http://codepen.io/christianjuth/"><i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
-  </div>
+</form>
+<% end %>
+
+<div class="col-xs-1 sidebar">
+  <a class="text-black text-center" href="https://linkedin.com/in/christianjuth"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+  <a class="text-black text-center" href="https://github.com/Christianjuth"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+  <a class="text-black text-center" href="http://codepen.io/christianjuth/"><i class="fa fa-codepen fa-2x" aria-hidden="true"></i></a>
 </div>

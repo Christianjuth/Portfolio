@@ -1,32 +1,25 @@
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1">
-    
-    <h1>Portfolio Entries</h1>
-    <a href="#" id="add" class="text-center btn btn-block btn-link" type="fake_submit" action="/portfolio/new_entry">add</a>
-    <br>
-    
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Date</th>
-          <th class="text-right">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @portfolio_entries.each do |entry| %>
-          <tr>
-            <td><%= entry.title %></td>
-            <td><%= entry.date.strftime("%m/%d/%Y") %></td>
-            <td class="text-right">
-              <a href="/portfolio/<%= entry.id %>">View</a>
-              <a href="/portfolio/edit/<%= entry.id %>">Edit</a>
-              <a href="#" type="fake_submit" class="delete" action="/portfolio/delete/<%= entry.id %>">Delete</a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-        
-  </div>
-</div>
+<h2 class="page-title-md">Portfolio Entries</h2>
+<a href="#" id="add" class="text-center btn btn-block btn-link" type="fake_submit" action="/portfolio/new_entry">add</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Date</th>
+      <th class="text-right">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @portfolio_entries.each do |entry| %>
+    <tr>
+      <td><%= entry.title %></td>
+      <td><%= entry.date.strftime("%m/%d/%Y") %></td>
+      <td class="text-right">
+        <a href="/portfolio/<%= entry.id %>">View</a>
+        <a href="/portfolio/edit/<%= entry.id %>">Edit</a>
+        <a href="#" type="fake_submit" class="delete" action="/portfolio/delete/<%= entry.id %>">Delete</a>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
