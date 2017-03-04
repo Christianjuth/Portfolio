@@ -10,6 +10,8 @@
 
 # The Portfolio of Christian Juth [![Build Status](https://travis-ci.org/Christianjuth/Portfolio.svg?branch=master)](https://travis-ci.org/Christianjuth/Portfolio) [![Stories in Ready](https://badge.waffle.io/Christianjuth/portfolio.svg?label=ready&title=Issues)](http://waffle.io/Christianjuth/sinatra-startpoint) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3e5abf687cfc495a93cafd274074fa39)](https://www.codacy.com/app/cjuth2/Portfolio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Christianjuth/Portfolio&amp;utm_campaign=Badge_Grade)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Christianjuth/portfolio.svg)](https://greenkeeper.io/)
+
 ChristianJuth.com is a Sinatra web app that incorporates GruntJS, TravisCI, and many other technologies to create a seamless development to production environment. Installing the project is as simple as cloning the git repo and running `npm install`. Once all the desired updates are made, the project is committed and pushed to Github. From there Travis picks up the commit, tests it using cucumber, and pushes it off to Heroku. This makes it very easy to allow other people to work on the project without having to learn how to use Heroku, and it ensures the application still works before it gets deployed.
 
 ### Behind the Scenes
