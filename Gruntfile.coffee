@@ -37,13 +37,6 @@ module.exports = (grunt)->
         cwd: "public/js"
         src: "**/*.js"
         dest: "public/js"
-    cssmin:
-      files:
-        expand: true
-        cwd: "public/css"
-        src: ["*.css", "!*.min.css"]
-        dest: "public/css"
-        ext: ".css"
     compress:
       main:
         options:
@@ -68,4 +61,4 @@ module.exports = (grunt)->
   # Default task(s).
   grunt.registerTask("default", ["sass", "coffee", "watch"])
   grunt.registerTask("once", ["sass", "coffee"])
-  grunt.registerTask("production", ["sass", "coffee", "uglify", "cssmin", "imagemin", "compress", "clean"])
+  grunt.registerTask("production", ["sass", "coffee", "uglify", "imagemin", "compress", "clean"])
