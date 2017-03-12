@@ -23,11 +23,14 @@ class ApplicationController < CoreController
   include Helpers
   include Recaptcha::Verify
 
+  # ----- Configure -----
+  recaptcha_site_key = ""
   Recaptcha.configure do |config|
     if ApiVerification.exists?({name: "recaptcha"})
-      api = ApiVerification.find_by({name: "recaptcha"})
-      config.site_key = api.key
-      config.secret_key = api.secret
+      recaptcha = ApiVerification.find_by({name: "recaptcha"})
+      config.site_key = recaptcha.key
+      config.secret_key = recaptcha.secret
+      recaptcha_site_key = config.site_key
     end
   end
 
@@ -622,25 +625,29 @@ class ApplicationController < CoreController
   # pass @user as the current user into the
   # requested view
   before do
+    if recaptcha_site_key
+      @recaptcha_key = recaptcha_site_key
+    else
+      @recaptcha_key = ""
+    end
     @production = Sinatra::Application.production?
     # Force the user to login before using the app
     force_login_page = false
-    exceptions = ["/login"]
+    exceptions = ["/login", "/forgot_password", "/reset_password"]
+    file_exceptions = []
     # Check the session and database for current user
     # !session[:user_id] to prevent session[:user_id] undefined
-    if (!session[:user_id] || !User.exists?(session[:user_id])) && !exceptions.include?(request.path)
+    if (!session[:user_id] || !User.exists?(session[:user_id]))
       session.destroy
-      redirect "/login" if force_login_page
-    elsif !["/login"].include?(request.path)
+      if !exceptions.include?(request.path) && !file_exceptions.include?(request.path.split(".")[-1])
+        redirect "/login" if force_login_page
+      end
+    else
       @user = User.find(session[:user_id])
     end
     @comments = false
     @host = request.base_url
-    if ApiVerification.exists?({name: "recaptcha"})
-      @recaptcha_key = ApiVerification.find_by({name: "recaptcha"}).key
-    else
-      @recaptcha_key = ""
-    end
+    @lightning = false
     @disqus_url = @production ? "christianjuth.disqus.com" : "development-4.disqus.com"  
   end
 end

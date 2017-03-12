@@ -5,14 +5,15 @@ os:
 - linux
 node_js:
 - 5.0.0
+cache: 
+- bundler
+- node_modules
 before_install:
 - "./core/scripts/travis-install.sh"
-- brew install openssl --force || true
-- brew install readline --force || true
 - rvm install 2.3.3
 - gem install bundler
 install:
-- npm install
+- npm install || true
 - ./node_modules/.bin/grunt production
 before_deploy:
 - rm -rf .bundle/
