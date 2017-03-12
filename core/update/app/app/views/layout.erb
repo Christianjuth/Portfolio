@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= ERB.new(File.read("./app/views/components/favicon.erb")).result(binding) %>
+  
+  <meta name="author" content="Christian Juth">
+  <meta name="keywords" content="Christian Juth, What by What">
+  <meta name="description" content="Google, but for photo dimentions.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+  <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon"/>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="<%= @host %>/blog/rss">
+  <title>What by What</title>
+
+  <!-- Stylesheets -->
+  <%= ERB.new(File.read("./app/views/components/stylesheets.erb")).result(binding) %>
+
+  <!-- Scripts -->
+  <%= ERB.new(File.read("./app/views/components/scripts.erb")).result(binding) %>
+  
+  <%= ERB.new(File.read("./app/views/components/open_graph.erb")).result(binding) %>
+</head>
+<body>
+  <!-- Improve Google Ranking  -->
+  <h1 class="hidden" style="display:none">Christian Juth</h1>
+  
+  <% if @user %>
+    <%= ERB.new(File.read("./app/views/components/admin_header.erb")).result(binding) %>
+  <% end %>
+  
+  <div class="page page-padding">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  
+  <% if Sinatra::Base.production? && defined?(@user).nil? %>
+    <%= ERB.new(File.read("./app/views/components/analytics.erb")).result(binding) %>
+  <% end %>
+</body>
+</html>

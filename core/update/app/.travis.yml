@@ -1,0 +1,27 @@
+language: node_js
+sudo: required
+dist: trusty
+os:
+- linux
+node_js:
+- 5.0.0
+before_install:
+- "./lib/scripts/travis-install.sh"
+- brew install openssl --force || true
+- brew install readline --force || true
+- rvm install 2.4.0
+- gem install bundler
+install:
+- npm install
+- ./node_modules/.bin/grunt production
+before_deploy:
+- rm -rf .bundle/
+deploy:
+  provider: heroku
+  app: whatbywhat
+  skip_cleanup: true
+  run: rake db:migrate
+  on:
+    repo: Christianjuth/whatbywhat
+  api_key:
+    secure: LcObwjfLRhd05sLVqFnZlJFuVuwY1yYC3FmXZ8/Xy5ruErATHwkm8r07xRNDjoC/en1ZwLqGrPtwgWVAUc+/f/sDrfg14VLDdNErRf9YyUgtbx1gyiUYNahvza8T1/tTgk4RXFraQKrA00sYHPs1J9hoSGar4RPAm6k+GrACLYMus3+AHDj0XJETA9ACGLydpNagvlFGi9V6oig7BmNaQNRPR6Zl+N1SAzb+zw51NBf/KLaCgEDrwoVJJFT5Qxyjfx6cFiV8+AriHCJcKPJgtd6Z/TTK0ZAHYIUZiYQ89R++k7sNbMPhvkVTJGNfKAY7Z/qWVXlnQ1zNF++l7/hkPaGoOobAB55/CZe4fMQx6x6afaVX1cZF0iCbOMgL2omG/FNgh74AFD8cvDwUPYaasGq/eGga+yLYpwd34xU9D73Tbu7MpdyBuCXpatJ6mhkTs6nGOXRmuU/IL80puD+EYD4K5lxnDXA1KhnZFVCeRMRXK0fwXgKTpa/yPOq5dTiZPlRf/sS8Gh/J2Ya/qrXgp5/WE0GR3IlH1BOGUwDWEMU/YGY9Bki0/jYoz/NOnlJItC/K36x0JIThugXorfYBsNb0dRKv8kjAdcHvskOJzeLDnNzcRF/6J68Ev7G7vMXqyE4wbu1sekN9V2idl2Ql19O1NeyVbyvNZKrK6bgY0WY=

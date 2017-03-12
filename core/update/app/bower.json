@@ -1,0 +1,12 @@
+{
+  "name": "whatbywhat",
+  "version": "0.1.0",
+  "homepage": "https://www.whatbywhat.com",
+  "authors": [
+    "Christian Juth <cjuth2@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "css-ripple-effect": "^1.0.1"
+  }
+}

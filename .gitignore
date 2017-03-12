@@ -3,7 +3,7 @@ npm-debug.log
 .bundle
 .sass-cache
 .DS_Store
-.github-token
+.codacy-token
 
 public/css
 public/js

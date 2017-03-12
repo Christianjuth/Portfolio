@@ -1,8 +1,13 @@
-# Setup environment
-require "./config/environment"
+# Setup Environment
+require "./core/config/environment"
+configure = JSON.parse(File.read("./configure.json"))
 
-# Require helpers
+# Require Helpers
+require "./core/helpers/helpers"
 require "./app/helpers/helpers"
+
+# Requrie Core Controller
+require "./core/controllers/core_controller"
 
 # Require models
 require "./app/models/user"
@@ -13,28 +18,27 @@ require "./app/models/page"
 require "./app/models/blog_post"
 require "./app/models/portfolio_entry"
 
-Recaptcha.configure do |config|
-  if ApiVerification.exists?({name: "recaptcha"})
-    api = ApiVerification.find_by({name: "recaptcha"})
-    config.site_key = api.key
-    config.secret_key = api.secret
-  end
-end
-
-if ApiVerification.exists?({name: "cloudinary"})
-  Cloudinary.config do |config|
-    config.cloud_name = "christianjuth-juth"
-    config.api_key = ApiVerification.find_by({name: "cloudinary"}).key
-    config.api_secret = ApiVerification.find_by({name: "cloudinary"}).secret
-    config.cdn_subdomain = true
-  end
-end
-
-# Set routs
-class ApplicationController < Sinatra::Base
+# Set Routs
+class ApplicationController < CoreController
   include Helpers
-  include Recaptcha::ClientHelper
   include Recaptcha::Verify
+
+  Recaptcha.configure do |config|
+    if ApiVerification.exists?({name: "recaptcha"})
+      api = ApiVerification.find_by({name: "recaptcha"})
+      config.site_key = api.key
+      config.secret_key = api.secret
+    end
+  end
+
+  if ApiVerification.exists?({name: "cloudinary"})
+    Cloudinary.config do |config|
+      config.cloud_name = "christianjuth-juth"
+      config.api_key = ApiVerification.find_by({name: "cloudinary"}).key
+      config.api_secret = ApiVerification.find_by({name: "cloudinary"}).secret
+      config.cdn_subdomain = true
+    end
+  end
   
   # This routs the home page to the template
   get "/" do
@@ -391,13 +395,17 @@ class ApplicationController < Sinatra::Base
 
   get "/login" do
     secure do
-      erb :login, :layout => :centered_blank_layout
+      unless_logged_in do
+        erb :login, :layout => :centered_blank_layout
+      end
     end
   end
   
   get "/forgot_password" do
     secure do
-      erb :forgot_password, :layout => :centered_blank_layout
+      unless_logged_in do
+        erb :forgot_password, :layout => :centered_blank_layout
+      end
     end
   end
   
@@ -427,7 +435,9 @@ class ApplicationController < Sinatra::Base
   
   get "/reset_password" do
     secure do
-      erb :reset_password, :layout => :centered_blank_layout
+      unless_logged_in do
+        erb :reset_password, :layout => :centered_blank_layout
+      end
     end
   end
   
@@ -626,6 +636,11 @@ class ApplicationController < Sinatra::Base
     end
     @comments = false
     @host = request.base_url
+    if ApiVerification.exists?({name: "recaptcha"})
+      @recaptcha_key = ApiVerification.find_by({name: "recaptcha"}).key
+    else
+      @recaptcha_key = ""
+    end
     @disqus_url = @production ? "christianjuth.disqus.com" : "development-4.disqus.com"  
   end
 end

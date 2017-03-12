@@ -1,0 +1,33 @@
+// sizes
+$computer:                     1200px;
+$medium-computer:              992px;
+$tablet:                       768px;
+$phone:                        0px;
+
+$prefixes:                     webkit moz;
+
+// colors
+$white:                        #fffefe;
+$black:                        #222;
+$primary:                      #6379C1;
+$dark-primary:                 #d05c58;
+$hover-primary:                #E74B47;
+$secondary:                    #2980b9;
+$dark-secondary:               #1a5588;
+$gray:                         #f2eff2;
+$dark-gray:                    #e6e6e6;
+
+// media rule
+$break-computer:               #{' (min-width: ' $computer ')'};
+$break-medium-computer:        #{' (min-width: ' $medium-computer ') and (max-width: ' $computer - 1 ')'};
+$break-tablet:                 #{' (min-width: ' $tablet ') and (max-width: ' $medium-computer - 1 ')'};
+$break-phone:                  #{' (min-width: ' $phone ') and (max-width: ' $tablet - 1 ')'};
+
+$break-computer-min:           #{' (min-width: ' $computer ')'};
+$break-medium-computer-min:    #{' (min-width: ' $medium-computer ')'};
+$break-tablet-min:             #{' (min-width: ' $tablet ')'};
+$break-phone-min:              #{' (min-width: ' $phone ')'};
+
+$break-medium-computer-max:    #{' (max-width: ' $medium-computer - 1 ')'};
+$break-tablet-max:             #{' (max-width: ' $computer - 1 ')'};
+$break-phone-max:              #{' (max-width: ' $tablet - 1 ')'};

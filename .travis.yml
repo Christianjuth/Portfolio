@@ -2,20 +2,18 @@ language: node_js
 sudo: required
 dist: trusty
 os:
-- osx
+- linux
 node_js:
 - 5.0.0
 before_install:
-- "./travis/install-qt.sh"
+- "./core/scripts/travis-install.sh"
 - brew install openssl --force || true
 - brew install readline --force || true
-- rvm install 2.3.3
+- rvm install 2.3.1
 - gem install bundler
 install:
-- npm install -g grunt-cli
-- npm install -g bower
 - npm install
-- grunt production
+- ./node_modules/.bin/grunt production
 before_deploy:
 - rm -rf .bundle/
 deploy:

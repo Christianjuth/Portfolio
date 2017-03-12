@@ -16,11 +16,12 @@ gem "cloudinary"
 require "rss"
 
 group :development, :test do
-  gem "shotgun"
   gem "pry"
   gem "tux"
   gem "sqlite3"
   gem "sass"
+  gem "sinatra-contrib", require: "sinatra/reloader"
+  gem "thin"
 end
 
 group :test do

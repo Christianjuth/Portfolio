@@ -1,0 +1,154 @@
+@import 'variables';
+@import 'mixins';
+
+body, html{
+  margin: 0;
+  padding: 0;    
+}
+
+html{
+  height: 100%;
+}
+
+body{
+  min-height: 100%;
+  overflow-x: hidden;
+  background: #348AC7; /* fallback for old browsers */
+  background: linear-gradient(to bottom right, #348AC7, #7474bf 70%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+br{
+  height: 10px;
+}
+
+.menu.row,
+.header .row,
+.row.no-margin{
+  margin-left: -1px;
+  margin-right: -1px;
+
+  & > a,
+  & > a:hover{
+    text-decoration: none;
+  }
+
+  & > a,
+  & > div{
+    padding: 0px;
+  }
+}
+
+.comments{
+  padding: 100px 0 0 0;
+}
+
+.flex-center-wrap {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center{
+  position: relative;
+  max-height: 80vh;
+  width: 454px;
+  max-width: 100vw;
+}
+
+.panel-body > *:first-child{
+  margin: 0;
+}
+
+.inline-form{
+  .btn{
+    margin: 0;
+  }
+}
+
+.g-recaptcha,
+.g-recaptcha.form-control{
+  height: auto;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// load components
+@import 'text';
+@import 'header';
+@import 'panel';
+@import 'ripple';
+
+.page{
+  overflow-x: hidden;
+  padding: 20px 0;
+
+  &.page-padding{
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+
+  .btn-link,
+  a:not(.btn){
+    text-decoration: underline;
+  }
+
+  .btn{
+    font-size: 17px;
+  }
+
+  .search{
+    border-radius: 0;
+  }
+}
+
+.list-group{
+  border: none;
+  border-radius: 3px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+
+  .search-results,
+  .search-results *{
+    transition: max-height 1s;
+    transition: height 1s;
+  }
+
+  .list-group-item{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+
+    &.search-container{
+      border-bottom: 2px solid $primary;
+    }
+
+    input{
+      width: 100%;
+    }
+  }
+}
+
+@media screen and #{$break-phone} {
+  .page{
+    width: 100%;
+    padding: 20px;
+  }
+}

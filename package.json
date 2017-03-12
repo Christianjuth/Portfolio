@@ -4,12 +4,17 @@
   "description": "Sinatra startpoint",
   "main": "index.js",
   "scripts": {
-    "postinstall": "brew install Caskroom/cask/wkhtmltopdf && bundle install --without production && npm run migrate && npm run seed && bower install && grunt once && ls db/",
-    "migrate": "bundle exec rake db:migrate_databases",
-    "seed": "bundle exec rake db:seed",
-    "test": "source ./travis/setup-codacy.sh && bundle exec cucumber",
-    "stop": "kill -9 $(lsof -i tcp:3000 | tail -n 1 | perl -lne 'print $& if /(?<=ruby)\\s+[0-9]+/i')",
-    "start": "grunt once && shotgun -o 0.0.0.0 -p 3000"
+    "postinstall": "./core/scripts/npm-postinstall.sh",
+    "start": "npm run app-start --silent",
+    "stop": "npm run app-stop --silent",
+    "test": "npm run app-test --silent",
+    "app-start": "./core/scripts/app-start.sh",
+    "app-stop": "./core/scripts/app-stop.sh",
+    "app-test": "./core/scripts/app-test.sh",
+    "app-update": "./core/scripts/app-update.sh",
+    "app-upgrade": "./core/scripts/app-upgrade.sh",
+    "app-migrate": "bundle exec rake db:migrate_databases",
+    "app-seed": "bundle exec rake db:seed"
   },
   "repository": {
     "type": "git",

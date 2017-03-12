@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2>Standards</h2>
+    <a href="#" id="add" class="text-center btn btn-block btn-link" type="fake_submit" action="/standards/new">add</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Dimensions</th>
+          <th class="text-right">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @standards.each do |standard| %>
+          <tr>
+            <td><%= standard.title %></td>
+            <td><%= standard.height %> x <%= standard.width %></td>
+            <td class="text-right">
+              <a href="/standards/edit/<%= standard.id %>">Edit</a>
+              <a href="#" type="fake_submit" class="delete" action="/standards/delete/<%= standard.id %>">Delete</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 # Require helpers
 require "./app/helpers/helpers"
+require "./core/helpers/helpers"
 
 class User < ActiveRecord::Base
   include Helpers

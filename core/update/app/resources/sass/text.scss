@@ -1,0 +1,309 @@
+body{
+  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+}
+
+.btn,
+.navbar,
+h1,h2,h3,h4,h5,h6{
+  font-weight: 300;
+}
+
+h1,h2,h3,h4,h5,h6{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: $white;
+  font-weight: 300;
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+}
+
+h1{
+  font-size: 60px;
+  font-weight: bold;
+  line-height: 75px;
+  margin: 20px 0 12px 0;
+  font-family: 'Paytone One', sans-serif;
+}
+
+h2{
+  font-size: 35px;
+  font-weight: bold;
+  margin: 20px 0 7px 0;
+}
+
+h3{
+  font-size: 30px;
+  font-weight: bold;
+  margin: 20px 0 7px 0;
+}
+
+h4{
+  font-size: 18px;
+  font-weight: 400;
+  padding: 4px 0;
+}
+
+h5{
+  font-size: 15px;
+  font-weight: 400;
+  padding: 4px 0;
+}
+
+h6{
+  font-size: 15px;
+  padding: 0;
+}
+
+p, a,
+.btn-link,
+.page li{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 175%;
+  letter-spacing: 0.5px;
+  padding-bottom: 15px;
+  margin: 0;
+  border-radius: 3px;
+  
+  &, &:hover{
+    color: $white;
+  }
+
+  &.slim-text{
+    padding-bottom: 5px;
+  }
+
+  &.indent{
+    text-indent: 50px;
+  }
+}
+
+.panel,
+.list-group{
+  h1,h1,h2,h4,h5,h6,p,
+  .btn-link,
+  a:not(.btn),
+  .page li,
+  .footer li{
+    &, &:hover{
+      color: $black;
+    }
+  }
+}
+
+.page p:not(.text-center),
+.page li,
+.page blockquote{
+  text-align: justify;
+}
+
+blockquote{
+  background-color: $gray;
+  border: none;
+  padding: 20px 30px;
+  min-height: 175px;
+
+  *{
+    text-align: left;
+  }
+}
+
+a{
+  cursor: pointer;
+}
+
+.text-black{
+  color: $black;
+}
+
+textarea,
+input[type=text],
+.form-control,
+.form-control[readonly]{
+  font-size: 20px;
+  line-height: 20px;
+  background-color: $gray;
+  border: 1px solid $gray;
+  border-radius: 3px;
+  padding: 12px 16px;
+  color: $black;
+  height: 45px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  &.no-border{
+    border: none;
+  }
+
+  &, &:focus{
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  &:focus{
+    border-color: rgba(73,100,173, 1);
+  }
+}
+
+textarea,
+textarea.form-control{ 
+  resize: vertical;
+}
+
+.form-control .icheckbox_square-red{
+  float: right;
+}
+
+thead{
+  background-color: $gray;
+  border-bottom: 1px solid $dark-gray;
+}
+
+table,
+table.table{
+  overflow: hidden;
+  border-bottom: 1px solid $dark-gray;
+  margin-bottom: 5px;
+  
+  *{
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  th,
+  td,
+  thead tr th,
+  tbody tr td{
+    color: $black;
+    padding: 10px 18px;
+    font-size: 17px;
+  }
+
+  tr,
+  thead tr,
+  tbody tr{
+    background-color: $gray;
+    border-bottom: 1px solid $dark-gray;
+  }
+
+  tr:last-child{
+    border: none;
+  }
+
+  td.text-right a{
+    color: $black;
+    margin: 0 0 0 10px;
+    padding: 0; 
+  }
+}
+
+.btn{
+  border-radius: 3px;
+}
+
+.page .btn:not(.btn-link){
+  padding: 11px 15px;
+}
+
+.input-phone,
+input[type=tel]{
+  font-size: 12.7px;
+  letter-spacing: -.3px;
+  font-family: 'Droid Sans Mono', monospace;
+}
+
+.page ul,
+.footer ul{
+  margin: 5px 0 -6px 0;
+  padding: 0;
+
+  li{
+    display: block;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+hr{
+  border: solid 1px $gray;
+  margin: 6px -15px;
+}
+
+.brand,
+.brand:visited{
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  bottom: 5px;
+  right: 10px;
+  text-decoration: none;
+  color: rgba(0,0,0,0.3);
+  font-size: 14px;
+  font-family: 'Pacifico', cursive;
+}
+
+.brand:hover{
+  color: rgba(0,0,0,0.3);
+  text-decoration: underline;
+}
+
+@media screen and #{$break-tablet-max} {
+  hr.secondary{
+    margin: 6px 0;
+  }
+}
+
+@media screen and #{$break-phone} {
+   h1{
+     font-size: calc(10vw);
+     line-height: calc(10vw + 8px);
+   }
+  
+  .page p:not(.text-center),
+  .page li,
+  .footer li,
+  .page blockquote{
+    text-align: left;
+  }
+
+  blockquote{
+    min-height: 250px;
+  }
+
+  pre{
+    font-size: 14px;
+  }
+
+  table,
+  table.table{
+    th, td,
+    thead tr th,
+    tbody tr td{
+      padding: 15px;
+      font-size: 13px;
+      max-width:1px;
+
+      &:not(.text-right){
+        white-space: nowrap;
+        text-overflow: ellipsis; 
+        overflow: hidden; 
+      }
+    }
+  }
+}
+
+.sweet-alert{
+  *:not(.btn),
+  *:not(.btn):hover,
+  .btn-link,
+  .btn-link:hover{
+    color: $black;
+  }
+}
+

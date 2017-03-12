@@ -1,0 +1,74 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2 class="page-title text-center">Settings</h2>
+    
+    <hr class="secondary">
+    <a href="#" type="fake_submit" class="btn btn-primary btn-block" action="/standards/sync_algolia">Sync Algolia</a>
+
+    <hr class="secondary">
+    <h4 class="text-center">Account Info</h4>
+    <% if !@user.phone_number_verified && @user.phone_number != "" %>
+    <a href="#" type="fake_submit" class="btn btn-link btn-info btn-block" action="/phone/resend_verification/<%= @user.id %>">Phone number is not verified. Resend Code <i class="fa fa-repeat" aria-hidden="true"></i></a>
+    <% else %>
+    <% end %>
+    <form action="/user/update/<%= @user.id %>" method="POST">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6">
+          <input type="text" name="username" class="form-control" placeholder="Username" value="<%= @user.username %>" required>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6">
+          <input type="tel" name="phone_number" class="input-phone form-control" placeholder="Phone" value="<%= @user.phone_number %>" required>
+        </div>
+        <div class="form-group col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block">Update User</button>
+        </div>
+      </div>
+    </form>
+
+    <hr class="secondary">
+    <h4 class="text-center">Change Password</h4>
+    <form action="/user/change_password" method="POST">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6">
+          <input type="password" name="new_password" class="form-control" placeholder="New Password" required>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6">
+          <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+        </div>
+        <div class="form-group col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block">Update Password</button>
+        </div>
+      </div>
+    </form>
+
+    <hr class="secondary">
+    <h5 class="text-center">API Integrations</h5>
+
+    <a href="#" class="btn btn-block btn-link" type="fake_submit" action="/api_verification/new_api_verification">add</a>
+
+    <% @api_verification.each do |api| %>
+    <form class="inline-form" action="/api_verification/update/<%= api.id %>" method="POST">
+      <div class="row">
+        <div class="form-group col-xs-3">
+          <input type="text" name="name" class="form-control" placeholder="name" value="<%= api.name %>" required>
+        </div>
+        <div class="form-group col-xs-3">
+          <input type="text" name="key" class="form-control" placeholder="key" value="<%= api.key %>">
+        </div>
+        <div class="form-group col-xs-3">
+          <input type="text" name="secret" class="form-control" placeholder="secret" value="<%= api.secret %>">
+        </div>
+        <div class="form-group col-xs-3">
+          <a href="#" class="inline-delete btn btn-block btn-primary delete" type="fake_submit" action="/api_verification/delete/<%= api.id %>">Delete</a>
+          <button type="submit" class="inline-update hidden btn btn-block btn-info">Update</button>
+        </div>
+      </div>
+    </form>
+    <% end %>
+
+    <hr class="secondary">
+    <h4 class="text-center">About</h4>
+    <p class="text-center">Application running Ruby <%= RUBY_VERSION %> - Travis <a href="https://travis-ci.org/Christianjuth/Portfolio"><img src="//travis-ci.org/Christianjuth/whatbywhat.svg?branch=master"></a></p>
+
+  </div>
+</div>
