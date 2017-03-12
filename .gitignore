@@ -4,6 +4,7 @@ npm-debug.log
 .sass-cache
 .DS_Store
 .codacy-token
+core/update
 
 public/css
 public/js
