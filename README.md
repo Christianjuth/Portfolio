@@ -10,56 +10,74 @@
 
 # The Portfolio of Christian Juth [![Build Status](https://travis-ci.org/Christianjuth/Portfolio.svg?branch=master)](https://travis-ci.org/Christianjuth/Portfolio) [![Stories in Ready](https://badge.waffle.io/Christianjuth/portfolio.svg?label=ready&title=Issues)](http://waffle.io/Christianjuth/sinatra-startpoint) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3e5abf687cfc495a93cafd274074fa39)](https://www.codacy.com/app/cjuth2/Portfolio?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Christianjuth/Portfolio&amp;utm_campaign=Badge_Grade)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Christianjuth/portfolio.svg)](https://greenkeeper.io/)
+
 ChristianJuth.com is a Sinatra web app that incorporates GruntJS, TravisCI, and many other technologies to create a seamless development to production environment. Installing the project is as simple as cloning the git repo and running `npm install`. Once all the desired updates are made, the project is committed and pushed to Github. From there Travis picks up the commit, tests it using cucumber, and pushes it off to Heroku. This makes it very easy to allow other people to work on the project without having to learn how to use Heroku, and it ensures the application still works before it gets deployed.
 
 ### Behind the Scenes
 ChristianJuth.com is a complex Sinatra application based on another project I created [Sinatra Start Point](https://github.com/Christianjuth/sinatra-start-point). Sinatra Start Point is the foundation for every Sinatra project I create. Currently, I have made a bunch of improvements to ChristianJuth.com that I intend to merge back into Sinatra Start Point. After every project I build I assess what makes it better than the last and merge that into Sinatra Start Point. This workflow ensures each project I create is better than the last.
 
-# Getting Started
+### Quickstart Guide
+
+##### 1. Get the Code
 Clone the repository
 
-### Setup environment
+##### 2. Setup environment
 Requirements
-* [Ruby v2 and Rubygems](https://rvm.io/) _(via RVM recommended)_
+* [Ruby v2](https://rvm.io/) _(via RVM recommended)_
 * [Bundler](http://bundler.io/)
-* [NodeJS & NPM](https://nodejs.org/en/)
-* [GruntJS](http://gruntjs.com)
-* [Bower](http://bower.io/)
+* [NodeJS](https://nodejs.org/en/)
 
 ```shell
   # install node modules and gems
   npm install
 ```
-_This command runs `bundle install` so you do not have to run that yourself._
+_No need to run `bundle install`, npm postinstall handels that._
 
-### Running Sinatra
+##### 3. Running the Project
 ```shell
-  # this command starts shotgun on port 3000
+  # starts the development server on port 3000
   npm start
-
-  # this command force stops shotgun
-  npm stop
+  
+  # or
+  npm start port
 ```
+
+(click control c to quit)
 
 ### Database
 ```shell
   # migrate database
-  npm run migrate
-```
-
-### Compiling
-```shell
-  # compile once
-  grunt once
-
-  # continuous compiling
-  grunt
+  npm run app-migrate
+  
+  # seed database
+  npm run app-seed
 ```
 
 ### Testing
 Create a file in the root of the repository called `.github-token` and paste your Github token inside. This will enable Codacy coverage.
 
-```
+```shell
   # test using mocha
   npm test
+  
+  # or
+  npm test specific_feature
+```
+
+### All Commands
+```shell
+  # shortcuts
+  npm start
+  npm stop
+  npm test
+  
+  # full commands
+  npm run app-start
+  npm run app-stop
+  npm run app-test
+  npm run app-update
+  npm run app-upgrade
+  npm run app-migrate
+  npm run app-seed
 ```
