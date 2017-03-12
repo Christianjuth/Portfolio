@@ -1,6 +1,8 @@
 ENV["RACK_ENV"] = "test"
 
 require "bundler"
+require "capybara/cucumber"
+require "capybara-screenshot/cucumber"
 require "sinatra"
 Bundler.require(:default, Sinatra::Application.environment)
 require "#{Dir.pwd}/db/seeds"
@@ -20,13 +22,13 @@ Capybara::Webkit.configure do |config|
 end
 
 Capybara::Webkit.configure do |config|
-    
-  end
+end
+
 Capybara::Screenshot.autosave_on_failure = true
 Capybara::Screenshot.prune_strategy = :keep_last_run
 Capybara::Screenshot.webkit_options = { width: 1024, height: 768 }
 Capybara.save_path = "../screenshots/"
-Capybara.default_wait_time = 10
+Capybara.default_max_wait_time = 20
 
 class MinitestWorld
   extend Minitest::Assertions
@@ -36,12 +38,12 @@ class MinitestWorld
     self.assertions = 0
   end
 end
- 
+
 World do
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
   seed()
-  
+
   MinitestWorld.new
   Capybara.app = ApplicationController
 end

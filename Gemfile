@@ -26,8 +26,8 @@ end
 
 group :test do
   gem "cucumber"
-  gem "capybara", require: "capybara/cucumber"
-  gem "capybara-screenshot", require: "capybara-screenshot/cucumber"
+  gem "capybara", :require => false
+  gem "capybara-screenshot", :require => false
   gem "capybara-webkit"
   gem "minitest", require: "minitest/spec"
   gem "codacy-coverage"
