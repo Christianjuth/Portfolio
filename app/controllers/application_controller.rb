@@ -213,7 +213,6 @@ class ApplicationController < CoreController
     end
   end
   
-  
   get "/blog/image/:id.png" do
     if BlogPost.exists?({id: params[:id]}) && BlogPost.find(params[:id]).publish
       content_type "png"
