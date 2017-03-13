@@ -10,10 +10,9 @@ cache:
   directories:
     - node_modules
     - .sass-cache
-    - ~/travis/.rvm/rubies/ruby-2.3.3
+    - ~/travis/.rvm/
 before_install:
-- "./core/scripts/travis-install.sh"
-- ls ~/
+- ./core/scripts/travis-install.sh
 - rvm install 2.3.3
 - gem install bundler
 install:
