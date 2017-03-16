@@ -17,7 +17,7 @@ require "rss"
 
 group :development, :test do
   gem "tty"
-  gem "github_api"
+  gem "github_api", ">=0.14.5"
   gem "simplecov"
   gem "codacy-coverage"
   gem "tux"
