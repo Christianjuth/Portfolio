@@ -16,7 +16,10 @@ gem "cloudinary"
 require "rss"
 
 group :development, :test do
-  gem "pry"
+  gem "tty"
+  gem "github_api"
+  gem "simplecov"
+  gem "codacy-coverage"
   gem "tux"
   gem "sqlite3"
   gem "sass"
@@ -30,8 +33,6 @@ group :test do
   gem "capybara-screenshot", :require => false
   gem "capybara-webkit"
   gem "minitest", require: "minitest/spec"
-  gem "codacy-coverage"
-  gem "simplecov"
 end
 
 group :production do

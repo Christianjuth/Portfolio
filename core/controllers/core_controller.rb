@@ -1,6 +1,8 @@
 class CoreController < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
+    also_reload "app/**/*.rb"
+    dont_reload "lib/**/*.rb"
   end
   
   include CoreHelpers

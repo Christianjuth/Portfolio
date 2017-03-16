@@ -11,4 +11,3 @@ awk "/→/" <<< "$(./node_modules/.bin/npm-check-updates -u)"
 printf "\nBower:\n"
 awk "/→/" <<< "$(./node_modules/.bin/npm-check-updates -m bower -u)"
 bower update &> /dev/null
-printf "\n"

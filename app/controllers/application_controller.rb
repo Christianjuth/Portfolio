@@ -1,6 +1,6 @@
 # Setup Environment
 require "./core/config/environment"
-configure = JSON.parse(File.read("./configure.json"))
+configure = JSON.parse(File.read("./apollo.json"))
 
 # Require Helpers
 require "./core/helpers/helpers"

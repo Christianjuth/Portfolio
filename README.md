@@ -55,7 +55,7 @@ _No need to run `bundle install`, npm postinstall handels that._
 ```
 
 ### Testing
-Create a file in the root of the repository called `.github-token` and paste your Github token inside. This will enable Codacy coverage.
+Create a file in the root of the repository called `.codacy-token` and paste your Github token inside. This will enable Codacy coverage.
 
 ```shell
   # test using mocha
@@ -80,4 +80,7 @@ Create a file in the root of the repository called `.github-token` and paste you
   npm run app-upgrade
   npm run app-migrate
   npm run app-seed
+  
+  # upgrade Apollo
+  npm run apollo-upgrade
 ```

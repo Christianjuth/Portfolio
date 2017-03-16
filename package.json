@@ -14,7 +14,8 @@
     "app-update": "./core/scripts/app-update.sh",
     "app-upgrade": "./core/scripts/app-upgrade.sh",
     "app-migrate": "bundle exec rake db:migrate_databases",
-    "app-seed": "bundle exec rake db:seed"
+    "app-seed": "bundle exec rake db:seed",
+    "apollo-upgrade": "ruby ./core/scripts/apollo-upgrade.rb"
   },
   "repository": {
     "type": "git",
