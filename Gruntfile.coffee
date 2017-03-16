@@ -37,14 +37,6 @@ module.exports = (grunt)->
         cwd: "public/js"
         src: "**/*.js"
         dest: "public/js"
-    compress:
-      main:
-        options:
-          mode: "gzip"
-        files: [
-          {expand: true, src: ["**/*.js"], cwd: "public/js", dest: "public/js", ext: ".js.gz"}
-          {expand: true, src: ["**/*.css"], cwd: "public/css", dest: "public/css", ext: ".css.gz"}
-        ]
     imagemin:
       options:
         optimizationLevel: 7
@@ -55,10 +47,11 @@ module.exports = (grunt)->
           src: ["**/*.{png,jpg,gif}"]
           dest: "public/images/"
         ]
-    clean: ["public/css/**/*.map", "public/js/**/*.map"]
+    clean: []
   })
 
   # Default task(s).
   grunt.registerTask("default", ["sass", "coffee", "watch"])
   grunt.registerTask("once", ["sass", "coffee"])
-  grunt.registerTask("production", ["sass", "coffee", "uglify", "imagemin", "compress", "clean"])
+  grunt.registerTask("production", ["sass", "coffee", "uglify"])
+  grunt.registerTask("optimize", ["imagemin"])
