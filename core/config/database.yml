@@ -11,9 +11,9 @@ test:
 production:
   adapter: postgresql
   encoding: utf8
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
+  database: <%= ENV['POSTGRESQL_ADDON_DB'] %>
+  username: <%= ENV['POSTGRESQL_ADDON_USER'] %>
+  password: <%= ENV['POSTGRESQL_ADDON_PASSWORD'] %>
   pool: 25
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
+  host: <%= ENV['POSTGRESQL_ADDON_HOST'] %>
+  port: <%= ENV['POSTGRESQL_ADDON_PORT'] %>

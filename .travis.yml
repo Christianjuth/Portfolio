@@ -5,23 +5,23 @@ os:
 - linux
 node_js:
 - 5.0.0
-cache: 
+cache:
   bundler: true
   directories:
-    - node_modules
-    - .sass-cache
-    - ~/travis/.rvm
-    - /usr/bin/qmake
+  - node_modules
+  - ".sass-cache"
+  - "~/travis/.rvm"
+  - "/usr/bin/qmake"
 env:
   global:
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 before_install:
-- ./core/scripts/travis-install.sh
+- "./core/scripts/travis-install.sh"
 - rvm install 2.3.3
 - gem install bundler
 install:
 - npm install || true
-- ./node_modules/.bin/grunt production
+- "./node_modules/.bin/grunt production"
 before_deploy:
 - rm -rf .bundle/
 deploy:
@@ -34,3 +34,6 @@ deploy:
     repo: Christianjuth/portfolio
   api_key:
     secure: XW32ibms7DgHnvAVmNVTk3AJ+IJkg6a76lzw/b9qYHo5U97TW9k01lcSNjRr6HxAPzBy4y1AsSPInUJXVBVsy9jFZ5/QCHape9MTRalS2uewYVJWnL/a4skpCQLB6QaeeDhNbMWDG8ssQndSPZosslIXC2km5nPVK/M5o7zyd2yg1sCdWNaY+j+h9xwOA7X3a5dRPhAcWjeKjMq9HAS3BacA0IPXmjW5fYpU8rtoln8xcd6/ACGSTu/ibW9R4OmGXc4dc46NscAOR6SloNfk4qC1iPoHkn091R+0Chnx1AVjBkFs2IgNrA9uzz6fFoLArb67+HIVCHJNd8JXeM7duEBmlAqnApFeuFE/noxagMGRXyhyhb02sfRf1aaGIEWt/40IMvxP5KumYFoNowsIcHI3JXb1JNjNVNXnPB8hYsHPzw0X02CWU7m9w6etRAeYXF4yi9NO0gOzTlWHXA3ATRjKbqlPiwsN1yXQX6616DOLOwKQF0t7N5Qer95UxtbnTr3Kx+glmdsegYGr4S/iri29RJxS8uglu/GWs6Uw6ARJgwl4GkShcCcLOKe+j9xabP2FminEaCWOZ/i0Ilj2AEVfK9U7So/PsmPmkEfa6crNCBdGQRgXY54ArOY4Iob7vs2yRV67Opuxo3Hm+A1ESJguHFfBzp290kYgiMr4+GA=
+notifications:
+  slack:
+    secure: yHcuBaXGfR9b0amkDa4TsvyKiBZIng9L7uEl7E2QyZF2AaGHJ7G4HAUJpax60bkL7irtvnT4cUF7O4oRc4C7zsmOV2wDZJX01KGShS/YReCYOa8d7eHYsNUYES4qRO1XHSNnKtKjhkvU9obPzJd9w5kkYsAMQ96konlXACToryEE6bJ9vnKul/VYehFizKn0WuNy10bAnKvGd9vSO+BDarsdNn0DRDlxZ8G3d4tA2uzITJ4Mk/NIUBwkcfYHQtMn5aLZULuqDTPcSD7A4bvOwo92jq/jWBNIN/V9qAb5gz9ZMnACj3I2YxnEBvHL9MvICmh8jUnc893EUQ7aK3QPylCsLb0mtlUXgYwM9hsuBzBLDZ+FVMsIV43E0AC7pjYh3nSzT8NTKGZtNAEnshGTJT2eTGFJ4SejBZISCV7zDbUkfz+XFNdhyJGRyoFP99EZR2/HO5xrD2bbM0+yGFEBMahFQPw+CJTWDWcwpRkVMoaDkHg7a1h0w1PhSgtSenyrfCL08GY3Ed5z1QrfIbhrOg+2UyORSRY4J/isNgxXqqRpBzZ3OE90zo/Nwytgs8ZziC2SmEhhVQU9ELkVtZ7IV/uWlnkFsswdXf5ZkQ+p1WAASq/bk3+IUbyzry2Y452ofaiI+FGvXWe8felUk7IggQ5khu2DyuUPum6SumJbiaU=
