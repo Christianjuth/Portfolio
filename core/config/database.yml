@@ -6,7 +6,7 @@ development:
 test:
   adapter: sqlite3
   database: db/cucumber-tests.db
-  pool: 5
+  pool: 25
   timeout: 5000
 production:
   adapter: postgresql
